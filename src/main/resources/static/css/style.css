@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'BMHANNAAir';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+	font-family:'BMHANNAAir'
+}
+
+#wrap {
+	width:1200px;
+	height:800px;
+}
+
+.empty-box {
+	height:50px;
+}
+
+.sign-up-box {
+	height:800px;
+}

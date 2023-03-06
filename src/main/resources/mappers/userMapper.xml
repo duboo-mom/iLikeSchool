@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.duboomom.iLikeSchool.user.dao.UserDAO">
+
+	<insert id="insertUser" parameterType="map">
+		INSERT INTO
+			`user`
+		(
+			`loginId`
+			, `password`
+			, `name`
+			, `nickname`
+			, `email`
+			, `phoneNumber`
+			, `yymmdd`
+			, `gender`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUE
+		(
+			#{loginId}
+			, #{password}
+			, #{name}
+			, #{nickname}
+			, #{email}
+			, #{phoneNumber}
+			, #{birthday}
+			, #{gender}
+			, now()
+			, now()
+		)
+	
+	</insert>
+	
+	<insert id="insertSchool" parameterType="map">
+		INSERT INTO
+			`school`
+		(
+			`name`
+			, `type`
+			, `createdAt`
+		)
+		VALUE
+		(
+			#{name}
+			, #{type}
+			, now()
+		)
+		
+	</insert>
+	
+	<insert id="insertUserSchool" parameterType="map">
+		INSERT INTO
+			`userSchool`
+		(
+			`userId`
+			, `schoolId`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUE
+		(
+			#{userId}
+			, #{schoolId}
+			, now()
+			, now()
+		)	
+	</insert>
+	
+	<select id="selectCountSchool" parameterType="String" resultType="count">
+		SELECT
+			count(1)
+		FROM
+			`school`
+		WHERE
+			`name` = #{name}
+	
+	</select>
+	
+	
+	
+</mapper>
+ 
+
