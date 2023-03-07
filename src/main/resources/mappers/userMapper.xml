@@ -35,24 +35,7 @@
 		)
 	
 	</insert>
-	
-	<insert id="insertSchool" parameterType="map">
-		INSERT INTO
-			`school`
-		(
-			`name`
-			, `type`
-			, `createdAt`
-		)
-		VALUE
-		(
-			#{name}
-			, #{type}
-			, now()
-		)
 		
-	</insert>
-	
 	<insert id="insertUserSchool" parameterType="map">
 		INSERT INTO
 			`userSchool`
@@ -71,17 +54,24 @@
 		)	
 	</insert>
 	
-	<select id="selectCountSchool" parameterType="String" resultType="count">
+	<select id="selectUserbyLoginId" parameterType="String" resultType="com.duboomom.iLikeSchool.user.model.User">
 		SELECT
-			count(1)
+			`id`
+			, `loginId`
+			, `password`
+			, `name`
+			, `nickname`
+			, `email`
+			, `phoneNumber`
+			, `yymmdd`
+			, `gender`
+			, `createdAt`
+			, `updatedAt`
 		FROM
-			`school`
+			`user`
 		WHERE
-			`name` = #{name}
-	
+			`loginId` = #{loginId}
 	</select>
-	
-	
 	
 </mapper>
  

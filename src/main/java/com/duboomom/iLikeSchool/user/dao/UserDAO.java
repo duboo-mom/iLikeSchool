@@ -3,6 +3,8 @@ package com.duboomom.iLikeSchool.user.dao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.duboomom.iLikeSchool.user.model.User;
+
 @Repository
 public interface UserDAO {
 
@@ -15,16 +17,12 @@ public interface UserDAO {
 			, @Param("phoneNumber") String phoneNumber
 			, @Param("birthday") String birthday
 			, @Param("gender") String gender);
-	
-	public int insertSchool(
-			@Param("name") String schoolName
-			, @Param("type") String type);
-	
+		
 	public int insertUserSchool(
 			@Param("userId") int userId
 			, @Param("schoolId") int schoolId);
 	
-	public int selectCountSchool(@Param("name") String schoolName);
+	public User selectUserbyLoginId(@Param("loginId") String loginId);
 	
-	
+
 }

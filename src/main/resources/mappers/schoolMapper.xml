@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.duboomom.iLikeSchool.school.dao.SchoolDAO">
+
+
+	<insert id="insertSchool" parameterType="map">
+		INSERT INTO
+			`school`
+		(
+			`name`
+			, `type`
+			, `createdAt`
+		)
+		VALUE
+		(
+			#{name}
+			, #{type}
+			, now()
+		)
+	</insert>
+
+	<select id="selectCountSchool" parameterType="String" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			`school`
+		WHERE
+			`name` = #{name}
+	
+	</select>
+	
+	<select id="selectSchoolByName" parameterType="String" resultType="com.duboomom.iLikeSchool.school.model.School">
+		SELECT
+			`id`
+			, `name`
+			, `type`
+			, `createdAt`
+		FROM
+			`school`
+		WHERE
+			`name` = #{name}	
+	</select>
+
+
+</mapper>

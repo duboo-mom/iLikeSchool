@@ -4,13 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.duboomom.iLikeSchool.common.EncryptUtils;
+import com.duboomom.iLikeSchool.school.bo.SchoolBO;
+import com.duboomom.iLikeSchool.school.model.School;
 import com.duboomom.iLikeSchool.user.dao.UserDAO;
+import com.duboomom.iLikeSchool.user.model.User;
 
 @Service
 public class UserBO {
 
 	@Autowired
 	private UserDAO userDAO;
+	
+	@Autowired
+	private SchoolBO schoolBO;
 	
 	public int addUser(
 			String loginId
@@ -20,26 +26,72 @@ public class UserBO {
 			, String email
 			, String phoneNumber
 			, String birthday
-			, String gender
+			, String gender) {
+		
+		// 비밀번호 암호화해서
+		String encryptPassword = EncryptUtils.md5(password);
+				
+		// insert user 하기		
+		return userDAO.insertUser(loginId, encryptPassword, name, nickname, email, phoneNumber, birthday, gender);
+		
+				
+	}
+	
+	
+	public int addUserSchool(
+			int userId
 			, String elementary
 			, String middleschool
 			, String highschool
 			, String university) {
 		
-		// 비밀번호 암호화해서 dao로 넘기기
-		String encryptPassword = EncryptUtils.md5(password);
-				
-		// insert user 하고
+		// 방금 추가된 userId = session에서 주워오기...?
+		// user가 선택한 학교 정보의 schoolId로 insert하기
 		
-		int addUserCount = userDAO.insertUser(loginId, encryptPassword, name, nickname, email, phoneNumber, birthday, gender);
-				
-		// 학교정보가 null이 아닌 값을 insert school도 해야함..!
-		// school DB 조회해서 없으면 추가해야함..!!!!!
+		School school = new School();
+		int count = 0;
 		
-		if()
+		// 초등학교 정보 있으면
+		if(elementary != null) {
+			
+			school = schoolBO.getSchoolbyName(elementary);
+			
+			count += userDAO.insertUserSchool(userId, school.getId());
+			
+			
+		}
 		
-		// userSchool에도 등록
+		// 중, 고, 대 반복
 		
+		if(middleschool != null) {
+			school = schoolBO.getSchoolbyName(middleschool);
+			
+			count += userDAO.insertUserSchool(userId, school.getId());
+		}
+		
+		
+		if(highschool != null) {
+			school = schoolBO.getSchoolbyName(highschool);
+			
+			count += userDAO.insertUserSchool(userId, school.getId());
+		}
+		
+		
+		if(university != null) {
+			school = schoolBO.getSchoolbyName(university);
+			
+			count += userDAO.insertUserSchool(userId, school.getId());
+		}
+		
+		
+		return count;
+		
+	}
+	
+	
+	public User getUserbyLoginId(String loginId) {
+	
+		return userDAO.selectUserbyLoginId(loginId);
 		
 	}
 	
