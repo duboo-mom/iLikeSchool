@@ -16,12 +16,33 @@
 	<link rel="stylesheet" href="/static/css/style.css" type="text/css">
 	
 <body>
+	<div class="container" width="1200">
+		<div class="empty-box"></div>
+		
+		<div class="singin-box d-flex justify-content-center">
+		
+			<div>
+				<div class="text-center">
+					<div class="display-4">i Like SChool</div>
+					<h5 class="text-secondary mt-3">로그인 해서 동창을 만나보세요</h5>
+				</div>
+				<div class="d-flex justify-content-center">
+					<div class="col-12">
+						<input type="text" class="form-control mt-5" placeholder="ID">
+						<input type="text" class="form-control mt-2" placeholder="비밀번호">
+					
+						<button class="btn signin-btn btn-block mt-3 text-white">로그인</button>
+						<button class="btn signin-naver btn-block mt-3 text-white">네이버로 로그인</button>
+					</div>	
+				</div>
+			</div>
 
-	<div class="container">
-	
+		</div>
+		
 	
 	
 	</div>
+
 	
 </body>
 </html>

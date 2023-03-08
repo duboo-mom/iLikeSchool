@@ -23,3 +23,23 @@ body {
 .sign-up-box {
 	height:800px;
 }
+
+.signin-box {
+	height:800px;
+}
+
+#signupBtn {
+	background-color:#add8e6;
+}
+
+.check-btn {
+	background-color:#ffdab9;
+}
+
+.signin-btn {
+	background-color:#ffa500;
+}
+
+.signin-naver {
+	background-color:#32cd32;
+}

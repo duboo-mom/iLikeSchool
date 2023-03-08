@@ -18,4 +18,8 @@ public class UserController {
 		return "user/signupSchool";
 	}
 	
+	@GetMapping("/signin/view")
+	public String signinView() {
+		return "user/signin";
+	}
 }

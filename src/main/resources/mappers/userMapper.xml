@@ -73,6 +73,15 @@
 			`loginId` = #{loginId}
 	</select>
 	
+	<select id="existUserByNickname" parameterType="String" resultType="boolean">
+		SELECT
+			count(1)
+		FROM
+			`user`
+		WHERE
+			`nickname` = #{nickname}
+	</select>
+	
 </mapper>
  
 

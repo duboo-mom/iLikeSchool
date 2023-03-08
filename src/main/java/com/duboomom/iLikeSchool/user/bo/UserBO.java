@@ -95,4 +95,24 @@ public class UserBO {
 		
 	}
 	
+	public Boolean isDuplicatedLoginId(String loginId) {
+		
+		User user = new User();
+		
+		user = userDAO.selectUserbyLoginId(loginId);
+		
+		if(user == null) {
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
+		
+	public Boolean isDuplicatedNickname(String nickname) {
+		
+		return userDAO.existUserByNickname(nickname);
+		
+	}
+	
 }

@@ -24,5 +24,5 @@ public interface UserDAO {
 	
 	public User selectUserbyLoginId(@Param("loginId") String loginId);
 	
-
+	public boolean existUserByNickname(@Param("nickname") String nickname);
 }

@@ -24,7 +24,8 @@
 		
 			<div class="text-center school-input-box">
 			
-				<div class="display-4">회원가입</div>
+				<div class="display-4">학교 정보 추가</div>
+				<h5 class="text-secondary">졸업한 학교의 정보를 입력하세요 :)</h5>
 							
 				<h4 class="text-left mt-4">학교정보</h4>
 				<input type="text" class="form-control mt-2" placeholder="초등학교">
@@ -32,7 +33,7 @@
 				<input type="text" class="form-control mt-2" placeholder="고등학교">
 				<input type="text" class="form-control mt-2" placeholder="대학교">
 			
-				<button class="btn btn-warning btn-block mt-3">가입하기</button>
+				<button class="btn btn-warning btn-block mt-3">완료</button>
 			</div>
 		</div>
 	

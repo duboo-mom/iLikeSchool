@@ -89,4 +89,37 @@ public class UserRestController {
 				
 	}
 	
+	
+	// 아이디 중복확인 api
+	@GetMapping("/loginid/is_duplicated")
+	public Map<String, Boolean> isDuplicatedId(@RequestParam("loginId") String loginId) {
+		
+		Boolean checkId = userBO.isDuplicatedLoginId(loginId);
+		
+		Map<String, Boolean> result = new HashMap<>();
+		
+		result.put("result", checkId);
+		
+		return result;
+		
+	}
+	
+	// 별명 중복확인 api
+	@GetMapping("/nickname/is_duplicated")
+	public Map<String, Boolean> isDuplicatedNickname(@RequestParam("nickname") String nickname) {
+		
+		Boolean checkNickname = userBO.isDuplicatedLoginId(nickname);
+		
+		Map<String, Boolean> result = new HashMap<>();
+		
+		result.put("result", checkNickname);
+		
+		return result;
+		
+	}
+	
+	
+	
+	
+	
 }
