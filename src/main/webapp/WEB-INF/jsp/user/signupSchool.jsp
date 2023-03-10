@@ -15,30 +15,89 @@
 
 	<link rel="stylesheet" href="/static/css/style.css" type="text/css">
 	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 <body>
 
 	<div class="container" width="1200">
-		<div class="empty-box"></div>
+		
+		<div class="empty-box">
+			<div class="mt-3 text-right">
+				${userNickname } 님 <a href="/user/signout">로그아웃</a>		
+			</div>
+		</div>
 		
 		<div class="sign-up-box d-flex justify-content-center">
 		
 			<div class="text-center school-input-box">
 			
 				<div class="display-4">학교 정보 추가</div>
-				<h5 class="text-secondary">졸업한 학교의 정보를 입력하세요 :)</h5>
+				<h5 class="text-secondary mt-2">졸업한 학교의 정보를 입력하세요 :)</h5>
 							
-				<h4 class="text-left mt-4">학교정보</h4>
-				<input type="text" class="form-control mt-2" placeholder="초등학교">
-				<input type="text" class="form-control mt-2" placeholder="중학교">
-				<input type="text" class="form-control mt-2" placeholder="고등학교">
-				<input type="text" class="form-control mt-2" placeholder="대학교">
-			
-				<button class="btn btn-warning btn-block mt-3">완료</button>
+				<h4 class="text-left mt-5">나의 졸업 학교정보</h4>
+
+				<div class="input-group mt-2">
+					<input type="text" class="form-control" placeholder="초등학교" id="elementaryInput">
+					<button class="btn btn-success" type="button">찾기</button>			
+				</div>
+				<div class="input-group mt-2">
+					<input type="text" class="form-control" placeholder="중학교" id="middleschoolInput">
+					<button class="btn btn-success" type="button">찾기</button>			
+				</div>
+				<div class="input-group mt-2">
+					<input type="text" class="form-control" placeholder="고등학교" id="highschoolInput">
+					<button class="btn btn-success" type="button">찾기</button>			
+				</div>
+				<div class="input-group mt-2">
+					<input type="text" class="form-control" placeholder="대학교" id="universityInput">
+					<button class="btn btn-success" type="button">찾기</button>			
+				</div>			
+								
+				<button class="btn btn-warning btn-block mt-3" id="saveBtn" data-user-id="${userId }">저장하기</button>
 			</div>
 		</div>
-	
-	
+		
 	</div>
+	
+	<script>
+		$(document).ready(function() {
+			
+			$("#saveBtn").on("click", function() {
+				
+				let userId = $(this).data("user-id");
+				let elementary = $("#elementaryInput").val();
+				let middleschool = $("#middleschoolInput").val();
+				let highschool = $("#highschoolInput").val();
+				let university = $("#universityInput").val();
+								
+				if(elementary == "" && middleschool == "" && highschool == "" && university == "") {
+					alert("학교 정보를 최소 1개 입력하세요");
+					return;
+				}
+				
+				$.ajax({
+					type:"get"
+					, url:"/school/add"
+					, data:{"elementary":elementary, "middleschool":middleschool, "highschool":highschool, "university":university}
+					, success:function(data) {
+						if(data.result == "success") {
+							location.href="/main"
+						} else {
+							alert("학교 정보 저장 실패");	
+						}						
+					}
+					, error:function() {
+						alert("학교 정보 추가 에러");
+					}
+				});
+				
+				
+			});
+			
+			
+		});
+	
+	</script>
+	
 	
 </body>
 </html>

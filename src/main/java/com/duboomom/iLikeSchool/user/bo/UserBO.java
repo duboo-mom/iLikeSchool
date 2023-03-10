@@ -89,8 +89,14 @@ public class UserBO {
 	}
 	
 	
-	public User getUserbyLoginId(String loginId) {
+	public User getUser(String loginId, String password) {
+		
+		return userDAO.selectUser(loginId, EncryptUtils.md5(password));
+		
+	}
 	
+	public User getUserbyLoginId(String loginId) {
+		
 		return userDAO.selectUserbyLoginId(loginId);
 		
 	}
@@ -112,6 +118,12 @@ public class UserBO {
 	public Boolean isDuplicatedNickname(String nickname) {
 		
 		return userDAO.existUserByNickname(nickname);
+		
+	}
+	
+	public String getLoginId(String name, String email) {
+		
+		return userDAO.selectLoginId(name, email);
 		
 	}
 	

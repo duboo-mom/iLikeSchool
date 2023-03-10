@@ -39,17 +39,9 @@ public class UserRestController {
 		int count = userBO.addUser(loginId, password, name, nickname, email, phoneNumber, birthday, gender);
 		
 		Map<String, String> result = new HashMap<>();
-		
-		User user = new User();
-		
+
 		if(count == 1) {
 			result.put("result", "success");
-			
-			user = userBO.getUserbyLoginId(loginId);
-			
-			HttpSession session = request.getSession();
-			
-			session.setAttribute("userId", user.getId());
 			
 		} else {
 			result.put("result", "fail");
@@ -65,10 +57,10 @@ public class UserRestController {
 	// 사용자의 학교정보 추가 api
 	@GetMapping("/signup/userschool")
 	public Map<String, String> signupUserSchool(
-			@RequestParam("elementary") String elementary
-			, @RequestParam("middelschool") String middleschool
-			, @RequestParam("highschool") String highschool
-			, @RequestParam("university") String university
+			@RequestParam(value = "elementary", required = false) String elementary
+			, @RequestParam(value = "middleschool", required = false) String middleschool
+			, @RequestParam(value = "highschool", required = false) String highschool
+			, @RequestParam(value = "university", required = false) String university
 			, HttpSession session) {
 		
 		// 세션에 저장된 userId 주워오고 
@@ -119,7 +111,54 @@ public class UserRestController {
 	}
 	
 	
+	// 로그인 api
+	@PostMapping("/signin")
+	public Map<String, String> signin(
+			@RequestParam("loginId") String loginId
+			, @RequestParam("password") String password
+			, HttpServletRequest request) {
+		
+		User user = userBO.getUser(loginId, password);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(user != null) {
+			result.put("result", "success");
+			
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userLoginId", user.getLoginId());
+			session.setAttribute("userName", user.getName());
+			session.setAttribute("userNickname", user.getNickname());
+		} else {
+			result.put("result", "fail");			
+		}
+		
+		return result;
+	}
 	
+	
+	// 아이디 찾기 api
+	@GetMapping("/find_id")
+	public Map<String, Object> findUserId(
+			@RequestParam("name") String name
+			, @RequestParam("email") String email) {
+		
+		String userLoginId = userBO.getLoginId(name, email);
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		if(userLoginId != null) {
+			result.put("result", "success");
+			result.put("loginId", userLoginId);
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+		
+	}
 	
 	
 }

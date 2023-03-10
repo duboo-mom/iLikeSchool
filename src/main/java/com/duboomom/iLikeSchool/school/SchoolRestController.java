@@ -5,22 +5,24 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.duboomom.iLikeSchool.school.bo.SchoolBO;
 
 @RestController
+@RequestMapping("/school")
 public class SchoolRestController {
 
 	@Autowired
 	private SchoolBO schoolBO;
 		
 	// 학교 정보 추가 api
-	@GetMapping("/signup/school")
+	@GetMapping("/add")
 	public Map<String, String> signupSchoolInfo(
 			@RequestParam("elementary") String elementary
-			, @RequestParam("middelschool") String middleschool
+			, @RequestParam("middleschool") String middleschool
 			, @RequestParam("highschool") String highschool
 			, @RequestParam("university") String university) {
 		

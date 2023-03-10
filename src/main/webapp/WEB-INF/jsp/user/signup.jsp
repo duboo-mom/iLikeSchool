@@ -22,8 +22,10 @@
 		
 		<div class="sign-up-box d-flex justify-content-center">
 			<div class="text-center">
-			
-				<div class="display-4">회원가입</div>
+				
+				<h2><a href="/user/signin/view">i Like School</a></h2>
+				
+				<div class="display-4 mt-3">회원가입</div>
 				
 				<div class="d-flex mt-4">
 					<input class="form-control mr-2" type="text" placeholder="ID" id="idInput">
@@ -33,8 +35,8 @@
 				<div class="small text-danger text-left d-none" id="duplicatedId">사용중인 아이디 입니다</div>
 				<div class="small text-primary text-left d-none" id="availableId">사용가능한 아이디 입니다</div>
 				
-				<input class="form-control mt-2" type="text" placeholder="비밀번호" id="passwordInput">
-				<input class="form-control mt-2" type="text" placeholder="비밀번호 확인" id="passwordConfirmInput">
+				<input class="form-control mt-2" type="password" placeholder="비밀번호" id="passwordInput">
+				<input class="form-control mt-2" type="password" placeholder="비밀번호 확인" id="passwordConfirmInput">
 				<input class="form-control mt-2" type="text" placeholder="이름(실명) - ID/친구찾기 용" id="nameInput">
 				<div class="d-flex mt-2">
 					<input class="form-control mr-2" type="text" placeholder="별명" id="nicknameInput">
