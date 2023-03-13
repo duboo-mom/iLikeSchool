@@ -2,12 +2,14 @@ package com.duboomom.iLikeSchool.user.bo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.duboomom.iLikeSchool.common.EncryptUtils;
 import com.duboomom.iLikeSchool.school.bo.SchoolBO;
 import com.duboomom.iLikeSchool.school.model.School;
 import com.duboomom.iLikeSchool.user.dao.UserDAO;
 import com.duboomom.iLikeSchool.user.model.User;
+import com.duboomom.iLikeSchool.common.FileManagerService;
 
 @Service
 public class UserBO {
@@ -57,8 +59,7 @@ public class UserBO {
 			school = schoolBO.getSchoolbyName(elementary);
 			
 			count += userDAO.insertUserSchool(userId, school.getId());
-			
-			
+						
 		}
 		
 		// 중, 고, 대 반복
@@ -67,22 +68,19 @@ public class UserBO {
 			school = schoolBO.getSchoolbyName(middleschool);
 			
 			count += userDAO.insertUserSchool(userId, school.getId());
-		}
-		
+		} 		
 		
 		if(highschool != null) {
 			school = schoolBO.getSchoolbyName(highschool);
 			
 			count += userDAO.insertUserSchool(userId, school.getId());
-		}
-		
+		}		
 		
 		if(university != null) {
 			school = schoolBO.getSchoolbyName(university);
 			
 			count += userDAO.insertUserSchool(userId, school.getId());
-		}
-		
+		}		
 		
 		return count;
 		
@@ -138,5 +136,30 @@ public class UserBO {
 		userDAO.updatePasswordById(id, encryptPassword);
 		
 	}
+	
+	public int changeMyprofile(
+			int userId
+			, String password
+			, String name
+			, String nickname
+			, String email
+			, String phoneNumber
+			, String birthday
+			, MultipartFile file) {
+		
+		String imagePath = FileManagerService.saveFile(userId, file);
+		
+		String encryptPassword = EncryptUtils.md5(password);
+		
+		int count = userDAO.updateUser(userId, encryptPassword, name, nickname, email, phoneNumber, birthday, imagePath);
+		
+		return count;
+		
+	}
+	
+	// 사용자학교정보 업데이트
+	// 학교정보가 이미 입력되어 있다면, 업데이트로
+	// 학교정보가 새로 입력된거라면, 추가로
+	
 
 }

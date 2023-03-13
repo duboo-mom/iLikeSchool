@@ -51,4 +51,9 @@ public class UserController {
 		return "user/findpw";
 	}
 	
+	@GetMapping("/mypage/view")
+	public String mypageView() {
+		return "user/mypage";
+	}
+	
 }

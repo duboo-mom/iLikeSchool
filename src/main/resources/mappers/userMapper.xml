@@ -137,9 +137,38 @@
 			`user`
 		SET
 			`password` = #{password}
+			, `updatedAt` = now()
 		WHERE
 			`id` = #{id}
 	</update>
+	
+	<update id="updateUser" parameterType="map">
+		UPDATE
+			`user`
+		SET
+			`loginId` = #{loginId}
+			, `password` = #{password}
+			, `name` = #{name}
+			, `nickname` = #{nickname}
+			, `email` = #{email}
+			, `phoneNumber` = #{phoneNumber}
+			, `yymmdd` = #{yymmdd}
+			, `profilePath` = #{filePaht}
+			, `updatedAt` = now()
+		WHERE
+			`id` = #{id}
+	</update>
+	
+	<update id="updateUserSchool" parameterType="map">
+		UPDATE
+			`userschool`
+		SET
+			`userId` = #{userId}
+			, `schoolId` = #{userId}
+		WHERE
+			`id` = #{id}
+	</update>
+	
 </mapper>
  
 

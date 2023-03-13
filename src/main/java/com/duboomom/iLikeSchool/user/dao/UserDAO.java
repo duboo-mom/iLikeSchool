@@ -38,4 +38,19 @@ public interface UserDAO {
 	
 	public int updatePasswordById(@Param("id") int id, @Param("password") String password);
 	
+	public int updateUser(
+			@Param("id") int id
+			, @Param("password") String password
+			, @Param("name") String name
+			, @Param("nickname") String nickname
+			, @Param("email") String email
+			, @Param("phoneNumber") String phoneNumber
+			, @Param("birthday") String birthday
+			, @Param("filePath") String filePath);
+	
+	public int updateUserSchool(
+			@Param("id") int id
+			, @Param("userId") int userId
+			, @Param("schoolId") int schoolId);
+	
 }

@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.duboomom.iLikeSchool.user.bo.UserBO;
 import com.duboomom.iLikeSchool.user.model.User;
+import com.duboomom.insutaguram.common.FileManagerService;
 
 @RestController
 @RequestMapping("/user")
@@ -188,6 +190,32 @@ public class UserRestController {
 		}
 		
 		return result;
+		
+	}
+	
+	@PostMapping("/mypage")
+	public Map<String, String> editMypage(
+			@RequestParam("password") String password
+			, @RequestParam("name") String name
+			, @RequestParam("nickname") String nickname
+			, @RequestParam("email") String email
+			, @RequestParam("phoneNumber") String phoneNumber
+			, @RequestParam("birthday") String birthday
+			, @RequestParam("file") MultipartFile file
+			, @RequestParam("elementary") String elementary
+			, @RequestParam("middleschool") String middleschool
+			, @RequestParam("highschool") String highschool
+			, @RequestParam("university") String university
+			, HttpSession session) {
+		
+		int userId = (Integer)session.getAttribute("userId");
+		
+		userBO.changeMyprofile(userId, password, name, nickname, email, phoneNumber, birthday, file);		
+		
+		
+		
+		
+		
 		
 	}
 		
