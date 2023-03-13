@@ -127,4 +127,16 @@ public class UserBO {
 		
 	}
 	
+	public User getUserByIdEmail(String loginId, String email) {
+		return userDAO.selectUserbyLoginIdEmail(loginId, email);
+	}
+	
+	public void changeTempPw(int id, String password) {
+		
+		String encryptPassword = EncryptUtils.md5(password);
+		
+		userDAO.updatePasswordById(id, encryptPassword);
+		
+	}
+
 }

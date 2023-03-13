@@ -160,5 +160,36 @@ public class UserRestController {
 		
 	}
 	
+	@GetMapping("/find_pw")
+	public Map<String, Object> findTempPassword(
+			@RequestParam("loginId") String loginId
+			, @RequestParam("email") String email){
+		
+		User user = userBO.getUserByIdEmail(loginId, email);
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		if(user != null) {
+			
+			// 임시 비밀번호 생성
+			String pw = "";
+			for (int i = 0; i < 12; i++) {
+				pw += (char) ((Math.random() * 26) + 97);
+			}
+						
+			// 비밀번호 변경
+			userBO.changeTempPw(user.getId(), pw);			
+			
+			result.put("result", "success");
+			result.put("password", pw);
+			
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+		
+	}
+		
 	
 }

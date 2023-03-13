@@ -46,4 +46,9 @@ public class UserController {
 		return "user/findId";
 	}
 	
+	@GetMapping("/find_pw/view")
+	public String findPwView() {
+		return "user/findpw";
+	}
+	
 }
