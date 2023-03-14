@@ -15,15 +15,73 @@
 
 	<link rel="stylesheet" href="/static/css/style.css" type="text/css">
 	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+	
 </head>
 <body>
 	<div id="wrap">
-		<header>
-			메인 페이지
-			<div>
-				${userNickname } 님 <a href="/user/signout">로그아웃</a>
-			</div>
-		</header>
+		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
+			
+			<section class="main-content d-flex justify-content-between align-itmes-end">
+				<div class="col-3 school-rank-table">
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+					<h5>학교 랭킹</h5>
+					<table class="table">
+						<tr>
+							<th>학교 이름</th>
+							<th>게시글 수</th>
+						</tr>
+						<tr>
+							<td>ㅇㅇ초등학교</td>
+							<td>21</td>							
+						</tr>
+						<tr>
+							<td>ㅁㅁ초등학교</td>
+							<td>13</td>							
+						</tr>
+						<tr>
+							<td>ㅂㅂ고등학교</td>
+							<td>5</td>							
+						</tr>						
+					</table>
+				</div>
+				
+				<div class="col-6">
+					<div class="main-content-item">
+						<h4>최신 게시글</h4>
+						<div class="text-secondary">어쩌구저쩌구...</div>
+					</div>
+					<hr>
+					<div class="main-content-item">
+						<h4>학교 소식</h4>
+						<div class="text-secondary">어디어디학교의 입학식</div>
+					</div>
+				</div>
+				<div class="col-2">
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+
+					<img width="200" alt="친구찾기" src="https://cdn.pixabay.com/photo/2014/03/25/16/34/reading-297450_960_720.png">
+					
+					<h6 class="mt-4">우리학교 소식 확인하기</h6>
+					<div class="input-group mt-1">
+						<input type="text" class="form-control" placeholder="학교검색">
+						<button class="btn btn-outline-secondary" type="button">검색</button>					
+					</div>
+				</div>
+							
+			</section>
 
 
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>

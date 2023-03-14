@@ -13,4 +13,8 @@ public class SchoolController {
 		return "school/main";
 	}
 	
+	@GetMapping("/news/view")
+	public String news() {
+		return "school/news";
+	}
 }

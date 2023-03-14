@@ -15,7 +15,7 @@ import com.duboomom.iLikeSchool.common.FileManagerService;
 public class FileManagerService {
 
 	// public이라 갖다 쓸순 있지만 final 붙여서 수정은 불가능
-	public static final String FILE_UPLOAD_PATH = "C:\\Users\\GIRYN\\Desktop\\미정\\springProject\\myproject-upload";
+	public static final String FILE_UPLOAD_PATH = "D:\\안미정\\myProject\\upload\\images";
 
 	private static Logger logger = LoggerFactory.getLogger(FileManagerService.class);
 	

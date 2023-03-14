@@ -11,9 +11,25 @@ body {
 	font-family:'NeoDunggeunmoPro-Regular'
 }
 
+#mainLogo {
+	text-decoration:none;
+}
+
+#mypage-icon {
+	text-decoration:none;	
+}
+
 #wrap {
 	width:1200px;
 	height:800px;
+}
+
+header > .main-menu-link {
+	text-decoration:none;
+}
+
+.nav-item:hover {
+	background-color:#FAFAD2;
 }
 
 .empty-box {
@@ -42,4 +58,21 @@ body {
 
 .signin-naver {
 	background-color:#32cd32;
+}
+
+.main-item-div {
+	width:800px;
+	height:600px;
+}
+
+.main-content {
+	height:600px;
+}
+
+.main-content > .school-rank-table {
+	height:250px;
+}
+
+.main-content > .main-content-item {
+	height:270px;
 }

@@ -53,4 +53,6 @@ public interface UserDAO {
 			, @Param("userId") int userId
 			, @Param("schoolId") int schoolId);
 	
+	public int existUserSchool(@Param("userId") int userId);
+	
 }

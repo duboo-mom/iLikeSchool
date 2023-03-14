@@ -218,6 +218,19 @@ public class UserRestController {
 		
 		
 	}
+	
+	@GetMapping("/userschool/is_existence")
+	public Map<String, Boolean> isExistenceUserschool(HttpSession session) {
+		
+		int id = (Integer)session.getAttribute("userId");
+		
+		Map<String, Boolean> result = new HashMap<>();
+		
+		result.put("result", userBO.isExistenceUserschool(id));
+		
+		return result;		
+				
+	}
 		
 	
 }

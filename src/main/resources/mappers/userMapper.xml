@@ -169,6 +169,16 @@
 			`id` = #{id}
 	</update>
 	
+	<select id="existUserSchool" parameterType="int" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			`userschool`
+		WHERE
+			`userId` = #{userId}
+	
+	</select>
+	
 </mapper>
  
 

@@ -23,7 +23,7 @@
 		<div class="sign-up-box d-flex justify-content-center">
 			<div class="text-center">
 				
-				<h2><a href="/user/signin/view" class="text-dark">i Like School</a></h2>
+				<h2><a href="/user/signin/view" class="text-dark" id="mainLogo">i Like School</a></h2>
 				
 				<div class="display-4 mt-3">회원가입</div>
 				

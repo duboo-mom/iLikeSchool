@@ -54,7 +54,7 @@ public class UserBO {
 		int count = 0;
 		
 		// 초등학교 정보 있으면
-		if(elementary != null) {
+		if(elementary != "") {
 			
 			school = schoolBO.getSchoolbyName(elementary);
 			
@@ -64,19 +64,19 @@ public class UserBO {
 		
 		// 중, 고, 대 반복
 		
-		if(middleschool != null) {
+		if(middleschool != "") {
 			school = schoolBO.getSchoolbyName(middleschool);
 			
 			count += userDAO.insertUserSchool(userId, school.getId());
 		} 		
 		
-		if(highschool != null) {
+		if(highschool != "") {
 			school = schoolBO.getSchoolbyName(highschool);
 			
 			count += userDAO.insertUserSchool(userId, school.getId());
 		}		
 		
-		if(university != null) {
+		if(university != "") {
 			school = schoolBO.getSchoolbyName(university);
 			
 			count += userDAO.insertUserSchool(userId, school.getId());
@@ -136,6 +136,19 @@ public class UserBO {
 		userDAO.updatePasswordById(id, encryptPassword);
 		
 	}
+	
+	public Boolean isExistenceUserschool(int userId) {
+		
+		int count = userDAO.existUserSchool(userId);
+		
+		if(count == 0) {
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
+	
 	
 	public int changeMyprofile(
 			int userId

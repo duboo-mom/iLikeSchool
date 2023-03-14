@@ -75,13 +75,27 @@
 					, data:{"loginId":loginId, "password":password}
 					, success:function(data) {
 						if(data.result == "success") {
-							// 나중에 userSchool 테이블에서 userId 조회했을 때 null이면..!
-							location.href="/user/signup-school/view"
 							
-							// null이 아니면
-							// 메인화면으로 이동
+							$.ajax({
+								type:"get"
+								, url:"/user/userschool/is_existence"
+								, success:function(data) {
+									if(data.result) {
+										// null이 아니면
+										// 메인화면으로 이동
+										location.href="/school/main"
+									} else {
+										// userSchool 테이블에서 userId 조회했을 때 null이면..!
+										location.href="/user/signup-school/view"
+									}
+								}
+								, error:function() {
+									alert("학교정보 조회 에러");
+								}
+							});
+							
 						} else {
-							alert("해당하는 사용자가 없습니다.")
+							alert("아이디와 비밀번호를 확인하세요.");
 						}
 					}
 					, error:function() {
