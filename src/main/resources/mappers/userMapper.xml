@@ -65,6 +65,7 @@
 			, `phoneNumber`
 			, `yymmdd`
 			, `gender`
+			, `profilePath`
 			, `createdAt`
 			, `updatedAt`
 		FROM
@@ -72,6 +73,26 @@
 		WHERE
 			`loginId` = #{loginId}
 			AND `password` = #{password}
+	</select>
+	
+	<select id="selectUserById" parameterType="int" resultType="com.duboomom.iLikeSchool.user.model.User">
+		SELECT
+			`id`
+			, `loginId`
+			, `password`
+			, `name`
+			, `nickname`
+			, `email`
+			, `phoneNumber`
+			, `yymmdd`
+			, `gender`
+			, `profilePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`user`
+		WHERE
+			`id` = #{id}
 	</select>
 	
 	<select id="selectUserbyLoginId" parameterType="String" resultType="com.duboomom.iLikeSchool.user.model.User">

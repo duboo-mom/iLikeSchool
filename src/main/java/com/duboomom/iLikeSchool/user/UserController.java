@@ -3,14 +3,22 @@ package com.duboomom.iLikeSchool.user;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.duboomom.iLikeSchool.user.bo.UserBO;
+import com.duboomom.iLikeSchool.user.model.User;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
+	@Autowired
+	private UserBO userBO;
+	
 	@GetMapping("/signup/view")
 	public String signupView() {
 		return "user/signup";
@@ -52,7 +60,16 @@ public class UserController {
 	}
 	
 	@GetMapping("/mypage/view")
-	public String mypageView() {
+	public String mypageView(
+			HttpSession session
+			, Model model) {
+		
+		int id = (Integer)session.getAttribute("userId");
+		
+		User user = userBO.getUserById(id);
+		
+		model.addAttribute("user", user);
+		
 		return "user/mypage";
 	}
 	

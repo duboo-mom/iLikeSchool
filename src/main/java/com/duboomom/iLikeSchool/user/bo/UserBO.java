@@ -93,6 +93,10 @@ public class UserBO {
 		
 	}
 	
+	public User getUserById(int id) {
+		return userDAO.selectUserById(id);
+	}
+	
 	public User getUserbyLoginId(String loginId) {
 		
 		return userDAO.selectUserbyLoginId(loginId);
@@ -153,7 +157,6 @@ public class UserBO {
 	public int changeMyprofile(
 			int userId
 			, String password
-			, String name
 			, String nickname
 			, String email
 			, String phoneNumber
@@ -164,7 +167,7 @@ public class UserBO {
 		
 		String encryptPassword = EncryptUtils.md5(password);
 		
-		int count = userDAO.updateUser(userId, encryptPassword, name, nickname, email, phoneNumber, birthday, imagePath);
+		int count = userDAO.updateUser(userId, encryptPassword, nickname, email, phoneNumber, birthday, imagePath);
 		
 		return count;
 		

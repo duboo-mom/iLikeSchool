@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.duboomom.iLikeSchool.user.bo.UserBO;
 import com.duboomom.iLikeSchool.user.model.User;
-import com.duboomom.insutaguram.common.FileManagerService;
 
 @RestController
 @RequestMapping("/user")
@@ -99,14 +98,27 @@ public class UserRestController {
 	}
 	
 	// 별명 중복확인 api
+	// 회원가입, 마이페이지 두번 사용
 	@GetMapping("/nickname/is_duplicated")
-	public Map<String, Boolean> isDuplicatedNickname(@RequestParam("nickname") String nickname) {
-		
-		Boolean checkNickname = userBO.isDuplicatedLoginId(nickname);
-		
+	public Map<String, Boolean> isDuplicatedNickname(
+			@RequestParam("nickname") String nickname
+			, HttpSession session) {
+
+		String userNick = (String)session.getAttribute("userNickname");
+
 		Map<String, Boolean> result = new HashMap<>();
 		
-		result.put("result", checkNickname);
+		Boolean checkNickname = userBO.isDuplicatedNickname(nickname);
+		
+		if(userNick == null) {
+			result.put("result", checkNickname);
+		} else {
+			if(nickname.equals(userNick)) {
+				result.put("result", false);
+			} else {
+				result.put("result", checkNickname);		
+			}		
+		}
 		
 		return result;
 		
@@ -193,29 +205,29 @@ public class UserRestController {
 		
 	}
 	
-	@PostMapping("/mypage")
+	@PostMapping("/edit/userinfo")
 	public Map<String, String> editMypage(
 			@RequestParam("password") String password
-			, @RequestParam("name") String name
 			, @RequestParam("nickname") String nickname
 			, @RequestParam("email") String email
 			, @RequestParam("phoneNumber") String phoneNumber
 			, @RequestParam("birthday") String birthday
-			, @RequestParam("file") MultipartFile file
-			, @RequestParam("elementary") String elementary
-			, @RequestParam("middleschool") String middleschool
-			, @RequestParam("highschool") String highschool
-			, @RequestParam("university") String university
+			, @RequestParam(value = "file", required = false) MultipartFile file
 			, HttpSession session) {
 		
 		int userId = (Integer)session.getAttribute("userId");
 		
-		userBO.changeMyprofile(userId, password, name, nickname, email, phoneNumber, birthday, file);		
+		int count = userBO.changeMyprofile(userId, password, nickname, email, phoneNumber, birthday, file);		
 		
+		Map<String, String> result = new HashMap<>();
+				
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
 		
-		
-		
-		
+		return result;
 		
 	}
 	

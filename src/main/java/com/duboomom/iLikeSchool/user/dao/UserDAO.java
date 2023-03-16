@@ -30,6 +30,8 @@ public interface UserDAO {
 			@Param("loginId") String loginId
 			, @Param("password") String password);
 	
+	public User selectUserById(@Param("id") int id);
+	
 	public String selectLoginId(@Param("name") String name, @Param("email") String email);
 	
 	public User selectUserbyLoginIdEmail(
@@ -41,7 +43,6 @@ public interface UserDAO {
 	public int updateUser(
 			@Param("id") int id
 			, @Param("password") String password
-			, @Param("name") String name
 			, @Param("nickname") String nickname
 			, @Param("email") String email
 			, @Param("phoneNumber") String phoneNumber
