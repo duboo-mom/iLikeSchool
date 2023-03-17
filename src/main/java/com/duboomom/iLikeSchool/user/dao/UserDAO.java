@@ -1,5 +1,7 @@
 package com.duboomom.iLikeSchool.user.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -55,5 +57,7 @@ public interface UserDAO {
 			, @Param("schoolId") int schoolId);
 	
 	public int existUserSchool(@Param("userId") int userId);
+	
+	public List<Integer> selectUserSchoolbyUserId(@Param("userId") int userId);
 	
 }

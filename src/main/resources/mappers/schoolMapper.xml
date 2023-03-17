@@ -44,5 +44,21 @@
 			`name` = #{name}	
 	</select>
 
+	<select id="selectSchoolById" parameterType="java.util.List" resultType="com.duboomom.iLikeSchool.school.model.School">
+		SELECT
+			`id`
+			, `name`
+			, `type`
+			, `createdAt`
+		FROM
+			`school`
+		WHERE
+			`id` IN (
+				<foreach collection="list" item="item" separator=",">
+					#{item}
+				</foreach>
+			)
 
+	</select>
+	
 </mapper>

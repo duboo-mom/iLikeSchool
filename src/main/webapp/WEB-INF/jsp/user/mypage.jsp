@@ -28,7 +28,7 @@
 			</div>		
 		</div>
 
-		<div class="sign-up-box d-flex justify-content-center">
+		<div class="mypage-box d-flex justify-content-center">
 			<div>
 				
 				<h3 class="mt-3 text-center">프로필 정보</h3>
@@ -67,23 +67,30 @@
 				<!-- 학교정보 수정 -->
 				<h5 class="text-left mt-4">나의 졸업 학교정보</h5>
 	
-				<div class="input-group mt-2">
-					<input type="text" class="form-control" placeholder="초등학교" id="elementaryInput">
+				<div class="small mt-2">초등학교</div>
+				<div class="input-group">
+					<input type="text" class="form-control" id="elementaryInput" value="${user.elementary }">
 					<button class="btn btn-light btn-outline-secondary" type="button">찾기</button>			
-					<button class="btn btn-info" type="button">저장</button>			
+					<button class="btn btn-info" type="button" id="elementaryBtn">저장</button>			
 				</div>
-				<div class="input-group mt-2">
-					<input type="text" class="form-control" placeholder="중학교" id="middleschoolInput">
+				
+				<div class="small mt-2">중학교</div>
+				<div class="input-group">
+					<input type="text" class="form-control" id="middleschoolInput" value="${user.middleSchool }">
 					<button class="btn btn-light btn-outline-secondary" type="button">찾기</button>			
 					<button class="btn btn-info" type="button">저장</button>					
 				</div>
-				<div class="input-group mt-2">
-					<input type="text" class="form-control" placeholder="고등학교" id="highschoolInput">
+				
+				<div class="small mt-2">고등학교</div>
+				<div class="input-group">
+					<input type="text" class="form-control" id="highschoolInput" value="${user.highSchool }">
 					<button class="btn btn-light btn-outline-secondary" type="button">찾기</button>			
 					<button class="btn btn-info" type="button">저장</button>				
 				</div>
-				<div class="input-group mt-2">
-					<input type="text" class="form-control" placeholder="대학교" id="universityInput">
+				
+				<div class="small mt-2">대학교</div>
+				<div class="input-group">
+					<input type="text" class="form-control" id="universityInput" value="${user.university }">
 					<button class="btn btn-light btn-outline-secondary" type="button">찾기</button>			
 					<button class="btn btn-info" type="button">저장</button>				
 				</div>			
@@ -91,11 +98,14 @@
 			</div>
 		</div>	
 	
+	<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
+	
 	</div>
 	
 	<script>
 		$(document).ready(function() {
-			
+		
+		
 			var nicknameDuplicate = false;
 			var checkNickname = true;
 			

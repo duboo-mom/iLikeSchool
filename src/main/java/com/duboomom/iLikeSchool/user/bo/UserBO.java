@@ -1,15 +1,18 @@
 package com.duboomom.iLikeSchool.user.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.duboomom.iLikeSchool.common.EncryptUtils;
+import com.duboomom.iLikeSchool.common.FileManagerService;
 import com.duboomom.iLikeSchool.school.bo.SchoolBO;
 import com.duboomom.iLikeSchool.school.model.School;
 import com.duboomom.iLikeSchool.user.dao.UserDAO;
 import com.duboomom.iLikeSchool.user.model.User;
-import com.duboomom.iLikeSchool.common.FileManagerService;
+import com.duboomom.iLikeSchool.user.model.UserDetail;
 
 @Service
 public class UserBO {
@@ -163,7 +166,11 @@ public class UserBO {
 			, String birthday
 			, MultipartFile file) {
 		
-		String imagePath = FileManagerService.saveFile(userId, file);
+		String imagePath = null;
+		
+		if(file != null) {
+			imagePath = FileManagerService.saveFile(userId, file);		
+		}
 		
 		String encryptPassword = EncryptUtils.md5(password);
 		
@@ -173,9 +180,45 @@ public class UserBO {
 		
 	}
 	
-	// 사용자학교정보 업데이트
-	// 학교정보가 이미 입력되어 있다면, 업데이트로
-	// 학교정보가 새로 입력된거라면, 추가로
+	
+	// 사용자 정보 + 사용자 학교정보 조회
+	public UserDetail getUserDetail(int id) {
+		
+		UserDetail userDetail = new UserDetail();
+		
+		User user = userDAO.selectUserById(id);
+		
+		userDetail.setId(id);
+		userDetail.setNickname(user.getNickname());
+		userDetail.setPassword(user.getPassword());
+		userDetail.setEmail(user.getEmail());
+		userDetail.setPhoneNumber(user.getPhoneNumber());
+		userDetail.setYymmdd(user.getYymmdd());
+		
+		// 사용자 학교정보 넣기
+		
+		List<Integer> intList = userDAO.selectUserSchoolbyUserId(id);
+		
+		List<School> schoolList = schoolBO.getSchoolById(intList);
+		
+		for(School school : schoolList) {
+			
+			if(school.getType() == "초") {
+				userDetail.setElementary(school.getName());
+			} else if(school.getType() == "중") {
+				userDetail.setMiddleSchool(school.getName());
+			} else if(school.getType() == "고") {
+				userDetail.setHighSchool(school.getName());
+			} else if(school.getType() == "대"){
+				userDetail.setUniversity(school.getName());
+			}
+			
+		}
+						
+		return userDetail;
+		
+	}
+	
 	
 
 }

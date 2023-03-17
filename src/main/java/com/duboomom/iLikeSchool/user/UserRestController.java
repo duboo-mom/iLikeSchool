@@ -174,6 +174,7 @@ public class UserRestController {
 		
 	}
 	
+	// 비밀번호 찾기 api
 	@GetMapping("/find_pw")
 	public Map<String, Object> findTempPassword(
 			@RequestParam("loginId") String loginId
@@ -205,6 +206,7 @@ public class UserRestController {
 		
 	}
 	
+	// 사용자정보 수정 api
 	@PostMapping("/edit/userinfo")
 	public Map<String, String> editMypage(
 			@RequestParam("password") String password
@@ -231,6 +233,7 @@ public class UserRestController {
 		
 	}
 	
+	// 사용자 학교정보 저장되어 있는지
 	@GetMapping("/userschool/is_existence")
 	public Map<String, Boolean> isExistenceUserschool(HttpSession session) {
 		
@@ -243,6 +246,8 @@ public class UserRestController {
 		return result;		
 				
 	}
+	
+	
 		
 	
 }

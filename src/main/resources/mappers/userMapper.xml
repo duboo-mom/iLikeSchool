@@ -167,14 +167,12 @@
 		UPDATE
 			`user`
 		SET
-			`loginId` = #{loginId}
-			, `password` = #{password}
-			, `name` = #{name}
+			`password` = #{password}
 			, `nickname` = #{nickname}
 			, `email` = #{email}
 			, `phoneNumber` = #{phoneNumber}
-			, `yymmdd` = #{yymmdd}
-			, `profilePath` = #{filePaht}
+			, `yymmdd` = #{birthday}
+			, `profilePath` = #{filePath}
 			, `updatedAt` = now()
 		WHERE
 			`id` = #{id}
@@ -199,6 +197,16 @@
 			`userId` = #{userId}
 	
 	</select>
+
+	<select id="selectUserSchoolbyUserId" parameterType="int" resultType="int">
+		SELECT
+			`schoolId`
+		FROM
+			`userschool`
+		WHERE
+			`userId` = #{userId}	
+	</select>
+
 	
 </mapper>
  

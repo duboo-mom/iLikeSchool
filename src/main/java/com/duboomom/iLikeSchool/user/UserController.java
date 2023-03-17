@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.duboomom.iLikeSchool.user.bo.UserBO;
-import com.duboomom.iLikeSchool.user.model.User;
+import com.duboomom.iLikeSchool.user.model.UserDetail;
 
 @Controller
 @RequestMapping("/user")
@@ -59,6 +59,8 @@ public class UserController {
 		return "user/findpw";
 	}
 	
+	// 사용자 정보
+	// 사용자 학교정보
 	@GetMapping("/mypage/view")
 	public String mypageView(
 			HttpSession session
@@ -66,9 +68,9 @@ public class UserController {
 		
 		int id = (Integer)session.getAttribute("userId");
 		
-		User user = userBO.getUserById(id);
-		
-		model.addAttribute("user", user);
+		UserDetail userDetail = userBO.getUserDetail(id);
+
+		model.addAttribute("user", userDetail);
 		
 		return "user/mypage";
 	}

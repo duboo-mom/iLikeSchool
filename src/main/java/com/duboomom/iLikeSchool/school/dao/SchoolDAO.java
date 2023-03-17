@@ -1,5 +1,7 @@
 package com.duboomom.iLikeSchool.school.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -16,5 +18,5 @@ public interface SchoolDAO {
 	
 	public School selectSchoolByName(@Param("name") String schoolName);
 	
-	
+	public List<School> selectSchoolById(List<Integer> idList);
 }

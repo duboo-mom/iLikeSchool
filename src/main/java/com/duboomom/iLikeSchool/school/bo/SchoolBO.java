@@ -1,5 +1,7 @@
 package com.duboomom.iLikeSchool.school.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,5 +62,7 @@ public class SchoolBO {
 		return schoolDAO.selectSchoolByName(schoolName);
 	}
 	
-	
+	public List<School> getSchoolById(List<Integer> idList) {
+		return schoolDAO.selectSchoolById(idList);
+	}
 }
