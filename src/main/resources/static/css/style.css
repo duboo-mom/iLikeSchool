@@ -76,3 +76,94 @@ header > .main-menu-link {
 .main-content > .main-content-item {
 	height:270px;
 }
+
+.school-calendar {
+    background-color : white;
+    height: auto;
+    width: 400px;
+    margin: 0px;
+    padding: 20px;
+    margin: 0 auto;
+    border: 0.5px dashed #daa520;
+}
+
+td {
+    width: 50px;
+    height: 50px;
+}
+
+.Calendar {
+    text-align: center;
+}
+
+.Calendar>thead>tr:first-child>td {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.Calendar>thead>tr:last-child>td {
+    font-weight: 500;     
+}
+
+.Calendar>tbody>tr>td>p {
+    height: 45px;
+    width: 45px;
+    border-radius: 45px;
+    transition-duration: .2s;
+    line-height: 45px;
+    margin: 2.5px;
+    display: block;
+    text-align: center;
+}        
+
+.pastDay {
+    color: lightgray;
+}
+
+.today {
+    background-color: #F5D042;            
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.futureDay {
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+.futureDay:hover{
+    background:#eee;
+}
+
+.futureDay.choiceDay,
+.today.choiceDay {
+    background: #0A174E;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.school-plan {
+	width:500px;
+}
+
+.school-post {
+	width:700px;
+	heic0c0c0ght:900px;
+	background-color:#fffff0;
+	padding:50px;
+}
+
+.rank-table {
+	width:400px;
+	border: 0.5px dotted #87cefa;	
+}
+
+.post-detail {
+	padding:10px;
+	border:3px solid #c0c0c0;
+}
+
+.name-tag-div {
+	background-color:#fff0f5;
+}

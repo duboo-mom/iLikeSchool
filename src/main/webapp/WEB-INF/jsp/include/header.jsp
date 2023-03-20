@@ -9,7 +9,7 @@
 			
 			<ul class="col-6 nav nav-fill">
 				<li class="nav-item"><a class="nav-link main-menu-link text-dark" href="/school/news/view">내 학교 소식</a></li>
-				<li class="nav-item"><a class="nav-link main-menu-link text-dark" href="#">동창회</a></li>
+				<li class="nav-item"><a class="nav-link main-menu-link text-dark" href="/school/reunion/view">동창회</a></li>
 				<li class="nav-item"><a class="nav-link main-menu-link text-dark" href="#">친구찾기</a></li>
 				<li class="nav-item"><a class="nav-link main-menu-link text-dark" href="#">방명록</a></li>
 			</ul>

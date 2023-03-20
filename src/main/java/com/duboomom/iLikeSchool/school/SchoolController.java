@@ -17,4 +17,9 @@ public class SchoolController {
 	public String news() {
 		return "school/news";
 	}
+	
+	@GetMapping("/reunion/view")
+	public String reunion() {
+		return "school/reunion";
+	}
 }
