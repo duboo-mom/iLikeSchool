@@ -118,7 +118,10 @@
 			<hr>
 			<section class="school-main-content d-flex justify-content-between align-itmes-end">
 				<div class="school-plan">
-					<h5 class="ml-5">우리학교 일정</h5>					
+					<div class="ml-5 mr-5 d-flex justify-content-between">
+						<h5>우리학교 일정</h5>	
+						<div><a href="/school/schedule/view" class="small">일정 등록하기</a></div>									
+					</div>
 	                <div class="school-calendar">
 				        <table class="Calendar">
 				            <thead>

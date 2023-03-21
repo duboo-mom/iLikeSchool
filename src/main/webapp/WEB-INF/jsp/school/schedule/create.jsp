@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>투표 등록</title>
+<title>일정 등록</title>
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	
@@ -16,7 +16,47 @@
 	<link rel="stylesheet" href="/static/css/style.css" type="text/css">
 	
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-
+	
+	<style>
+		label {
+		  display: inline-flex;
+		  align-items: center;
+		  gap: 0.5rem;
+		  cursor: pointer;
+		}
+		
+		[type="checkbox"] {
+		  appearance: none;
+	   	  position: relative;
+		  border: max(2px, 0.1em) solid gray;
+		  border-radius: 1.25em;
+		  width: 2.25em;
+		  height: 1.25em;
+		}
+		
+		[type="checkbox"]::before {
+		  content: "";
+		  position: absolute;
+		  left: 0;
+		  width: 1em;
+		  height: 1em;
+		  border-radius: 50%;
+		  transform: scale(0.8);
+		  background-color: gray;
+		  transition: left 250ms linear;
+		}
+		
+		[type="checkbox"]:checked::before {
+		  background-color: white;
+		  left: 1em;
+		}
+		
+		[type="checkbox"]:checked {
+		  background-color: tomato;
+		  border-color: tomato;
+		}
+	
+	</style>	
 </head>
 <body>
 	<div id="wrap">
@@ -24,21 +64,19 @@
 		
 		<section class="schedule-input-div d-flex justify-content-center">
 			<div id="schedule-main-box">
-				<h5 class="text-center mt-4">투표 만들기</h5>
-
-				<input class="form-control mt-3" type="text" placeholder="투표 제목">
-				<input id="datePicker" class="mt-3" type="text" placeholder="기한">		
-				<div class="mt-3">투표 항목</div>		
-				<div class="input-group mt-1">
-					<input type="text" class="form-control" placeholder="내용을 입력해주세요">
-					<button class="btn btn-white" type="button"> + </button>			
+				<h5 class="text-center mt-4">일정 등록하기</h5>
+				<div class="text-right mt-3">
+					<label>
+					  <input role="switch" type="checkbox" />
+					  <span>일정 등록 알람</span>
+					</label>
 				</div>
-				<div class="input-group mt-1">
-					<input type="text" class="form-control" placeholder="내용을 입력해주세요">
-					<button class="btn btn-white" type="button"> + </button>			
-				</div>	
+
+				<input class="form-control mt-1" type="text" placeholder="제목">
+				<input class="form-control mt-3" type="text" placeholder="장소">
+				<input id="datePicker" class="mt-3" type="text" placeholder="날짜">
 				
-				<button type="button" class="btn btn-block btn-light mt-3">등록하기</button>
+				<button type="button" class="btn btn-block btn-secondary mt-3">일정 등록</button>
 			
 			</div>
 		</section>
@@ -48,3 +86,4 @@
 	</div>
 
 </body>
+</html>

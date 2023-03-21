@@ -23,7 +23,7 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
 		<div class="d-flex justify-content-center">
 		
-			<section class="main-item-div bg-warning p-2">
+			<section class="main-item-div p-2">
 				<div>
 					<form>
 						<label><input type="radio" class="mr-1 school-type-input" name="schoolType" value="e" checked="checked">초등학교</label>
@@ -32,12 +32,18 @@
 						<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="u">대학교</label>				
 					</form>				
 				</div>
-				<h4>${userNickname } 님 학교 뉴스</h4>
-				<div>
-					뉴스 정보1
+				
+				<h5>${userNickname } 님 학교 뉴스</h5>				
+				
+				<div class="news-div mt-3">
+					<h5>title</h5>
+					<div class="text-dark">기사내용 주절주절</div>
+					<div class="small text-secondary">pubDate</div>
 				</div>
-				<div>
-					뉴스 정보2
+				<div class="news-div mt-3">
+					<h5>title2</h5>
+					<div class="text-dark">기사내용 주절주절2</div>
+					<div class="small text-secondary">pubDate2</div>
 				</div>
 				
 			</section>

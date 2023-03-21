@@ -5,11 +5,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.duboomom.iLikeSchool.school.bo.SchoolBO;
+import com.duboomom.iLikeSchool.school.bo.SchoolNewsBO;
 
 @RestController
 @RequestMapping("/school")
@@ -17,6 +19,9 @@ public class SchoolRestController {
 
 	@Autowired
 	private SchoolBO schoolBO;
+	
+	@Autowired
+	private SchoolNewsBO schoolNewsBO;
 		
 	// 학교 정보 추가 api
 	@GetMapping("/add")
@@ -40,6 +45,12 @@ public class SchoolRestController {
 		return result;
 	}
 	
+	@GetMapping("/news/{schoolName}")
+	public String getSchoolNews(@PathVariable("schoolName") String schoolName) {
+		
+		return schoolNewsBO.requestNews(schoolName);
+		
+	}
 	
 	
 }

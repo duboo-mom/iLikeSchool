@@ -22,4 +22,14 @@ public class SchoolController {
 	public String reunion() {
 		return "school/reunion";
 	}
+	
+	@GetMapping("/schedule/view")
+	public String scheduleInputView() {
+		return "school/schedule/create";
+	}
+	
+	@GetMapping("/vote/create/view")
+	public String voteView() {
+		return "school/vote/create";
+	}
 }
