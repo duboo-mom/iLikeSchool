@@ -1,6 +1,7 @@
 package com.duboomom.iLikeSchool.school;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.duboomom.iLikeSchool.school.bo.SchoolBO;
 import com.duboomom.iLikeSchool.school.bo.SchoolNewsBO;
+import com.duboomom.iLikeSchool.school.model.SchoolNews;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 @RestController
 @RequestMapping("/school")
@@ -46,7 +50,7 @@ public class SchoolRestController {
 	}
 	
 	@GetMapping("/news/{schoolName}")
-	public String getSchoolNews(@PathVariable("schoolName") String schoolName) {
+	public List<SchoolNews> getSchoolNews(@PathVariable("schoolName") String schoolName) throws JsonMappingException, JsonProcessingException {
 		
 		return schoolNewsBO.requestNews(schoolName);
 		

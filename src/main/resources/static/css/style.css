@@ -62,7 +62,6 @@ header > .main-menu-link {
 
 .main-item-div {
 	width:800px;
-	height:600px;
 }
 
 .main-content {
@@ -149,7 +148,7 @@ td {
 
 .school-post {
 	width:700px;
-	heic0c0c0ght:900px;
+	height:900px;
 	background-color:#fffff0;
 	padding:50px;
 }
@@ -180,4 +179,8 @@ td {
 .a-custom {
 	text-decoration:none;
 	color:#000;
+}
+
+#nicknameColor {
+	color:#6AC793	;
 }

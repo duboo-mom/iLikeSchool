@@ -32,20 +32,31 @@
 						<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="u">대학교</label>				
 					</form>				
 				</div>
-				
-				<h5>${userNickname } 님 학교 뉴스</h5>				
-				
-				<div class="news-div mt-3">
-					<h5>title</h5>
-					<div class="text-dark">기사내용 주절주절</div>
-					<div class="small text-secondary">pubDate</div>
+				<hr>
+				<h5 id="nicknameColor">${userNickname } 님 학교 뉴스</h5>				
+				<hr>
+				<div class="news-div">
+					<c:if test="${empty newsList }">
+						<div class="mt-5 display-4 text-secondary">
+							학교 정보를 입력해주세요 :)
+						</div>
+					</c:if>
+					<c:if test="${not empty newsList }">
+					
+						<c:forEach var="news" items="${newsList }">
+						<div class="news-content mt-3">
+							<h5>${news.title}</h5>
+							<div class="text-dark">${news.description }</div>
+							<div class="small text-secondary">${news.pubDate }</div>
+						</div>
+						</c:forEach>
+
+						<div class="mt-3">
+							<a href="#">더 많은 뉴스 보기</a>									
+						</div>
+					
+					</c:if>
 				</div>
-				<div class="news-div mt-3">
-					<h5>title2</h5>
-					<div class="text-dark">기사내용 주절주절2</div>
-					<div class="small text-secondary">pubDate2</div>
-				</div>
-				
 			</section>
 		
 		</div>
@@ -54,5 +65,9 @@
 	
 	</div>
 
+	<script>
+	
+	</script>
+	
 </body>
 </html>

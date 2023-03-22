@@ -74,15 +74,16 @@
 			         <ul class="list-group">
 			           <li class="list-group-item d-flex justify-content-between align-items-center">
 			             첫번째 모임
-			             <span class="badge badge-primary">New</span>
+			             <!-- go 누르면 해당 모임의 gatheringId 받아서 소모임 메인페이지로 이동 -->
+			             <span class="badge badge-danger">go</span>
 			           </li>
 			           <li class="list-group-item d-flex justify-content-between align-items-center">
 			             두번째 모임
-			             <span class="badge badge-danger">12</span>
+			             <span class="badge badge-danger">go</span>
 			           </li>
 			           <li class="list-group-item d-flex justify-content-between align-items-center">
 			             세번째 모임
-			             <span class="badge badge-warning">20</span>
+			             <span class="badge badge-danger">go</span>
 			           </li>
 			         </ul>
 				

@@ -12,6 +12,8 @@
 	<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="resources/js/plugin/datepicker/bootstrap-datepicker.js"></script>
+	<script src="resources/js/plugin/datepicker/bootstrap-datepicker.ko.min.js"></script>
 	
 	<link rel="stylesheet" href="/static/css/style.css" type="text/css">
 	
@@ -74,7 +76,7 @@
 
 				<input class="form-control mt-1" type="text" placeholder="제목">
 				<input class="form-control mt-3" type="text" placeholder="장소">
-				<input id="datePicker" class="mt-3" type="text" placeholder="날짜">
+				<input id="datePicker" class="mt-3 form-control" type="text" placeholder="날짜">
 				
 				<button type="button" class="btn btn-block btn-secondary mt-3">일정 등록</button>
 			
@@ -84,6 +86,16 @@
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
 	
 	</div>
+
+	<script>
+		$(document).ready(function() {
+			$('#datePicker').datepicker({
+				format: "yyyy-mm-dd",
+				autoclose : true				
+			});
+			
+		});
+	</script>
 
 </body>
 </html>
