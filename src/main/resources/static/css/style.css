@@ -166,8 +166,18 @@ td {
 
 .name-tag-div {
 	background-color:#fff0f5;
+	border-radius: 30px;
 }
 
 #schedule-main-box {
 	width:400px;
+}
+
+#voteListBox {
+	width:600px;
+}
+
+.a-custom {
+	text-decoration:none;
+	color:#000;
 }

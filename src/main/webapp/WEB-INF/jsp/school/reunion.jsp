@@ -163,7 +163,7 @@
 		            <div class="ml-5 mt-4">
 		            	<div class="d-flex justify-content-between">
 			            	<h5>내 모임 소식</h5>
-							<i class="bi bi-three-dots mr-5 pr-3"></i>	            	
+							<a class="a-custom" href="/school/gathering/list/view"><i class="bi bi-three-dots mr-5 pr-3"></i></a>	            	
 		            	</div>
 		            	<ul>
 		            		<li>미종 : 난 안갈랭</li>
@@ -196,10 +196,14 @@
 			          
 				
 				<div class="school-post">
-					<h4>조잘조잘</h4>
+					<div class="d-flex justify-content-between">
+						<h4>조잘조잘</h4>
+						<a href="/school/create/view">글쓰기</a>					
+					</div>
 					<div class="post-detail">
-						<div class="name-tag-div">
-							<div>두부 - 동원초등학교</div>
+						<div class="name-tag-div d-flex align-items-center">
+							<img class="rounded-circle" width="50" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg">
+							<div class="ml-2">두부 - 동원초등학교</div>
 						</div>
 						<img class="my-2" width="550" src="https://cdn.pixabay.com/photo/2017/07/27/16/48/toppokki-2545943_960_720.jpg">
 						<div class="mt-1">

@@ -32,4 +32,14 @@ public class SchoolController {
 	public String voteView() {
 		return "school/vote/create";
 	}
+	
+	@GetMapping("/vote/list/view")
+	public String voteListView() {
+		return "school/vote/list";
+	}
+	
+	@GetMapping("/gathering/list/view")
+	public String gatheringListView() {
+		return "school/gathering/list";
+	}
 }
