@@ -23,13 +23,13 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
 		
 		<section class="d-flex justify-content-center">
-			<div>
-				<h4>새 모임 만들기</h4>
+			<div class="gathering-create-div">
+				<h4 class="text-center mt-4">새 모임 만들기</h4>
 				
-				<input type="text" class="form-control" placeholder="모임 제목">
-				<input type="text" class="form-control" placeholder="설명 (20자 제한)">
+				<input type="text" class="form-control mt-4" placeholder="모임 제목">
+				<input type="text" class="form-control mt-3" placeholder="설명 (20자 제한)">
 				
-				<button type="button" class="btn btn-block btn-primary">만들기</button>
+				<button type="button" class="mt-4 btn btn-block input-btn">만들기</button>
 			</div>
 		</section>
 		

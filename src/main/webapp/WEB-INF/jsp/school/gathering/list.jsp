@@ -75,19 +75,19 @@
 			           <li class="list-group-item d-flex justify-content-between align-items-center">
 			             첫번째 모임
 			             <!-- go 누르면 해당 모임의 gatheringId 받아서 소모임 메인페이지로 이동 -->
-			             <span class="badge badge-danger">go</span>
+			             <span class="badge badge-danger gathering-go-btn" data-gathering-id="1">go</span>
 			           </li>
 			           <li class="list-group-item d-flex justify-content-between align-items-center">
 			             두번째 모임
-			             <span class="badge badge-danger">go</span>
+			             <span class="badge badge-danger gathering-go-btn">go</span>
 			           </li>
 			           <li class="list-group-item d-flex justify-content-between align-items-center">
 			             세번째 모임
-			             <span class="badge badge-danger">go</span>
+			             <span class="badge badge-danger gathering-go-btn">go</span>
 			           </li>
 			         </ul>
 				
-				<button type="button" class="btn btn-block btn-info mt-3" onClick="location.href='/school/gathering/create/view'">모임 만들기</button>
+				<button type="button" class="btn btn-block input-btn mt-3" onClick="location.href='/school/gathering/create/view'">모임 만들기</button>
 			
 			</div>
 		</section>
@@ -96,5 +96,19 @@
 	
 	</div>
 
+	<script>
+		$(document).ready(function() {
+			
+			$(".gathering-go-btn").on("click", function() {
+				
+				let id = $(this).data("gathering-id");
+				
+				location.href="/school/gathering/main/view";
+				
+			});
+			
+		});
+	
+	</script>
 </body>
 </html>

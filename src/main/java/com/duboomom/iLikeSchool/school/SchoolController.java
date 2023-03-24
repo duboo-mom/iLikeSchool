@@ -76,4 +76,20 @@ public class SchoolController {
 	public String gatheringInput() {
 		return "school/gathering/create";
 	}
+
+	@GetMapping("/gathering/main/view")
+	public String gatheringMainView() {
+		return "school/gathering/main";
+	}
+	
+	@GetMapping("/create/view")
+	public String postCreateView() {
+		return "school/create";
+	}
+	
+	@GetMapping("/find-friend/view")
+	public String findFriendView() {
+		return "school/findFriend";
+	}
+	
 }

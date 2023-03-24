@@ -52,7 +52,7 @@
 						</c:forEach>
 
 						<div class="mt-3">
-							<a href="#">더 많은 뉴스 보기</a>									
+							<a href="https://search.naver.com/search.naver?where=news&sm=tab_jum&query=동원초등학교">더 많은 뉴스 보기</a>									
 						</div>
 					
 					</c:if>
@@ -64,6 +64,7 @@
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
 	
 	</div>
+
 
 	<script>
 	

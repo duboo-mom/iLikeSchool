@@ -55,6 +55,7 @@ public class SchoolNewsBO {
 		// resultBody에서 items에 해당하는 것만 빼오기
 		Map<String, Object> jsonMap = objectMapper.readValue(resultBody, new TypeReference<Map<String, Object>>() {});
 		
+		// 내가 만든 model 객체 SchoolNews 
 		List<SchoolNews> newsList = (List<SchoolNews>) jsonMap.get("items");
 		
 		return newsList;

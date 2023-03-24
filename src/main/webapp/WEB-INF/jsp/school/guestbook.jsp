@@ -23,25 +23,16 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
 		
 		<section class="d-flex justify-content-center">
-			<div style="width:400px;">
-				<h4 class="text-center mt-4">친구 찾기</h4>
-				<div>
-					<input type="text" class="form-control mt-4" placeholder="찾고싶은 친구 이름" id="nameInput">
-					<input type="text" class="form-control mt-2" placeholder="학교" id="schoolInput">
+			<div style="width:500px;">
+				<h4>(별명) 의 방명록</h4>
 				
-					<button class="btn btn-block mt-3 mb-3 search-btn" id="searchBtn">검색</button>
-						
-					<hr>
-						
-					<div class="mt-3">
-						<h5>검색 결과</h5>
-						<ul>
-							<li>결과1</li>
-							<li>결과2</li>
-						</ul>
-					</div>
-						
-				</div>	
+				<!-- 내 방명록이 아닐 경우에만 guest-input-div 보이도록 -->
+				<div class="guest-input-div">
+					
+				</div>
+				<div class="my-guestbook-div">
+				
+				</div>
 			</div>
 								
 		</section>
