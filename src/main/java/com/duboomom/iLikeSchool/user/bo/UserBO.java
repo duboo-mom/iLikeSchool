@@ -203,14 +203,17 @@ public class UserBO {
 		
 		for(School school : schoolList) {
 			
-			if(school.getType() == "초") {
-				userDetail.setElementary(school.getName());
-			} else if(school.getType() == "중") {
-				userDetail.setMiddleSchool(school.getName());
-			} else if(school.getType() == "고") {
-				userDetail.setHighSchool(school.getName());
-			} else if(school.getType() == "대"){
-				userDetail.setUniversity(school.getName());
+			String schoolType = school.getType();
+			String schoolName = school.getName();
+			
+			if(schoolType.equals("초") ) {
+				userDetail.setElementary(schoolName);
+			} else if(schoolType.equals("중")) {
+				userDetail.setMiddleSchool(schoolName);
+			} else if(schoolType.equals("고")) {
+				userDetail.setHighSchool(schoolName);
+			} else if(schoolType.equals("대")){
+				userDetail.setUniversity(schoolName);
 			}
 			
 		}

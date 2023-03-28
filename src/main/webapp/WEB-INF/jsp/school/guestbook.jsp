@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>친구 찾기</title>
+<title>방명록</title>
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	
@@ -23,15 +23,45 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
 		
 		<section class="d-flex justify-content-center">
-			<div style="width:500px;">
-				<h4>(별명) 의 방명록</h4>
+			<div style="width:600px;">
+				<div class="my-3">
+					<h4>${userNickname } 의 방명록</h4>				
+				</div>
 				
 				<!-- 내 방명록이 아닐 경우에만 guest-input-div 보이도록 -->
-				<div class="guest-input-div">
-					
+				<div class="guest-input-div d-flex p-3">
+					<div class="profile-div mt-5 ml-2 mr-2">
+						<img class="rounded-circle" width="50" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg">
+						<div class="text-center">${userNickname }</div>
+					</div>
+					<div class="ml-2 mr-2">
+						<label><input type="checkbox">비밀글</label>						
+						<textarea rows="4" cols="40" class="form-control" placeholder="글쓰기"></textarea>
+					</div>
+					<div class="mt-5 ml-2">
+						<button class="btn input-btn p-4">올리기</button>					
+					</div>
 				</div>
 				<div class="my-guestbook-div">
-				
+					<div class="guestbook-post d-flex p-3">
+						<div class="profile-div mt-3 ml-2 mr-2">
+							<img class="rounded-circle" width="50" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg">
+							<div class="text-center">미종</div>
+						</div>
+						<div class="ml-2 mr-2">					
+							<textarea rows="4" cols="40" class="form-control">내용 주절주절</textarea>
+						</div>					
+					</div>
+					<div class="guestbook-post d-flex p-3">
+						<div class="profile-div mt-3 ml-2 mr-2">
+							<img class="rounded-circle" width="50" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg">
+							<div class="text-center">미종</div>
+						</div>
+						<div class="ml-2 mr-2">
+							<h6><i class="bi bi-lock-fill"></i>비밀글 입니다.</h6>				
+							<textarea rows="4" cols="40" class="form-control">내용 주절주절</textarea>
+						</div>					
+					</div>
 				</div>
 			</div>
 								

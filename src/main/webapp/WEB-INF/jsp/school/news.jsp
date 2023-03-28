@@ -26,15 +26,16 @@
 			<section class="main-item-div p-2">
 				<div>
 					<form>
-						<label><input type="radio" class="mr-1 school-type-input" name="schoolType" value="e" checked="checked">초등학교</label>
+						<label><input type="radio" class="mr-1 school-type-input" name="schoolType" value="e" checked="checked" id="userElementary" data-user-elementary=${userElementary }>초등학교</label>
 						<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="m">중학교</label>				
 						<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="h">고등학교</label>				
-						<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="u">대학교</label>				
+						<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="u" id="userUniversity" data-user-university=${user.university }>대학교</label>				
 					</form>				
 				</div>
 				<hr>
 				<h5 id="nicknameColor">${userNickname } 님 학교 뉴스</h5>				
 				<hr>
+				
 				<div class="news-div">
 					<c:if test="${empty newsList }">
 						<div class="mt-5 display-4 text-secondary">
@@ -67,7 +68,33 @@
 
 
 	<script>
-	
+		$(document).ready(function() {
+			var elementary = $("#userElementary").data("user-elementary");
+			var university = $("#userUniversity").data("user-university");
+			
+			// 라디오 버튼 선택에 따른 학교 인풋 변경
+			$("input[name=schoolType]").on("change", function() {
+				
+				if($(this).val() == "e") {
+					
+					alert(elementary);
+					
+					$.ajax({
+						type:"get"
+						, url:"/news/" + elementary
+					});
+				}
+				
+				if($(this).val() == "u") {
+					alert(elementary);
+				}
+					
+					
+				
+			});
+			
+			
+		});
 	</script>
 	
 </body>

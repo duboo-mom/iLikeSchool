@@ -1,9 +1,5 @@
 package com.duboomom.iLikeSchool.user.model;
 
-import java.util.List;
-
-import com.duboomom.iLikeSchool.school.model.School;
-
 public class UserDetail {
 
 	private int id;

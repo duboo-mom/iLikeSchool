@@ -36,13 +36,15 @@ public class SchoolController {
 		
 		UserDetail userDetail = userBO.getUserDetail(id);
 		
-//		if(userDetail.getUniversity() != null) {
-//			model.addAttribute("newsList", schoolNewsBO.requestNews(userDetail.getUniversity()));
-//		} else {
-//			model.addAttribute("newsList", null);
-//		}
+		model.addAttribute("user", userDetail);
+		
+		if(userDetail.getElementary() != null) {
+			model.addAttribute("newsList", schoolNewsBO.requestNews(userDetail.getElementary()));
+		} else {
+			model.addAttribute("newsList", null);
+		}
 
-		model.addAttribute("newsList", schoolNewsBO.requestNews("동원초등학교"));
+		model.addAttribute("newsList", schoolNewsBO.requestNews(userDetail.getElementary()));
 		
 		return "school/news";
 	}
@@ -90,6 +92,11 @@ public class SchoolController {
 	@GetMapping("/find-friend/view")
 	public String findFriendView() {
 		return "school/findFriend";
+	}
+	
+	@GetMapping("/guestbook/view")
+	public String guestbookView() {
+		return "school/guestbook";
 	}
 	
 }
