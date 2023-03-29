@@ -61,4 +61,30 @@
 
 	</select>
 	
+	<insert id="insertSchedule" parameterType="map">
+		INSERT INTO
+			`schoolSchedule`
+		(
+			`userId`
+			, `schoolId`
+			, `title`
+			, `locationInfo`
+			, `dateInfo`
+			, `detail`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUE
+		(
+			#{userId}
+			, #{schoolId}
+			, #{title}
+			, #{locationInfo}
+			, #{dateInfo}
+			, #{detail}
+			, now()
+			, now()
+		)
+	</insert>
+	
 </mapper>

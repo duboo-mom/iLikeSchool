@@ -69,7 +69,7 @@
 
 	<script>
 		$(document).ready(function() {
-			var elementary = $("#userElementary").data("user-elementary");
+			var elementary = "동원초등학교";
 			var university = $("#userUniversity").data("user-university");
 			
 			// 라디오 버튼 선택에 따른 학교 인풋 변경
@@ -77,7 +77,7 @@
 				
 				if($(this).val() == "e") {
 					
-					alert(elementary);
+					console.log(elementary);
 					
 					$.ajax({
 						type:"get"

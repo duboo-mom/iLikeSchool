@@ -1,5 +1,6 @@
 package com.duboomom.iLikeSchool.school.bo;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,4 +66,10 @@ public class SchoolBO {
 	public List<School> getSchoolById(List<Integer> idList) {
 		return schoolDAO.selectSchoolById(idList);
 	}
+	
+	public int addSchedule(int userId, int schoolId, String title, String locationInfo, Date dateInfo, String detail) {
+		
+		return schoolDAO.insertSchedule(userId, schoolId, title, locationInfo, dateInfo, detail);		
+	}
+	
 }

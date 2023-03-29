@@ -1,8 +1,11 @@
 package com.duboomom.iLikeSchool.school;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,6 +56,31 @@ public class SchoolRestController {
 	public List<SchoolNews> getSchoolNews(@PathVariable("schoolName") String schoolName) throws JsonMappingException, JsonProcessingException {
 		
 		return schoolNewsBO.requestNews(schoolName);
+		
+	}
+	
+	@GetMapping("/schedule/create")
+	public Map<String, String> scheduleInput(
+			@RequestParam("schoolId") int schoolId
+			, @RequestParam("title") String title
+			, @RequestParam("locationInfo") String locationInfo
+			, @RequestParam("dateInfo") Date dateInfo
+			, @RequestParam(value = "detail", required = false) String detail
+			, HttpSession session) {
+		
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = schoolBO.addSchedule(userId, schoolId, title, locationInfo, dateInfo, detail);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
 		
 	}
 	

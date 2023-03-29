@@ -77,11 +77,12 @@
 					</label>
 				</div>
 
-				<input class="form-control mt-1" type="text" placeholder="제목">
-				<input class="form-control mt-3" type="text" placeholder="장소">
-				<input id="datePicker" class="mt-3 form-control" type="text" placeholder="날짜">
+				<input class="form-control mt-1" type="text" placeholder="제목" id="titleInput">
+				<input class="form-control mt-3" type="text" placeholder="장소" id="locationInput">
+				<input id="datePicker" class="mt-3 form-control" type="text" placeholder="날짜" id="dateInput">
+				<textarea class="form-control mt-3" rows="4" placeholder="설명" id="detailInput"></textarea>
 				
-				<button type="button" class="btn btn-block input-btn mt-3">일정 등록</button>
+				<button type="button" class="btn btn-block input-btn mt-3" id="scheduleInputBtn" data-user-id="${userId }" data-school-id="">일정 등록</button>
 			
 			</div>
 		</section>
@@ -105,6 +106,13 @@
 				dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
 				showMonthAfterYear: true,
 				yearSuffix: '년'
+				
+			});
+			
+			$("scheduleInputBtn").on("click", function() {
+				
+				// schoolId는 어떻게 받아와야할까??
+						
 				
 			});
 			
