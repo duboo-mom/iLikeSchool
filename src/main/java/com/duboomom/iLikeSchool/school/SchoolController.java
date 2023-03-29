@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.duboomom.iLikeSchool.school.bo.SchoolNewsBO;
 import com.duboomom.iLikeSchool.user.bo.UserBO;
@@ -43,14 +44,19 @@ public class SchoolController {
 		} else {
 			model.addAttribute("newsList", null);
 		}
-
-		model.addAttribute("newsList", schoolNewsBO.requestNews(userDetail.getElementary()));
 		
 		return "school/news";
 	}
 	
 	@GetMapping("/reunion/view")
-	public String reunion() {
+	public String reunion(Model model, HttpSession session) {
+		
+		int id = (Integer)session.getAttribute("userId");
+		
+		UserDetail userDetail = userBO.getUserDetail(id);
+		
+		model.addAttribute("user", userDetail);
+		
 		return "school/reunion";
 	}
 	

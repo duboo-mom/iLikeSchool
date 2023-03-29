@@ -28,124 +28,129 @@
 <body>
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
-			<div class="school-menu d-flex align-items-center">
-				<h4 class="ml-5">동원초등학교</h4>
-				<form>
-					<label><input type="radio" class="ml-4 mr-1 school-type-input" name="schoolType" value="e" checked="checked">초등학교</label>
-					<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="m">중학교</label>				
-					<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="h">고등학교</label>				
-					<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="u">대학교</label>				
-				</form>				
+		<div class="school-menu d-flex align-items-center">
+			<h4 class="ml-5" id="schoolTitle"></h4>
+			<form>
+				<label><input type="radio" class="ml-4 mr-1 school-type-input" name="schoolType" value="${user.elementary }" checked="checked">초등학교</label>
+				<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.middleSchool }">중학교</label>				
+				<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.highSchool }">고등학교</label>				
+				<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.university }">대학교</label>				
+			</form>				
+		</div>
+		<hr>
+		
+		<div id="notExistDiv" class="mt-5 ml-5 display-4 text-secondary">
+			학교 정보를 입력해주세요 :)
+		</div>			
+		
+		<div id="existDiv" class="school-main-content d-flex justify-content-between align-itmes-end">
+
+			<div class="school-plan">
+				<div class="ml-5 mr-5 d-flex justify-content-between">
+					<h5>우리학교 일정</h5>	
+					<div><a href="/school/schedule/view" class="small">일정 등록하기</a></div>									
+				</div>
+                <div class="school-calendar">
+			        <table class="Calendar">
+			            <thead>
+			                <tr>
+			                    <td onClick="prevCalendar();" style="cursor:pointer;">&#60;</td>
+			                    <td colspan="5">
+			                        <span id="calYear"></span>년
+			                        <span id="calMonth"></span>월
+			                    </td>
+			                    <td onClick="nextCalendar();" style="cursor:pointer;">&#62;</td>
+			                </tr>
+			                <tr>
+			                    <td>일</td>
+			                    <td>월</td>
+			                    <td>화</td>
+			                    <td>수</td>
+			                    <td>목</td>
+			                    <td>금</td>
+			                    <td>토</td>
+			                </tr>
+			            </thead>
+			
+			            <tbody>
+			            </tbody>
+			        </table>
+			    </div>
+	            
+	            <div class="ml-5 mt-4">
+	            	<div class="d-flex justify-content-between">
+		            	<h5>우리학교 투표</h5>
+						<i data-toggle="modal" data-target="#moreMenuModal" class="bi bi-three-dots more-btn mr-5 pr-3"></i>	            	
+	            	</div>
+	            	<ul>
+	            		<li>동창회 일정</li>
+	            		<li>여름 야유회</li>
+	            	</ul>
+	            </div>
+	            
+	            <div class="ml-5 mt-4">
+	            	<div class="d-flex justify-content-between">
+		            	<h5>내 모임 소식</h5>
+						<a class="a-custom" href="/school/gathering/list/view"><i class="bi bi-three-dots mr-5 pr-3"></i></a>	            	
+	            	</div>
+	            	<ul>
+	            		<li>미종 : 난 안갈랭</li>
+	            		<li>보갬 : 동창회하면 갈 사람?</li>
+	            	</ul>
+	            </div>
+	            
+	            <div class="ml-5 mt-4">
+	            	<h5>열혈 활동 랭킹</h5>
+	            	<table class="rank-table text-center" border="1">
+	            		<tr>
+	            			<th>순위</th>
+	            			<th>이름</th>
+	            			<th>게시글수</th>
+	            		</tr>
+	            		<tr>
+	            			<td>1</td>
+	            			<td>미종</td>
+	            			<td>3</td>
+	            		</tr>
+	            		<tr>
+	            			<td>2</td>
+	            			<td>두부</td>
+	            			<td>1</td>
+	            		</tr>
+	            	</table>
+	            </div>
+	            
 			</div>
-			<hr>
-			<section class="school-main-content d-flex justify-content-between align-itmes-end">
-				<div class="school-plan">
-					<div class="ml-5 mr-5 d-flex justify-content-between">
-						<h5>우리학교 일정</h5>	
-						<div><a href="/school/schedule/view" class="small">일정 등록하기</a></div>									
-					</div>
-	                <div class="school-calendar">
-				        <table class="Calendar">
-				            <thead>
-				                <tr>
-				                    <td onClick="prevCalendar();" style="cursor:pointer;">&#60;</td>
-				                    <td colspan="5">
-				                        <span id="calYear"></span>년
-				                        <span id="calMonth"></span>월
-				                    </td>
-				                    <td onClick="nextCalendar();" style="cursor:pointer;">&#62;</td>
-				                </tr>
-				                <tr>
-				                    <td>일</td>
-				                    <td>월</td>
-				                    <td>화</td>
-				                    <td>수</td>
-				                    <td>목</td>
-				                    <td>금</td>
-				                    <td>토</td>
-				                </tr>
-				            </thead>
-				
-				            <tbody>
-				            </tbody>
-				        </table>
-				    </div>
-		            
-		            <div class="ml-5 mt-4">
-		            	<div class="d-flex justify-content-between">
-			            	<h5>우리학교 투표</h5>
-							<i data-toggle="modal" data-target="#moreMenuModal" class="bi bi-three-dots more-btn mr-5 pr-3"></i>	            	
-		            	</div>
-		            	<ul>
-		            		<li>동창회 일정</li>
-		            		<li>여름 야유회</li>
-		            	</ul>
-		            </div>
-		            
-		            <div class="ml-5 mt-4">
-		            	<div class="d-flex justify-content-between">
-			            	<h5>내 모임 소식</h5>
-							<a class="a-custom" href="/school/gathering/list/view"><i class="bi bi-three-dots mr-5 pr-3"></i></a>	            	
-		            	</div>
-		            	<ul>
-		            		<li>미종 : 난 안갈랭</li>
-		            		<li>보갬 : 동창회하면 갈 사람?</li>
-		            	</ul>
-		            </div>
-		            
-		            <div class="ml-5 mt-4">
-		            	<h5>열혈 활동 랭킹</h5>
-		            	<table class="rank-table text-center" border="1">
-		            		<tr>
-		            			<th>순위</th>
-		            			<th>이름</th>
-		            			<th>게시글수</th>
-		            		</tr>
-		            		<tr>
-		            			<td>1</td>
-		            			<td>미종</td>
-		            			<td>3</td>
-		            		</tr>
-		            		<tr>
-		            			<td>2</td>
-		            			<td>두부</td>
-		            			<td>1</td>
-		            		</tr>
-		            	</table>
-		            </div>
-		            
+		          
+			
+			<div class="school-post">
+				<div class="d-flex justify-content-between">
+					<h4>조잘조잘</h4>
+					<a href="/school/create/view">글쓰기</a>					
 				</div>
-			          
-				
-				<div class="school-post">
-					<div class="d-flex justify-content-between">
-						<h4>조잘조잘</h4>
-						<a href="/school/create/view">글쓰기</a>					
+				<div class="post-detail">
+					<div class="name-tag-div d-flex align-items-center">
+						<img class="rounded-circle" width="50" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg">
+						<div class="ml-2">두부 - 동원초등학교</div>
 					</div>
-					<div class="post-detail">
-						<div class="name-tag-div d-flex align-items-center">
-							<img class="rounded-circle" width="50" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg">
-							<div class="ml-2">두부 - 동원초등학교</div>
-						</div>
-						<img class="my-2" width="550" src="https://cdn.pixabay.com/photo/2017/07/27/16/48/toppokki-2545943_960_720.jpg">
-						<div class="mt-1">
-							: 학교앞에 떡볶이 맛있었는뎅
-						</div>
-					</div>
-					<div class="post-detail mt-3">
-						<div class="name-tag-div">
-							<img src="">
-							미종 - 동원초등학교
-						</div>
-						<div>
-							: 애두라 모하니?
-						</div>
+					<img class="my-2" width="550" src="https://cdn.pixabay.com/photo/2017/07/27/16/48/toppokki-2545943_960_720.jpg">
+					<div class="mt-1">
+						: 학교앞에 떡볶이 맛있었는뎅
 					</div>
 				</div>
-					
-			</section>
-
-
+				<div class="post-detail mt-3">
+					<div class="name-tag-div">
+						<img src="">
+						미종 - 동원초등학교
+					</div>
+					<div>
+						: 애두라 모하니?
+					</div>
+				</div>
+			</div>
+		
+		</div>
+			
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
 	
 	</div>
@@ -169,6 +174,28 @@
 	  </div>
 	</div>
 
+	<script>
+		$(document).ready(function() {
+			
+			// 학교 선택에 따라 타이틀 변경 및 section reload
+			$("input[name=schoolType]").on("click", function() {
+				
+				var schoolName = $('input[name="schoolType"]:checked').val();
+				$("#schoolTitle").text(schoolName);
+				
+				if(schoolName == "" || schoolName == null) {
+					$("#notExistDiv").removeClass("d-none");
+					$("#existDiv").addClass("d-none");
+				} else {
+					$("#existDiv").removeClass("d-none");
+					$("#notExistDiv").addClass("d-none");
+				}
+				
+			});
+			
+		});
+	
+	</script>
 	
 </body>
 </html>

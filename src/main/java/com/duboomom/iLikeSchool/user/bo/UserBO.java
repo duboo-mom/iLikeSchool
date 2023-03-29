@@ -208,12 +208,16 @@ public class UserBO {
 			
 			if(schoolType.equals("초") ) {
 				userDetail.setElementary(schoolName);
+				userDetail.setElementaryId(school.getId());
 			} else if(schoolType.equals("중")) {
 				userDetail.setMiddleSchool(schoolName);
+				userDetail.setMiddleId(school.getId());
 			} else if(schoolType.equals("고")) {
 				userDetail.setHighSchool(schoolName);
+				userDetail.setHighId(school.getId());
 			} else if(schoolType.equals("대")){
 				userDetail.setUniversity(schoolName);
+				userDetail.setUniversityId(school.getId());
 			}
 			
 		}

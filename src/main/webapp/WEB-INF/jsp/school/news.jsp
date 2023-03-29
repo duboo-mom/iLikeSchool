@@ -26,17 +26,17 @@
 			<section class="main-item-div p-2">
 				<div>
 					<form>
-						<label><input type="radio" class="mr-1 school-type-input" name="schoolType" value="e" checked="checked" id="userElementary" data-user-elementary=${userElementary }>초등학교</label>
-						<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="m">중학교</label>				
-						<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="h">고등학교</label>				
-						<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="u" id="userUniversity" data-user-university=${user.university }>대학교</label>				
+						<label><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.elementary }" checked="checked">초등학교</label>
+						<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.middleSchool}">중학교</label>				
+						<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.highSchool }">고등학교</label>				
+						<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.university }">대학교</label>				
 					</form>				
 				</div>
 				<hr>
 				<h5 id="nicknameColor">${userNickname } 님 학교 뉴스</h5>				
 				<hr>
 				
-				<div class="news-div">
+				<div class="news-div" id="newsDiv">
 					<c:if test="${empty newsList }">
 						<div class="mt-5 display-4 text-secondary">
 							학교 정보를 입력해주세요 :)
@@ -53,7 +53,7 @@
 						</c:forEach>
 
 						<div class="mt-3">
-							<a href="https://search.naver.com/search.naver?where=news&sm=tab_jum&query=동원초등학교">더 많은 뉴스 보기</a>									
+							<a href="https://search.naver.com/search.naver?where=news&sm=tab_jum&query=">더 많은 뉴스 보기</a>									
 						</div>
 					
 					</c:if>
@@ -69,24 +69,25 @@
 
 	<script>
 		$(document).ready(function() {
-			var elementary = "동원초등학교";
-			var university = $("#userUniversity").data("user-university");
 			
 			// 라디오 버튼 선택에 따른 학교 인풋 변경
-			$("input[name=schoolType]").on("change", function() {
+			$("input[name=schoolType]").on("click", function() {
 				
-				if($(this).val() == "e") {
-					
-					console.log(elementary);
-					
+				var schoolName = $('input[name="schoolType"]:checked').val();
+				
+				if(schoolName != "") {
 					$.ajax({
 						type:"get"
-						, url:"/news/" + elementary
-					});
-				}
-				
-				if($(this).val() == "u") {
-					alert(elementary);
+						, url:"/school/news"
+						, data:{"schoolName":schoolName}
+						, contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+						, success:function() {
+							$("#newsDiv").load(location.href+' #newsDiv');
+						}
+						, error:function() {
+							alert("뉴스 조회 에러");
+						}
+					});					
 				}
 					
 					

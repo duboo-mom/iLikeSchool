@@ -52,8 +52,8 @@ public class SchoolRestController {
 		return result;
 	}
 	
-	@GetMapping("/news/{schoolName}")
-	public List<SchoolNews> getSchoolNews(@PathVariable("schoolName") String schoolName) throws JsonMappingException, JsonProcessingException {
+	@GetMapping("/news")
+	public List<SchoolNews> getSchoolNews(@RequestParam("schoolName") String schoolName) throws JsonMappingException, JsonProcessingException {
 		
 		return schoolNewsBO.requestNews(schoolName);
 		

@@ -33,8 +33,9 @@
 						
 					<hr>
 						
-					<div class="mt-3">
+					<div class="mt-3" id="friendResultDiv">
 						<h5>검색 결과</h5>
+						<!-- 검색한 결과가 여러개라면 어떻게 불러와야할지 -->
 						<ul>
 							<li>결과1</li>
 							<li>결과2</li>
@@ -48,6 +49,48 @@
 		
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
 	</div>
+
+	<script>
+		$(document).ready(function() {
+			
+			$("#searchBtn").on("click", function() {
+				
+				let name = $("#nameInput").val();
+				let school = $("#schoolInput").val();
+				
+				if(name == "") {
+					alert("이름(실명)을 입력하세요");
+					return;
+				}
+				
+				if(school == "") {
+					alert("학교 이름을 입력하세요");
+					return;
+				}
+				
+				$.ajax({
+					type:"get"
+					, url:"/school/find_friend"
+					, data:{"name":name, "school":school}
+					, success:function(data) {
+						if(data.result == "success") {
+							$("#friendResultDiv").removeClass("d-none");
+							$("#friendResultDiv").text(data.loginId);
+						} else {
+							alert("일치하는 사용자가 없습니다");
+						}	
+					}
+					, error:function() {
+						alert("친구 찾기 에러");
+					}
+				});
+				
+				
+			});
+			
+		});
+	
+	</script>
 
 
 </body>

@@ -12,6 +12,10 @@ public class UserDetail {
 	private String middleSchool;
 	private String highSchool;
 	private String university;
+	private int elementaryId;
+	private int middleId;
+	private int highId;
+	private int universityId;
 	
 	public int getId() {
 		return id;
@@ -72,6 +76,30 @@ public class UserDetail {
 	}
 	public void setUniversity(String university) {
 		this.university = university;
+	}
+	public int getElementaryId() {
+		return elementaryId;
+	}
+	public void setElementaryId(int elementaryId) {
+		this.elementaryId = elementaryId;
+	}
+	public int getMiddleId() {
+		return middleId;
+	}
+	public void setMiddleId(int middleId) {
+		this.middleId = middleId;
+	}
+	public int getHighId() {
+		return highId;
+	}
+	public void setHighId(int highId) {
+		this.highId = highId;
+	}
+	public int getUniversityId() {
+		return universityId;
+	}
+	public void setUniversityId(int universityId) {
+		this.universityId = universityId;
 	}
 	
 	
