@@ -66,22 +66,22 @@ public class SchoolController {
 	}
 	
 	@GetMapping("/vote/create/view")
-	public String voteView() {
+	public String voteView(@RequestParam("schoolId") int schoolId) {
 		return "school/vote/create";
 	}
 	
 	@GetMapping("/vote/list/view")
-	public String voteListView() {
+	public String voteListView(@RequestParam("schoolId") int schoolId) {
 		return "school/vote/list";
 	}
 	
 	@GetMapping("/gathering/list/view")
-	public String gatheringListView() {
+	public String gatheringListView(@RequestParam("schoolId") int schoolId) {
 		return "school/gathering/list";
 	}
 	
 	@GetMapping("/gathering/create/view")
-	public String gatheringInput() {
+	public String gatheringInput(@RequestParam("schoolId") int schoolId) {
 		return "school/gathering/create";
 	}
 
@@ -91,7 +91,7 @@ public class SchoolController {
 	}
 	
 	@GetMapping("/create/view")
-	public String postCreateView() {
+	public String postCreateView(@RequestParam("schoolId") int schoolId) {
 		return "school/create";
 	}
 	

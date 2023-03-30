@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.duboomom.iLikeSchool.school.vote.dao.VoteDAO">
+
+	<insert id="insertVote" parameterType="map">
+		INSERT INTO
+			`vote`
+		(
+			`schoolId`
+			, `userId`
+			, `title`
+			, `endDate`
+			, `createdAt`
+			, `updatedAt`		
+		)
+		VALUE
+		(
+			#{schoolId}
+			, #{userId}
+			, #{title}
+			, #{endDate}
+			, now()
+			, now()
+		)
+		
+	</insert>
+	
+	<select id="selectVoteIdbyTitle" parameterType="String" resultType="int">
+		SELECT
+			`id`
+		FROM
+			`vote`
+		WHERE
+			`schoolId` = #{schoolId}
+			AND `userId` = #{userId}
+			AND `title` = #{title}
+	</select>
+	
+	<insert id="insertVoteItem" parameterType="map">
+		INSERT INTO
+			`voteItem`
+		(
+			`voteId`
+			, `item`
+			, `createdAt`
+			, `updatedAt`		
+		)
+		VALUE
+		(
+			#{voteId}
+			, #{item}
+			, now()
+			, now()
+		)
+		
+	</insert>
+
+</mapper>
