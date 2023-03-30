@@ -36,27 +36,22 @@
 				<h5 id="nicknameColor">${userNickname } 님 학교 뉴스</h5>				
 				<hr>
 				
-				<div class="news-div" id="newsDiv">
-					<c:if test="${empty newsList }">
-						<div class="mt-5 display-4 text-secondary">
-							학교 정보를 입력해주세요 :)
-						</div>
-					</c:if>
-					<c:if test="${not empty newsList }">
-					
-						<c:forEach var="news" items="${newsList }">
-						<div class="news-content mt-3">
-							<h5>${news.title}</h5>
-							<div class="text-dark">${news.description }</div>
-							<div class="small text-secondary">${news.pubDate }</div>
-						</div>
-						</c:forEach>
+				<div id="emptyUniveDiv" class="mt-5 display-4 text-secondary d-none">
+					학교 정보를 입력해주세요 :)
+				</div>
+				
+				<div class="news-div" id="newsDiv">				
+					<c:forEach var="news" items="${newsList }">
+					<div class="news-content mt-3">
+						<h5>${news.title}</h5>
+						<div class="text-dark">${news.description }</div>
+						<div class="small text-secondary">${news.pubDate }</div>
+					</div>
+					</c:forEach>
 
-						<div class="mt-3">
-							<a href="https://search.naver.com/search.naver?where=news&sm=tab_jum&query=">더 많은 뉴스 보기</a>									
-						</div>
-					
-					</c:if>
+					<div class="mt-3">
+						<a href="https://search.naver.com/search.naver?where=news&sm=tab_jum&query=">더 많은 뉴스 보기</a>									
+					</div>
 				</div>
 			</section>
 		
@@ -75,22 +70,27 @@
 				
 				var schoolName = $('input[name="schoolType"]:checked').val();
 				
-				if(schoolName != "") {
-					$.ajax({
-						type:"get"
-						, url:"/school/news"
-						, data:{"schoolName":schoolName}
-						, contentType: "application/x-www-form-urlencoded; charset=UTF-8"
-						, success:function() {
+				$.ajax({
+					type:"get"
+					, url:"/school/news"
+					, data:{"schoolName":schoolName}
+					, contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+					, success:function(data) {
+						console.log(data);
+						
+						if(data.length == 0) {
+							$("#emptyUniveDiv").removeClass("d-none");
+							$("#newsDiv").load(location.href+' #newsDiv');
+						} else {
+							$("#emptyUniveDiv").addClass("d-none");
 							$("#newsDiv").load(location.href+' #newsDiv');
 						}
-						, error:function() {
-							alert("뉴스 조회 에러");
-						}
-					});					
-				}
-					
-					
+						
+					}
+					, error:function() {
+						alert("뉴스 조회 에러");
+					}
+				});					
 				
 			});
 			

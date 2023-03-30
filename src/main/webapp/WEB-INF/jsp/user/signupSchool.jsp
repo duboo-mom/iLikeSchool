@@ -68,11 +68,16 @@
 				let highschool = $("#highschoolInput").val();
 				let university = $("#universityInput").val();
 								
-				if(elementary == "" && middleschool == "" && highschool == "" && university == "") {
-					alert("학교 정보를 최소 1개 입력하세요");
+				if(elementary == "") {
+					alert("초등학교 정보를 입력하세요");
 					return;
 				}
 				
+				if(middleschool == "") {
+					alert("중학교 정보를 입력하세요");
+					return;
+				}
+
 				$.ajax({
 					type:"get"
 					, url:"/school/add"

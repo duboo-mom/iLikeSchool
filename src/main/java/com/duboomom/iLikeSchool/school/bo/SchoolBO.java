@@ -72,4 +72,21 @@ public class SchoolBO {
 		return schoolDAO.insertSchedule(userId, schoolId, title, locationInfo, dateInfo, detail);		
 	}
 	
+	public int addElementary(String elementary) {
+		return schoolDAO.insertSchool(elementary, "초");
+	}
+	
+	public int addMiddleschool(String middleschool) {
+		return schoolDAO.insertSchool(middleschool, "중");
+	}
+	
+	public int addHighschool(String highschool) {
+		return schoolDAO.insertSchool(highschool, "고");
+	}
+	
+	public int addUniversity(String university) {
+		return schoolDAO.insertSchool(university, "대");
+	}
+	
+	
 }

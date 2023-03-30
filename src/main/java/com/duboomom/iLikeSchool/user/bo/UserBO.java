@@ -211,10 +211,10 @@ public class UserBO {
 				userDetail.setElementaryId(school.getId());
 			} else if(schoolType.equals("중")) {
 				userDetail.setMiddleSchool(schoolName);
-				userDetail.setMiddleId(school.getId());
+				userDetail.setMiddleschoolId(school.getId());
 			} else if(schoolType.equals("고")) {
 				userDetail.setHighSchool(schoolName);
-				userDetail.setHighId(school.getId());
+				userDetail.setHighschoolId(school.getId());
 			} else if(schoolType.equals("대")){
 				userDetail.setUniversity(schoolName);
 				userDetail.setUniversityId(school.getId());
@@ -226,6 +226,19 @@ public class UserBO {
 		
 	}
 	
+	public int editUserSchool(int id, int userId, int schoolId) {
+		
+		return userDAO.updateUserSchool(id, userId, schoolId);
+		
+	}
+	
+	public int getUserSchoolId(int userId, int schoolId) {
+		return userDAO.selectIdByUserSchool(userId, schoolId);
+	}
+	
+	public int addUserSchoolSingle(int userId, int schoolId) {
+		return userDAO.insertUserSchool(userId, schoolId);
+	}
 	
 
 }

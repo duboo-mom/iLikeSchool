@@ -79,10 +79,11 @@
 
 				<input class="form-control mt-1" type="text" placeholder="제목" id="titleInput">
 				<input class="form-control mt-3" type="text" placeholder="장소" id="locationInput">
-				<input id="datePicker" class="mt-3 form-control" type="text" placeholder="날짜" id="dateInput">
+				<input id="datePicker" class="mt-3 form-control" type="text" placeholder="날짜">
+
 				<textarea class="form-control mt-3" rows="4" placeholder="설명" id="detailInput"></textarea>
 				
-				<button type="button" class="btn btn-block input-btn mt-3" id="scheduleInputBtn" data-user-id="${userId }" data-school-id="">일정 등록</button>
+				<button type="button" class="btn btn-block input-btn mt-3" id="scheduleInputBtn" data-school-id="${param.schoolId }">일정 등록</button>
 			
 			</div>
 		</section>
@@ -93,6 +94,52 @@
 
 	<script>
 		$(document).ready(function() {
+			
+			$("#scheduleInputBtn").on("click", function() {
+				
+				let schoolId = $(this).data("school-id");
+				let title = $("#titleInput").val();
+				let locationInfo = $("#locationInput").val();
+				let dateInfo = $("#datePicker").datepicker("getDate");
+				let detail = $("#detailInput").val();
+				
+				console.log(dateInfo);
+				
+				if(title == "") {
+					alert("제목을 입력하세요");
+					return;
+				}
+				
+				if(locationInfo == "") {
+					alert("장소 정보를 입력하세요");
+					return;
+				}
+						
+				if(dateInfo == "") {
+					alert("날짜 정보를 입력하세요");
+					return;
+				}
+				
+				
+				$.ajax({
+					type:"get"
+					, url:"/school/schedule/create"
+					, data:{"schoolId":schoolId, "title":title, "locationInfo":locationInfo, "dateInfo":dateInfo, "detail":detail}
+					, success:function(data) {
+						if(data.result == "success") {
+							location.href="/school/reunion/view"
+						} else {
+							alert("등록 실패");
+						}
+					}
+					, error:function() {
+						alert("등록 에러");
+					}
+						
+				});
+				
+			});
+			
 			$("#datePicker").datepicker({
 				dateFormat: "yy-mm-dd",
 				minDate:0,
@@ -109,12 +156,6 @@
 				
 			});
 			
-			$("scheduleInputBtn").on("click", function() {
-				
-				// schoolId는 어떻게 받아와야할까??
-						
-				
-			});
 			
 		});
 	</script>

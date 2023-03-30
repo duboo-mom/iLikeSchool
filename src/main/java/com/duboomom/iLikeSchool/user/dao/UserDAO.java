@@ -60,4 +60,8 @@ public interface UserDAO {
 	
 	public List<Integer> selectUserSchoolbyUserId(@Param("userId") int userId);
 	
+	public int selectIdByUserSchool(
+			@Param("userId") int userId
+			, @Param("schoolId") int schoolId);
+	
 }

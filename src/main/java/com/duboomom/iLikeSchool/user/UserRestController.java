@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.duboomom.iLikeSchool.school.bo.SchoolBO;
+import com.duboomom.iLikeSchool.school.model.School;
 import com.duboomom.iLikeSchool.user.bo.UserBO;
 import com.duboomom.iLikeSchool.user.model.User;
 
@@ -23,6 +25,9 @@ public class UserRestController {
 	
 	@Autowired
 	private UserBO userBO;
+	
+	@Autowired
+	private SchoolBO schoolBO;
 	
 	// 사용자 추가 api
 	@PostMapping("/signup/user")
@@ -246,6 +251,58 @@ public class UserRestController {
 		return result;		
 				
 	}
+	
+	
+	@GetMapping("/edit/school")
+	public Map<String, String> editUserSchool(
+			@RequestParam(value = "schoolName") String schoolName
+			, HttpSession session) {
+		
+		int userId = (Integer)session.getAttribute("userId");
+		
+		School school = schoolBO.getSchoolbyName(schoolName);
+		
+		int count = 0;
+		
+		// 이거를 BO에서 처리했어야 할까??
+		if(school == null) {
+			// 우선 school테이블 추가
+			if(schoolName.contains("초등학교")) {
+				schoolBO.addElementary(schoolName);				
+			} else if(schoolName.contains("중학교")) {
+				schoolBO.addMiddleschool(schoolName);
+			} else if(schoolName.contains("고등학교")) {
+				schoolBO.addHighschool(schoolName);
+			} else if(schoolName.contains("대학교")) {
+				schoolBO.addUniversity(schoolName);
+			}
+			
+			School newSchool = schoolBO.getSchoolbyName(schoolName);
+			// 그다음 사용자 학교 저장
+			count = userBO.addUserSchoolSingle(userId, newSchool.getId());
+
+		} else {
+			int schoolId = school.getId();
+			// edit 하면되고
+			
+			int userSchoolId = userBO.getUserSchoolId(userId, schoolId);
+			
+			count = userBO.editUserSchool(userSchoolId, userId, schoolId);
+			
+		}
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+		
+	}
+	
 	
 	
 		

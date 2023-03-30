@@ -13,8 +13,8 @@ public class UserDetail {
 	private String highSchool;
 	private String university;
 	private int elementaryId;
-	private int middleId;
-	private int highId;
+	private int middleschoolId;
+	private int highschoolId;
 	private int universityId;
 	
 	public int getId() {
@@ -83,17 +83,17 @@ public class UserDetail {
 	public void setElementaryId(int elementaryId) {
 		this.elementaryId = elementaryId;
 	}
-	public int getMiddleId() {
-		return middleId;
+	public int getMiddleschoolId() {
+		return middleschoolId;
 	}
-	public void setMiddleId(int middleId) {
-		this.middleId = middleId;
+	public void setMiddleschoolId(int middleschoolId) {
+		this.middleschoolId = middleschoolId;
 	}
-	public int getHighId() {
-		return highId;
+	public int getHighschoolId() {
+		return highschoolId;
 	}
-	public void setHighId(int highId) {
-		this.highId = highId;
+	public void setHighschoolId(int highschoolId) {
+		this.highschoolId = highschoolId;
 	}
 	public int getUniversityId() {
 		return universityId;
@@ -101,7 +101,7 @@ public class UserDetail {
 	public void setUniversityId(int universityId) {
 		this.universityId = universityId;
 	}
-	
+
 	
 	
 }

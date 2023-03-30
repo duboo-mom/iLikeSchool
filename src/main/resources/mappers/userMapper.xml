@@ -183,7 +183,7 @@
 			`userschool`
 		SET
 			`userId` = #{userId}
-			, `schoolId` = #{userId}
+			, `schoolId` = #{schoolId}
 		WHERE
 			`id` = #{id}
 	</update>
@@ -206,7 +206,15 @@
 		WHERE
 			`userId` = #{userId}	
 	</select>
-
+	<select id="selectIdByUserSchool" parameterType="map" resultType="int">
+		SELECT
+			`id`
+		FROM
+			`userschool`
+		WHERE
+			`userId` = #{userId}
+			AND `schoolId` = #{schoolId}
+	</select>
 	
 </mapper>
  

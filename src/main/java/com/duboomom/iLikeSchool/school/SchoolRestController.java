@@ -1,5 +1,7 @@
 package com.duboomom.iLikeSchool.school;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,9 +54,13 @@ public class SchoolRestController {
 	}
 	
 	@GetMapping("/news")
-	public List<SchoolNews> getSchoolNews(@RequestParam("schoolName") String schoolName) throws JsonMappingException, JsonProcessingException {
+	public List<SchoolNews> getSchoolNews(@RequestParam(value = "schoolName", required = false) String schoolName) throws JsonMappingException, JsonProcessingException {
 		
-		return schoolNewsBO.requestNews(schoolName);
+		if(schoolName.isEmpty()) {
+			return null;
+		} else {
+			return schoolNewsBO.requestNews(schoolName);			
+		}
 		
 	}
 	
@@ -66,7 +71,7 @@ public class SchoolRestController {
 			, @RequestParam("locationInfo") String locationInfo
 			, @RequestParam("dateInfo") Date dateInfo
 			, @RequestParam(value = "detail", required = false) String detail
-			, HttpSession session) {
+			, HttpSession session) throws ParseException {
 		
 		int userId = (Integer)session.getAttribute("userId");
 		

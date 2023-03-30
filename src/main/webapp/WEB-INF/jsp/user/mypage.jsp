@@ -78,21 +78,21 @@
 				<div class="input-group">
 					<input type="text" class="form-control" id="middleschoolInput" value="${user.middleSchool }">
 					<button class="btn btn-light btn-outline-secondary" type="button">찾기</button>			
-					<button class="btn btn-info" type="button">저장</button>					
+					<button class="btn btn-info" type="button" id="middleSchoolBtn">저장</button>					
 				</div>
 				
 				<div class="small mt-2">고등학교</div>
 				<div class="input-group">
 					<input type="text" class="form-control" id="highschoolInput" value="${user.highSchool }">
 					<button class="btn btn-light btn-outline-secondary" type="button">찾기</button>			
-					<button class="btn btn-info" type="button">저장</button>				
+					<button class="btn btn-info" type="button" id="highschoolBtn">저장</button>				
 				</div>
 				
 				<div class="small mt-2">대학교</div>
 				<div class="input-group">
 					<input type="text" class="form-control" id="universityInput" value="${user.university }">
 					<button class="btn btn-light btn-outline-secondary" type="button">찾기</button>			
-					<button class="btn btn-info" type="button">저장</button>				
+					<button class="btn btn-info" type="button" id="universityBtn">저장</button>				
 				</div>			
 					
 			</div>
@@ -104,6 +104,114 @@
 	
 	<script>
 		$(document).ready(function() {
+			
+			$("#elementaryBtn").on("click", function() {
+				
+				let elementary = $("#elementaryInput").val();
+				
+				if(elementary == "") {
+					alert("초등학교 이름을 입력하세요");
+				}
+				
+				// 저장 api 호출
+				$.ajax({
+					type:"get"
+					, url:"/user/edit/school"
+					, data:{"schoolName":elementary}
+					, success:function(data) {
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("수정 실패");
+						}
+					}
+					, error:function() {
+						alert("학교 정보 수정 에러");
+					}
+				});
+				
+			});
+			
+			$("#middleSchoolBtn").on("click", function() {
+				
+				let middleschool = $("#middleschoolInput").val();
+				
+				if(middleschool == "") {
+					alert("중학교 이름을 입력하세요");
+				}
+				
+				// 저장 api 호출
+				$.ajax({
+					type:"get"
+					, url:"/user/edit/school"
+					, data:{"schoolName":middleschool}
+					, success:function(data) {
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("수정 실패");
+						}
+					}
+					, error:function() {
+						alert("학교 정보 수정 에러");
+					}
+				});
+				
+			});
+			
+			$("#highschoolBtn").on("click", function() {
+				
+				let highschool = $("#highschoolInput").val();
+				
+				if(highschool == "") {
+					alert("고등학교 이름을 입력하세요");
+				}
+				
+				// 저장 api 호출
+				$.ajax({
+					type:"get"
+					, url:"/user/edit/school"
+					, data:{"schoolName":highschool}
+					, success:function(data) {
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("수정 실패");
+						}
+					}
+					, error:function() {
+						alert("학교 정보 수정 에러");
+					}
+				});
+				
+			});
+			
+			$("#universityBtn").on("click", function() {
+				
+				let university = $("#universityInput").val();
+				
+				if(university == "") {
+					alert("대학교 이름을 입력하세요");
+				}
+				
+				// 저장 api 호출
+				$.ajax({
+					type:"get"
+					, url:"/user/edit/school"
+					, data:{"schoolName":university}
+					, success:function(data) {
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("수정 실패");
+						}
+					}
+					, error:function() {
+						alert("학교 정보 수정 에러");
+					}
+				});
+				
+			});
 		
 		
 			var nicknameDuplicate = false;
@@ -239,6 +347,7 @@
 				
 				
 			});
+			
 			
 			
 			

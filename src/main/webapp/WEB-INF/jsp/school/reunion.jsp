@@ -29,7 +29,7 @@
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
 		<div class="school-menu d-flex align-items-center">
-			<h4 class="ml-5" id="schoolTitle"></h4>
+			<h4 class="ml-5" id="schoolTitle">${user.elementary }</h4>
 			<form>
 				<label><input type="radio" class="ml-4 mr-1 school-type-input" name="schoolType" value="${user.elementary }" checked="checked">초등학교</label>
 				<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.middleSchool }">중학교</label>				
@@ -39,7 +39,7 @@
 		</div>
 		<hr>
 		
-		<div id="notExistDiv" class="mt-5 ml-5 display-4 text-secondary">
+		<div id="notExistDiv" class="mt-5 ml-5 display-4 text-secondary d-none">
 			학교 정보를 입력해주세요 :)
 		</div>			
 		
@@ -48,7 +48,7 @@
 			<div class="school-plan">
 				<div class="ml-5 mr-5 d-flex justify-content-between">
 					<h5>우리학교 일정</h5>	
-					<div><a href="/school/schedule/view" class="small">일정 등록하기</a></div>									
+					<div><a href="/school/schedule/view?schoolId=${user.elementaryId }" class="small">일정 등록하기</a></div>									
 				</div>
                 <div class="school-calendar">
 			        <table class="Calendar">
@@ -182,15 +182,7 @@
 				
 				var schoolName = $('input[name="schoolType"]:checked').val();
 				$("#schoolTitle").text(schoolName);
-				
-				if(schoolName == "" || schoolName == null) {
-					$("#notExistDiv").removeClass("d-none");
-					$("#existDiv").addClass("d-none");
-				} else {
-					$("#existDiv").removeClass("d-none");
-					$("#notExistDiv").addClass("d-none");
-				}
-				
+								
 			});
 			
 		});

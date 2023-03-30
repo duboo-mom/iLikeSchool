@@ -61,7 +61,7 @@ public class SchoolController {
 	}
 	
 	@GetMapping("/schedule/view")
-	public String scheduleInputView() {
+	public String scheduleInputView(@RequestParam("schoolId") int schoolId) {
 		return "school/schedule/create";
 	}
 	
