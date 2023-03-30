@@ -285,10 +285,14 @@ public class UserRestController {
 			int schoolId = school.getId();
 			// edit 하면되고
 			
-			int userSchoolId = userBO.getUserSchoolId(userId, schoolId);
+			Integer userSchoolId = userBO.getUserSchoolId(userId, schoolId);
 			
-			count = userBO.editUserSchool(userSchoolId, userId, schoolId);
-			
+			if(userSchoolId == null) {
+				count = userBO.addUserSchoolSingle(userId, schoolId);
+			} else {
+				count = userBO.editUserSchool(userSchoolId, userId, schoolId);				
+			}
+						
 		}
 		
 		Map<String, String> result = new HashMap<>();

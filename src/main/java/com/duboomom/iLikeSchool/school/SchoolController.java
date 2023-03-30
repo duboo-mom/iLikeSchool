@@ -105,4 +105,26 @@ public class SchoolController {
 		return "school/guestbook";
 	}
 	
+	// news 본문에 해당하는 html div 만 보여주는
+	@GetMapping("/news/content/div")
+	public String newsContent(
+			Model model
+			, HttpSession session
+			, @RequestParam("schoolName") String schoolName) throws JsonMappingException, JsonProcessingException {
+		
+		int id = (Integer)session.getAttribute("userId");
+		
+		UserDetail userDetail = userBO.getUserDetail(id);
+		
+		model.addAttribute("user", userDetail);
+		model.addAttribute("schoolName", schoolName);
+
+		if(schoolName != null) {
+			model.addAttribute("newsList", schoolNewsBO.requestNews(schoolName));
+		} else {
+			model.addAttribute("newsList", null);
+		}
+		
+		return "school/newsContent";
+	}
 }

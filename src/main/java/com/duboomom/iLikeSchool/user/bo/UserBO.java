@@ -232,7 +232,7 @@ public class UserBO {
 		
 	}
 	
-	public int getUserSchoolId(int userId, int schoolId) {
+	public Integer getUserSchoolId(int userId, int schoolId) {
 		return userDAO.selectIdByUserSchool(userId, schoolId);
 	}
 	

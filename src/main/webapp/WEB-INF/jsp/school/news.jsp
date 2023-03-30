@@ -50,7 +50,7 @@
 					</c:forEach>
 
 					<div class="mt-3">
-						<a href="https://search.naver.com/search.naver?where=news&sm=tab_jum&query=">더 많은 뉴스 보기</a>									
+						<a href="https://search.naver.com/search.naver?where=news&sm=tab_jum&query=${user.elementary }">더 많은 뉴스 보기</a>									
 					</div>
 				</div>
 			</section>
@@ -72,19 +72,11 @@
 				
 				$.ajax({
 					type:"get"
-					, url:"/school/news"
+					, url:"/school/news/content/div"
 					, data:{"schoolName":schoolName}
-					, contentType: "application/x-www-form-urlencoded; charset=UTF-8"
 					, success:function(data) {
-						console.log(data);
 						
-						if(data.length == 0) {
-							$("#emptyUniveDiv").removeClass("d-none");
-							$("#newsDiv").load(location.href+' #newsDiv');
-						} else {
-							$("#emptyUniveDiv").addClass("d-none");
-							$("#newsDiv").load(location.href+' #newsDiv');
-						}
+						$("#newsDiv").html(data);
 						
 					}
 					, error:function() {
