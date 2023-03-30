@@ -28,7 +28,7 @@
 		
 	</insert>
 	
-	<select id="selectVoteIdbyTitle" parameterType="String" resultType="int">
+	<select id="selectVoteIdbyTitle" parameterType="map" resultType="int">
 		SELECT
 			`id`
 		FROM
@@ -58,4 +58,18 @@
 		
 	</insert>
 
+	<select id="selectVote" parameterType="int" resultType="com.duboomom.iLikeSchool.school.vote.model.Vote">
+		SELECT
+			`id`
+			, `schoolId`
+			, `userId`
+			, `title`
+			, `endDate`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`vote`
+		WHERE
+			`schoolId` = #{schoolId}
+	</select>
 </mapper>

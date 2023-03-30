@@ -1,5 +1,8 @@
 package com.duboomom.iLikeSchool.school;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.duboomom.iLikeSchool.school.bo.SchoolNewsBO;
+import com.duboomom.iLikeSchool.school.vote.bo.VoteBO;
+import com.duboomom.iLikeSchool.school.vote.model.Vote;
 import com.duboomom.iLikeSchool.user.bo.UserBO;
 import com.duboomom.iLikeSchool.user.model.UserDetail;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -24,6 +29,9 @@ public class SchoolController {
 
 	@Autowired
 	private UserBO userBO;
+
+	@Autowired
+	private VoteBO voteBO;
 	
 	@GetMapping("/main")
 	public String main() {
@@ -71,8 +79,24 @@ public class SchoolController {
 	}
 	
 	@GetMapping("/vote/list/view")
-	public String voteListView(@RequestParam("schoolId") int schoolId) {
+	public String voteListView(
+			@RequestParam("schoolId") int schoolId
+			, Model model) {
+		
+		Date now = new Date();	
+		
+		model.addAttribute("now", now);
+		
+		List<Vote> voteList = voteBO.getVoteList(schoolId);
+		
+		model.addAttribute("voteList", voteList);
+		
 		return "school/vote/list";
+	}
+	
+	@GetMapping("/vote/voting/view")
+	public String votingView(@RequestParam("voteId") int voteId) {
+		return "school/vote/voting";
 	}
 	
 	@GetMapping("/gathering/list/view")

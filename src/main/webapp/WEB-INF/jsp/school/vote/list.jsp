@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,20 +35,27 @@
 						<th>현황</th>
 						<th></th>
 					</tr>
+					<c:forEach var="vote" items="${voteList }" varStatus="status">
 					<tr>
-						<td><button type="button" class="btn btn-danger">삭제</button></td>
-						<td>1</td>
-						<td>제목1</td>
-						<td class="text-primary">진행중</td>
-						<td><button type="button" class="btn btn-primary">투표하기</button></td>
+						<td>
+							<c:if test="${vote.userId eq userId }">
+							<button type="button" class="btn btn-danger btn-small delete-btn-${vote.id }">삭제</button>
+							</c:if>
+						</td>
+						<td>${status.count }</td>
+						<td>${vote.title }</td>
+						<c:choose>
+							<c:when test="${vote.endDate > now }">							
+								<td class="text-primary">진행중</td>
+								<td><button type="button" class="btn btn-primary btn-small" onclick="window.open('/school/vote/voting/view?voteId=${vote.id}','투표창','width=430,height=500,location=no,status=no,scrollbars=yes')">투표하기</button></td>
+							</c:when>
+							<c:otherwise>
+								<td class="text-warning">마감</td>
+								<td><button type="button" class="btn btn-warning btn-small">결과보기</button></td>
+							</c:otherwise>
+						</c:choose>
 					</tr>
-					<tr>
-						<td></td>
-						<td>2</td>
-						<td>제목2</td>
-						<td class="text-warning">마감</td>
-						<td><button type="button" class="btn btn-warning">결과보기</button></td>
-					</tr>
+					</c:forEach>
 				</table>
 			
 			</div>
@@ -57,4 +65,10 @@
 	
 	</div>
 
+	<script>
+		$(document).ready(function() {
+			
+
+		});
+	</script>
 </body>

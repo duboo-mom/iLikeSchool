@@ -85,6 +85,12 @@
 				let item4 = $("#fourthInput").val();
 				let item5 = $("#fifthInput").val();
 				
+				console.log(item1);
+				console.log(item2);
+				console.log(item3);
+				console.log(item4);
+				console.log(item5);
+				
 				if(title == "") {
 					alert("제목을 입력하세요");
 					return;
@@ -106,13 +112,15 @@
 					, data:{"schoolId":schoolId, "title":title, "endDate":endDate}
 					, success:function(data) {
 						if(data.result == "success") {
+							// 투표 등록이 성공 하면
+							// 아이템 등록
 							$.ajax({
 								type:"get"
 								, url:"/school/vote/item/create"
 								, data:{"schoolId":schoolId, "title":title, "item1":item1, "item2":item2, "item3":item3, "item4":item4, "item5":item5}
 								, success:function(data) {
 									if(data.result == "success") {
-										location.href="/school/vote/list/view?schoolId="+schoolId
+										location.href="/school/vote/list/view?schoolId="+schoolId ;
 									} else {
 										alert("투표 아이템 등록 실패");
 									}
@@ -121,6 +129,7 @@
 									alert("투표 아이템 등록 에러");
 								}
 							});
+							
 						} else {
 							alert("투표 등록 실패");
 						}
