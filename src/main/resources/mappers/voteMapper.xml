@@ -72,4 +72,76 @@
 		WHERE
 			`schoolId` = #{schoolId}
 	</select>
+	
+	<delete id="deleteVote" parameterType="map">
+		DELETE FROM
+			`vote`
+		WHERE
+			`id` = #{voteId}
+			AND `userId` = #{userId}
+		
+	</delete>
+	
+	<delete id="deleteVoteItems" parameterType="int">
+		DELETE FROM
+			`voteItem`
+		WHERE
+			`voteId` = #{voteId}
+	</delete>
+	
+	<select id="selectVoteItems" parameterType="int" resultType="com.duboomom.iLikeSchool.school.vote.model.VoteItem">
+		SELECT
+			`id`
+			, `voteId`
+			, `item`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`voteItem`
+		WHERE
+			`voteId` = #{voteId}
+	
+	</select>
+	
+	<select id="selectTitlebyId" parameterType="int" resultType="String">
+		SELECT
+			`title`
+		FROM
+			`vote`
+		WHERE
+			`id` = #{id}	
+	</select>
+	
+	<insert id="insertVoteResult" parameterType="map">
+		INSERT INTO
+			`voteResult`
+		(
+			`itemId`
+			, `userId`
+			, `createdAt`
+			, `updatedAt`		
+		)
+		VALUE
+		(
+			#{itemId}
+			, #{userId}
+			, now()
+			, now()
+		)
+	</insert>
+	
+	<select id="selectItemResultByVote" parameterType="int" resultType="com.duboomom.iLikeSchool.school.vote.model.VoteItemResult">
+		SELECT
+			`voteItem.item`, count(1) AS `itemCount`
+		FROM
+			`voteItem` 
+		JOIN
+			`voteResult` ON `voteItem.id` = `voteresult.itemId` 
+		WHERE
+			`voteId` = #{voteId}
+		GROUP BY 
+			`voteItem.id`;
+	
+	</select>
+	
 </mapper>

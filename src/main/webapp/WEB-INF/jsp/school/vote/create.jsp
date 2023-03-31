@@ -148,6 +148,7 @@
 			
 			$("#disable1").on("click", function() {
 				$("#firstInput").attr('disabled', true);
+				$("#firstInput").val("");
 			});	
 			
 			$("#enable2").on("click", function() {
@@ -156,6 +157,7 @@
 			
 			$("#disable2").on("click", function() {
 				$("#secondInput").attr('disabled', true);
+				$("#secondInput").val("");
 			});	
 			
 			$("#enable3").on("click", function() {
@@ -164,6 +166,7 @@
 			
 			$("#disable3").on("click", function() {
 				$("#thirdInput").attr('disabled', true);
+				$("#thirdInput").val("");
 			});			
 			
 			$("#enable4").on("click", function() {
@@ -172,6 +175,7 @@
 			
 			$("#disable4").on("click", function() {
 				$("#fourthInput").attr('disabled', true);
+				$("#fourthInput").val("");
 			});
 			
 			$("#enable5").on("click", function() {
@@ -180,6 +184,7 @@
 			
 			$("#disable5").on("click", function() {
 				$("#fifthInput").attr('disabled', true);
+				$("#fifthInput").val("");
 			});
 
 			

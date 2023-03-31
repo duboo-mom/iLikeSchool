@@ -87,7 +87,7 @@
 			           </li>
 			         </ul>
 				
-				<button type="button" class="btn btn-block input-btn mt-3" onClick="location.href='/school/gathering/create/view'">모임 만들기</button>
+				<button type="button" class="btn btn-block input-btn mt-3" onClick="location.href='/school/gathering/create/view?schoolId=${param.schoolId}'">모임 만들기</button>
 			
 			</div>
 		</section>

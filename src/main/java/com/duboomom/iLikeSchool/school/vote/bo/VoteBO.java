@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.duboomom.iLikeSchool.school.vote.dao.VoteDAO;
 import com.duboomom.iLikeSchool.school.vote.model.Vote;
+import com.duboomom.iLikeSchool.school.vote.model.VoteItem;
+import com.duboomom.iLikeSchool.school.vote.model.VoteItemResult;
 
 @Service
 public class VoteBO {
@@ -55,6 +57,40 @@ public class VoteBO {
 	
 	public List<Vote> getVoteList(int schoolId) {
 		return voteDAO.selectVote(schoolId);
+	}
+	
+	public int deleteVote(int voteId, int userId) {
+		
+		int count = voteDAO.deleteVote(voteId, userId);
+		
+		if(count == 1) {
+			
+			// 해당 투표의 item들도 삭제해야됨
+			voteDAO.deleteVoteItems(voteId);
+		}
+		
+		return count;
+	}
+	
+	// 아이템 조회하기
+	public List<VoteItem> getVoteItemList(int voteId) {
+		
+		return voteDAO.selectVoteItems(voteId);
+		
+	}
+	
+	// 투표 제목만 조회
+	public String getVoteTitle(int voteId) {
+		return voteDAO.selectTitlebyId(voteId);
+	}
+	
+	// 투표하기
+	public int addVoteResult(int userId, int itemId) {
+		return voteDAO.insertVoteResult(userId, itemId);
+	}
+	
+	public List<VoteItemResult> getVoteResult(int voteId) {
+		return voteDAO.selectItemResultByVote(voteId);
 	}
 	
 	

@@ -69,5 +69,47 @@ public class VoteRestController {
 		return result;
 		
 	}
+
+	@GetMapping("/delete")
+	public Map<String, String> deleteVote(
+			@RequestParam("voteId") int voteId
+			, HttpSession session) {
+
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = voteBO.deleteVote(voteId, userId);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+		
+	}
+	
+	@GetMapping("/voting")
+	public Map<String, String> voting(@RequestParam("itemId") int itemId, HttpSession session) {
+		
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = voteBO.addVoteResult(userId, itemId);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+				
+	}
+	
+	
 	
 }

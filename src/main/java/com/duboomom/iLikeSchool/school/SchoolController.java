@@ -1,5 +1,8 @@
 package com.duboomom.iLikeSchool.school;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.duboomom.iLikeSchool.school.bo.SchoolNewsBO;
 import com.duboomom.iLikeSchool.school.vote.bo.VoteBO;
 import com.duboomom.iLikeSchool.school.vote.model.Vote;
+import com.duboomom.iLikeSchool.school.vote.model.VoteItem;
+import com.duboomom.iLikeSchool.school.vote.model.VoteItemResult;
 import com.duboomom.iLikeSchool.user.bo.UserBO;
 import com.duboomom.iLikeSchool.user.model.UserDetail;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -83,9 +88,13 @@ public class SchoolController {
 			@RequestParam("schoolId") int schoolId
 			, Model model) {
 		
-		Date now = new Date();	
+		Date now = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(now);
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		calendar.add(Calendar.DATE, 1);
 		
-		model.addAttribute("now", now);
+		model.addAttribute("now", formatter.format(calendar.getTime()));
 		
 		List<Vote> voteList = voteBO.getVoteList(schoolId);
 		
@@ -95,8 +104,30 @@ public class SchoolController {
 	}
 	
 	@GetMapping("/vote/voting/view")
-	public String votingView(@RequestParam("voteId") int voteId) {
+	public String votingView(@RequestParam("voteId") int voteId, Model model) {
+		
+		// voteId로 voteItem 조회해서 해당 item들만 보여주기
+		
+		List<VoteItem> itemList = voteBO.getVoteItemList(voteId);
+		
+		model.addAttribute("voteItems", itemList);
+		
+		model.addAttribute("title", voteBO.getVoteTitle(voteId));
+		
 		return "school/vote/voting";
+	}
+	
+	@GetMapping("/vote/result/view")
+	public String voteResultView(@RequestParam("voteId") int voteId, Model model) {
+		
+		// voteId로 조회해서 해당하는 item result들의 합 보여주기
+		List<VoteItemResult> resultList = voteBO.getVoteResult(voteId);
+		
+		model.addAttribute("resultList", resultList);
+		
+		model.addAttribute("title", voteBO.getVoteTitle(voteId));
+		
+		return "school/vote/result";
 	}
 	
 	@GetMapping("/gathering/list/view")
@@ -110,7 +141,7 @@ public class SchoolController {
 	}
 
 	@GetMapping("/gathering/main/view")
-	public String gatheringMainView() {
+	public String gatheringMainView(@RequestParam("gatheringId") int gatheringId) {
 		return "school/gathering/main";
 	}
 	

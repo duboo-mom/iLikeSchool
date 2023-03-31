@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,22 +19,58 @@
 </head>
 <body>
 	<div>
-		<h4>투표 제목</h4>
+		<h4>${title }</h4>
 		<table class="table" style="width:400">
 			<tr>
 				<th>No.</th>
 				<th>보기</th>
 				<th>선택</th>
 			</tr>
+			
+			<c:forEach var="voteItem" items="${voteItems }" varStatus="status">
 			<tr>
-				<td>1</td>
-				<td>참석</td>
+				<td>${status.count }</td>
+				<td>${voteItem.item }</td>
 				<td>
-					<input type="radio">
+					<input type="radio" value="${voteItem.id }" name="itemCheck">
 				</td>
-			</tr>		
+			</tr>
+			</c:forEach>		
 		</table>
-		<button type="button" class="btn save-btn btn-block">저장</button>
-	</div>	
+		<!-- 이미 투표를 한 사용자라면 저장 버튼 안보이게 -->
+		<button type="button" class="btn save-btn btn-block" id="saveBtn" data-vote-id="${voteItem.voteId }">저장</button>
+	</div>
+	
+	<script>
+		$(document).ready(function() {
+			
+			$("#saveBtn").on("click", function() {
+								
+				let itemId = $("input[name='itemCheck']:checked").val();
+				
+				// vote result에 추가하는 api
+				$.ajax({
+					type:"get"
+					, url:"/school/vote/voting"
+					, data:{"itemId":itemId}
+					, success:function(data) {
+						if(data.result == "success") {
+							alert("투표가 정상적으로 처리되었습니다.");
+							window.close();
+						} else {
+							alert("투표 실패");
+						}
+					}
+					, error:function() {
+						alert("투표 에러");
+					}
+				});
+				
+			});
+			
+			
+		});
+	
+	</script>	
 </body>
 </html>

@@ -26,16 +26,58 @@
 			<div class="gathering-create-div">
 				<h4 class="text-center mt-4">새 모임 만들기</h4>
 				
-				<input type="text" class="form-control mt-4" placeholder="모임 제목">
-				<input type="text" class="form-control mt-3" placeholder="설명 (20자 제한)">
+				<input type="text" class="form-control mt-4" placeholder="모임 제목" id="titleInput">
+				<input type="text" class="form-control mt-3" placeholder="설명 (20자 제한)" id="detailInput">
 				
-				<button type="button" class="mt-4 btn btn-block input-btn">만들기</button>
+				<button type="button" class="mt-4 btn btn-block input-btn" id="createBtn" data-school-id=${param.schoolId }>만들기</button>
 			</div>
 		</section>
 		
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
 	
 	</div>
-
+	
+	<script>
+	
+		$(document).ready(function() {
+			
+			$("#createBtn").on("click", function() {
+				
+				let schoolId = $(this).data("school-id");
+				let title = $("#titleInput").val();
+				let detail = $("#detailInput").val();
+				
+				if(title == "") {
+					alert("제목을 입력하세요");
+					return;
+				}
+				
+				if(detail == "") {
+					alert("설명을 입력하세요");
+					return;
+				}
+				
+				$.ajax({
+					type:"get"
+					, url:"/school/gathering/create"
+					, data:{"schoolId":schoolId, "title":title, "detail":detail}
+					, success:function(data) {
+						if(data.result == "success") {
+							location.href="/school/gathering/list/view?schoolId="+schoolId
+						} else {
+							alert("모임 생성 실패");
+						}						
+					}
+					, error:function() {
+						alert("모임 생성 에러");
+					}
+				});
+				
+				
+			});
+			
+		});	
+	
+	</script>
 </body>
 </html>

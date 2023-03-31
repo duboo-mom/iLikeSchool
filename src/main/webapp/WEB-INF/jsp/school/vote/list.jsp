@@ -39,7 +39,7 @@
 					<tr>
 						<td>
 							<c:if test="${vote.userId eq userId }">
-							<button type="button" class="btn btn-danger btn-small delete-btn-${vote.id }">삭제</button>
+							<button type="button" class="btn btn-danger btn-small vote-delete-btn" data-vote-id="${vote.id }">삭제</button>
 							</c:if>
 						</td>
 						<td>${status.count }</td>
@@ -51,13 +51,15 @@
 							</c:when>
 							<c:otherwise>
 								<td class="text-warning">마감</td>
-								<td><button type="button" class="btn btn-warning btn-small">결과보기</button></td>
+								<td><button type="button" class="btn btn-warning btn-small" onclick="window.open('/school/vote/result/view?voteId=${vote.id}','투표창','width=430,height=500,location=no,status=no,scrollbars=yes')">결과보기</button></td>
 							</c:otherwise>
 						</c:choose>
 					</tr>
 					</c:forEach>
 				</table>
-			
+				<div class="text-right mt-2">
+					<a href="/school/vote/create/view?schoolId=${param.schoolId }">만들기 페이지로 이동</a>
+				</div>
 			</div>
 		</section>
 		
@@ -68,7 +70,30 @@
 	<script>
 		$(document).ready(function() {
 			
-
+			$(".vote-delete-btn").on("click", function() {
+				
+				let voteId = $(this).data("vote-id");
+				
+				// delete ajax
+				$.ajax({
+					type:"get"
+					, url:"/school/vote/delete"
+					, data:{"voteId":voteId}
+					, success:function(data) {
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("삭제 실패");
+						}
+					}
+					, error:function() {
+						alert("삭제 에러");
+					}
+				});
+				
+			});
+			
+			
 		});
 	</script>
 </body>
