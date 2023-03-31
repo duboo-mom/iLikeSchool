@@ -24,7 +24,7 @@ public class UserController {
 		return "user/signup";
 	}
 	
-	@GetMapping("/signup-school/view")
+	@GetMapping("/signup/userschool/view")
 	public String signup2View() {
 		return "user/signupSchool";
 	}

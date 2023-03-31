@@ -70,19 +70,31 @@
 				
 				var schoolName = $('input[name="schoolType"]:checked').val();
 				
-				$.ajax({
-					type:"get"
-					, url:"/school/news/content/div"
-					, data:{"schoolName":schoolName}
-					, success:function(data) {
-						
-						$("#newsDiv").html(data);
-						
-					}
-					, error:function() {
-						alert("뉴스 조회 에러");
-					}
-				});					
+				if(schoolName == "") {
+					
+					$("#newsDiv").addClass("d-none");
+					$("#emptyUniveDiv").removeClass("d-none");
+					
+				} else {
+					
+					$("#newsDiv").removeClass("d-none");
+					$("#emptyUniveDiv").addClass("d-none");
+					
+					$.ajax({
+						type:"get"
+						, url:"/school/news/content/div"
+						, data:{"schoolName":schoolName}
+						, success:function(data) {
+							
+							$("#newsDiv").html(data);
+							
+						}
+						, error:function() {
+							alert("뉴스 조회 에러");
+						}
+					});										
+				}
+				
 				
 			});
 			

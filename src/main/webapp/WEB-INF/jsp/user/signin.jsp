@@ -86,7 +86,7 @@
 										location.href="/school/main"
 									} else {
 										// userSchool 테이블에서 userId 조회했을 때 null이면..!
-										location.href="/user/signup-school/view"
+										location.href="/user/signup/userschool/view"
 									}
 								}
 								, error:function() {

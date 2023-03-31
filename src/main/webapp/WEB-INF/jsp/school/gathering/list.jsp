@@ -72,19 +72,13 @@
 					</label>
 				</div>
 			         <ul class="list-group">
-			           <li class="list-group-item d-flex justify-content-between align-items-center">
-			             첫번째 모임
-			             <!-- go 누르면 해당 모임의 gatheringId 받아서 소모임 메인페이지로 이동 -->
-			             <span class="badge badge-danger gathering-go-btn" data-gathering-id="1">go</span>
-			           </li>
-			           <li class="list-group-item d-flex justify-content-between align-items-center">
-			             두번째 모임
-			             <span class="badge badge-danger gathering-go-btn">go</span>
-			           </li>
-			           <li class="list-group-item d-flex justify-content-between align-items-center">
-			             세번째 모임
-			             <span class="badge badge-danger gathering-go-btn">go</span>
-			           </li>
+			         	<c:forEach var="gathering" items="${gatheringList }">
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+							  ${gathering.title }
+							  <!-- go 누르면 해당 모임의 gatheringId 받아서 소모임 메인페이지로 이동 -->
+							  <span class="badge badge-danger gathering-go-btn" data-gathering-id="${gathering.id }">go</span>
+							</li>
+			         	</c:forEach>
 			         </ul>
 				
 				<button type="button" class="btn btn-block input-btn mt-3" onClick="location.href='/school/gathering/create/view?schoolId=${param.schoolId}'">모임 만들기</button>
@@ -103,7 +97,7 @@
 				
 				let id = $(this).data("gathering-id");
 				
-				location.href="/school/gathering/main/view";
+				location.href="/school/gathering/main/view?gatheringId="+id;
 				
 			});
 			

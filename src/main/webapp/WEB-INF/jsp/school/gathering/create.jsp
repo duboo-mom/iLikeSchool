@@ -63,7 +63,9 @@
 					, data:{"schoolId":schoolId, "title":title, "detail":detail}
 					, success:function(data) {
 						if(data.result == "success") {
+							
 							location.href="/school/gathering/list/view?schoolId="+schoolId
+									
 						} else {
 							alert("모임 생성 실패");
 						}						

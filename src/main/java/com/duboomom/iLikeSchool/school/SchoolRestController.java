@@ -56,12 +56,12 @@ public class SchoolRestController {
 	@GetMapping("/news")
 	public List<SchoolNews> getSchoolNews(@RequestParam(value = "schoolName", required = false) String schoolName) throws JsonMappingException, JsonProcessingException {
 		
-		if(schoolName.isEmpty()) {
-			return null;
-		} else {
-			return schoolNewsBO.requestNews(schoolName);			
-		}
-		
+//		if(schoolName.isEmpty() || schoolName.length() == 0) {
+//			return null;
+//		} else {
+//		}
+//		
+		return schoolNewsBO.requestNews(schoolName);			
 	}
 	
 	@GetMapping("/schedule/create")

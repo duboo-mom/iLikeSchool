@@ -27,5 +27,74 @@
 			, now()
 		)	
 	</insert>
-
+	<select id="selectGathering" parameterType="int" resultType="com.duboomom.iLikeSchool.school.gathering.model.Gathering">
+		SELECT
+			`id`
+			, `userId`
+			, `schoolId`
+			, `title`
+			, `detail`
+			, `announcement`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`gathering`
+		WHERE
+			`schoolId` = #{schoolId}
+	</select>
+	
+	<insert id="insertGatheringMember" parameterType="map">
+		INSERT INTO
+			`gatheringMember`
+		(
+			`gatheringId`
+			, `userId`
+			, `createdAt`		
+		)
+		VALUE
+		(
+			#{gatheringId}
+			, #{userId}
+			, now()
+		)
+	</insert>
+	<select id="selectMemberCount" parameterType="map" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			`gatheringMember`
+		WHERE
+			`gatheringId` = #{gatheringId}
+			AND `userId` = #{userId}
+	</select>
+	<insert id="insertGatheringComment" parameterType="map">
+		INSERT INTO
+			`gatheringComment`
+		(
+			`gatheringId`
+			, `userId`
+			, `comment`
+			, `createdAt`
+			, `updatedAt`		
+		)
+		VALUE
+		(
+			#{gatheringId}
+			, #{userId}
+			, #{comment}
+			, now()
+			, now()
+		)
+	</insert>
+	<update id="updateGatheringAnnouncement" parameterType="map">
+		UPDATE
+			`gathering`
+		SET
+			`announcement` = #{announcement}
+			, `updatedAt` = now()
+		WHERE
+			`id` = #{gatheringId}
+			AND `userId` = #{userId}
+	
+	</update>
 </mapper>

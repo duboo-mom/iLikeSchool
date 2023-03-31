@@ -44,13 +44,13 @@
 		</div>			
 		
 		<div id="existDiv" class="school-main-content d-flex justify-content-between align-itmes-end">
-
+			<!-- 좌측 정보들 -->
 			<div class="school-plan">
-				<div class="ml-5 mr-5 d-flex justify-content-between">
+				<div class="ml-5 mr-5 mt-3 d-flex justify-content-between">
 					<h5>우리학교 일정</h5>	
 					<div><a href="/school/schedule/view?schoolId=${user.elementaryId }" class="small">일정 등록하기</a></div>									
 				</div>
-                <div class="school-calendar">
+                <div class="school-calendar mt-3">
 			        <table class="Calendar">
 			            <thead>
 			                <tr>
@@ -75,7 +75,11 @@
 			            <tbody>
 			            </tbody>
 			        </table>
+			        <div class="mt-3">
+						<div class="text-right"><a href="/school/schedule/calendar/view" class="small">이번달 일정 자세히 보기</a></div>	        	
+			        </div>
 			    </div>
+	          
 	            
 	            <div class="ml-5 mt-4">
 	            	<div class="d-flex justify-content-between">
@@ -90,34 +94,12 @@
 	            
 	            <div class="ml-5 mt-4">
 	            	<div class="d-flex">
-		            	<h5 class="text-rainbow">내 모임 소식 보러가기<a class="a-custom" href="/school/gathering/list/view?schoolId=${user.elementaryId }"><i class="bi bi-box-arrow-in-right ml-3 pr-3"></i></a></h5>	            	
+		            	<h5 class="text-rainbow">소모임 소식 보러가기<a class="a-custom" href="/school/gathering/list/view?schoolId=${user.elementaryId }"><i class="bi bi-box-arrow-in-right ml-3 pr-3"></i></a></h5>	            	
 	            	</div>
 	            </div>
-	            
-	            <div class="ml-5 mt-4">
-	            	<h5>열혈 활동 랭킹</h5>
-	            	<table class="rank-table text-center" border="1">
-	            		<tr>
-	            			<th>순위</th>
-	            			<th>이름</th>
-	            			<th>게시글수</th>
-	            		</tr>
-	            		<tr>
-	            			<td>1</td>
-	            			<td>미종</td>
-	            			<td>3</td>
-	            		</tr>
-	            		<tr>
-	            			<td>2</td>
-	            			<td>두부</td>
-	            			<td>1</td>
-	            		</tr>
-	            	</table>
-	            </div>
-	            
 			</div>
-		          
 			
+			<!-- 조잘조잘 -->
 			<div class="school-post">
 				<div class="d-flex justify-content-between">
 					<h4>조잘조잘</h4>

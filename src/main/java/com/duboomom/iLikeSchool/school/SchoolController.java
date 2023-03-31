@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.duboomom.iLikeSchool.school.bo.SchoolNewsBO;
+import com.duboomom.iLikeSchool.school.gathering.bo.GatheringBO;
+import com.duboomom.iLikeSchool.school.gathering.model.Gathering;
 import com.duboomom.iLikeSchool.school.vote.bo.VoteBO;
 import com.duboomom.iLikeSchool.school.vote.model.Vote;
 import com.duboomom.iLikeSchool.school.vote.model.VoteItem;
@@ -37,6 +39,9 @@ public class SchoolController {
 
 	@Autowired
 	private VoteBO voteBO;
+	
+	@Autowired
+	private GatheringBO gatheringBO;
 	
 	@GetMapping("/main")
 	public String main() {
@@ -76,6 +81,11 @@ public class SchoolController {
 	@GetMapping("/schedule/view")
 	public String scheduleInputView(@RequestParam("schoolId") int schoolId) {
 		return "school/schedule/create";
+	}
+	
+	@GetMapping("/schedule/calendar/view")
+	public String scheduleDetailView() {
+		return "school/schedule/calendar";
 	}
 	
 	@GetMapping("/vote/create/view")
@@ -131,7 +141,12 @@ public class SchoolController {
 	}
 	
 	@GetMapping("/gathering/list/view")
-	public String gatheringListView(@RequestParam("schoolId") int schoolId) {
+	public String gatheringListView(@RequestParam("schoolId") int schoolId, Model model) {
+		
+		List<Gathering> gatheringList = gatheringBO.getGatherings(schoolId);
+		
+		model.addAttribute("gatheringList", gatheringList);
+		
 		return "school/gathering/list";
 	}
 	
@@ -142,6 +157,9 @@ public class SchoolController {
 
 	@GetMapping("/gathering/main/view")
 	public String gatheringMainView(@RequestParam("gatheringId") int gatheringId) {
+		
+		
+		
 		return "school/gathering/main";
 	}
 	
@@ -156,7 +174,8 @@ public class SchoolController {
 	}
 	
 	@GetMapping("/guestbook/view")
-	public String guestbookView() {
+	public String guestbookView(@RequestParam("bookUserId") int userId) {
+				
 		return "school/guestbook";
 	}
 	

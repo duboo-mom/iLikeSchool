@@ -31,9 +31,11 @@
 				
 				<div class="mt-3 d-flex justify-content-between">
 					<div>
-						방장의 프로필 보여주는 box					
+						<!-- 이름 누르면 방장 방명록으로 이동? -->
+						방장 : 방장이름					
 					</div>
 					<%--가입하지 않은 사람이면 가입하기 버튼, 가입한 사용자면 탈퇴하기 버튼 선택적으로 보여주기 --%>
+					<%--방장에게는 모임 삭제로 --%>
 					<!-- <button class="btn btn-success btn-sm">가입하기</button> -->
 					<button class="btn btn-danger btn-sm">탈퇴하기</button>
 				</div>
@@ -45,10 +47,9 @@
 						<%-- 로그인한 userId와 해당 모임의 주인 userId가 일치하는 경우에만 아래 태그 보여주기 --%>
 						<a href="#">수정하기</a>					
 					</div>
-					<ul>
-						<li>1. 어쩌구저쩌구</li>
-						<li>2. 함냐함냐</li>
-					</ul>
+					<div id="announceDiv">
+						여기에 공지사항 블라블라
+					</div>
 				</div>
 				<hr>
 				<div>
@@ -65,9 +66,9 @@
 					<div><b>미종</b>&nbsp 안녕하세용</div>
 				</div>
 				<div class="d-flex mt-2 mb-4">
-					<input type="text" class="form-control" placeholder="${userNickname } (으)로 한마디">
+					<input type="text" class="form-control" placeholder="${userNickname } (으)로 한마디" id="commentInput">
 					<!-- <input type="text" class="form-control" name="${post.id}">  -->
-					<button type="button" class="btn input-btn ml-2 comment-btn">남기기</button>
+					<button type="button" class="btn input-btn ml-2 comment-btn" id="saveBtn" data-gathering-id=${param.gatheringId }>남기기</button>
 				</div>
 			</div>
 						
@@ -77,6 +78,21 @@
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
 	
 	</div>
+
+	<script>
+		$(document).ready(function() {
+			
+			$("#saveBtn").on("click", function() {
+				
+				let gatheringId = $(this).data("gathering-id");
+				let comment = $("#commentInput").val();
+				
+				
+				
+			});
+			
+		});
+	</script>
 
 </body>
 </html>

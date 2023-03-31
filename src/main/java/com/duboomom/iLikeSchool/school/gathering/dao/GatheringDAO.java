@@ -1,7 +1,11 @@
 package com.duboomom.iLikeSchool.school.gathering.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import com.duboomom.iLikeSchool.school.gathering.model.Gathering;
 
 @Repository
 public interface GatheringDAO {
@@ -11,5 +15,20 @@ public interface GatheringDAO {
 			@Param("schoolId") int schoolId,
 			@Param("title") String title,
 			@Param("detail") String detail);
+	
+	public List<Gathering> selectGathering(@Param("schoolId") int schoolId); 
 
+	public int insertGatheringMember(@Param("userId") int userId, @Param("gatheringId") int gatheringId);
+	
+	public int selectMemberCount(@Param("userId") int userId, @Param("gatheringId") int gatheringId);
+	
+	public int insertGatheringComment(
+			@Param("userId") int userId
+			, @Param("gatheringId") int gatheringId
+			, @Param("comment") String comment);
+	
+	public int updateGatheringAnnouncement(
+			@Param("userId") int userId
+			, @Param("gatheringId") int gatheringId
+			, @Param("announcement") String announcement);
 }
