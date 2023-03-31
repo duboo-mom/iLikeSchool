@@ -97,7 +97,24 @@
 				
 				let id = $(this).data("gathering-id");
 				
-				location.href="/school/gathering/main/view?gatheringId="+id;
+				// 모임멤버인지 확인해서 맞으면 소모임 메인으로 들어갈 수 있도록
+				// 멤버가 아니라면 가입화면 팝업
+				$.ajax({
+					type:"get"
+					, url:"/school/gathering/isMember"
+					, data:{"gatheringId":id}
+					, success:function(data) {
+						if(data.result) {
+							location.href="/school/gathering/main/view?gatheringId="+id;							
+						} else {
+							window.open('/school/gathering/join/view?gatheringId='+id,'가입하기','width=430,height=500,location=no,status=no,scrollbars=yes');
+						}
+					}
+					, error:function() {
+						alert("멤버 조회 에러");
+					}
+				});
+				
 				
 			});
 			

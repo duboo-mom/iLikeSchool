@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.duboomom.iLikeSchool.school.bo.SchoolBO;
 import com.duboomom.iLikeSchool.school.bo.SchoolNewsBO;
 import com.duboomom.iLikeSchool.school.gathering.bo.GatheringBO;
 import com.duboomom.iLikeSchool.school.gathering.model.Gathering;
+import com.duboomom.iLikeSchool.school.gathering.model.GatheringDetail;
 import com.duboomom.iLikeSchool.school.vote.bo.VoteBO;
 import com.duboomom.iLikeSchool.school.vote.model.Vote;
 import com.duboomom.iLikeSchool.school.vote.model.VoteItem;
@@ -43,11 +45,15 @@ public class SchoolController {
 	@Autowired
 	private GatheringBO gatheringBO;
 	
+	@Autowired
+	private SchoolBO schoolBO;
+	
 	@GetMapping("/main")
 	public String main() {
 		return "school/main";
 	}
 	
+	// 학교소식 페이지 처음엔 초등학교 정보로
 	@GetMapping("/news/view")
 	public String news(Model model, HttpSession session) throws JsonMappingException, JsonProcessingException {
 		
@@ -66,6 +72,7 @@ public class SchoolController {
 		return "school/news";
 	}
 	
+	// 동창회 페이지 처음엔 초등학교 정보로
 	@GetMapping("/reunion/view")
 	public String reunion(Model model, HttpSession session) {
 		
@@ -74,6 +81,14 @@ public class SchoolController {
 		UserDetail userDetail = userBO.getUserDetail(id);
 		
 		model.addAttribute("user", userDetail);
+		
+		// 투표 title 필요한데
+		// voteList로 가져가서 그중에 title만 가져오기
+		int schoolId = userDetail.getElementaryId();
+		model.addAttribute("voteList", voteBO.getVoteList(schoolId));
+		
+		// schoolPost 리스트
+		model.addAttribute("schoolPostList", schoolBO.getPostDetailList(schoolId));
 		
 		return "school/reunion";
 	}
@@ -156,11 +171,30 @@ public class SchoolController {
 	}
 
 	@GetMapping("/gathering/main/view")
-	public String gatheringMainView(@RequestParam("gatheringId") int gatheringId) {
+	public String gatheringMainView(
+			@RequestParam("gatheringId") int gatheringId
+			, Model model
+			, HttpSession session) {
 		
+		// GatheringDetail을 model에 넣기
+		GatheringDetail gatheringDetail = gatheringBO.getGatheringDetail(gatheringId);
 		
+		model.addAttribute("gatheringDetail", gatheringDetail);
 		
 		return "school/gathering/main";
+	}
+	
+	@GetMapping("/gathering/join/view")
+	public String joinGatheringView(
+			@RequestParam("gatheringId") int gatheringId
+			, Model model
+			, HttpSession session) {
+
+		GatheringDetail gatheringDetail = gatheringBO.getGatheringDetail(gatheringId);
+				
+		model.addAttribute("gatheringDetail", gatheringDetail);		
+		
+		return "school/gathering/join";
 	}
 	
 	@GetMapping("/create/view")

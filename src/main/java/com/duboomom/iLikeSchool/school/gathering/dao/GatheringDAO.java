@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.duboomom.iLikeSchool.school.gathering.model.Gathering;
+import com.duboomom.iLikeSchool.school.gathering.model.GatheringComment;
 
 @Repository
 public interface GatheringDAO {
@@ -31,4 +32,11 @@ public interface GatheringDAO {
 			@Param("userId") int userId
 			, @Param("gatheringId") int gatheringId
 			, @Param("announcement") String announcement);
+
+	public Gathering selectGatheringById(@Param("gatheringId") int gatheringId);
+	
+	public List<GatheringComment> selectCommentByGatheringId(@Param("gatheringId") int gatheringId);
+
+	public int deleteGatheringMember(@Param("gatheringId") int gatheringId, @Param("userId") int userId);
+		
 }

@@ -48,7 +48,12 @@
 			<div class="school-plan">
 				<div class="ml-5 mr-5 mt-3 d-flex justify-content-between">
 					<h5>우리학교 일정</h5>	
-					<div><a href="/school/schedule/view?schoolId=${user.elementaryId }" class="small">일정 등록하기</a></div>									
+					
+					<button type="button" class="btn btn-outline-warning btn-sm" onclick="window.open('/school/schedule/calendar/view','우리학교 일정','_blank')">일정 보기 및 등록하기</button>	        	
+					
+					<%--
+					<div><a href="/school/schedule/view?schoolId=${user.elementaryId }" class="small">일정 등록하기</a></div>														
+					 --%>
 				</div>
                 <div class="school-calendar mt-3">
 			        <table class="Calendar">
@@ -75,9 +80,7 @@
 			            <tbody>
 			            </tbody>
 			        </table>
-			        <div class="mt-3">
-						<div class="text-right"><a href="/school/schedule/calendar/view" class="small">이번달 일정 자세히 보기</a></div>	        	
-			        </div>
+
 			    </div>
 	          
 	            
@@ -87,8 +90,11 @@
 						<i data-toggle="modal" data-target="#moreMenuModal" class="bi bi-three-dots more-btn mr-5 pr-3"></i>	            	
 	            	</div>
 	            	<ul>
-	            		<li>동창회 일정</li>
-	            		<li>여름 야유회</li>
+	            		<c:forEach var="vote" items="${voteList }">
+	            			<li>
+	            				${vote.title }
+	            			</li>
+	            		</c:forEach>
 	            	</ul>
 	            </div>
 	            
@@ -105,25 +111,32 @@
 					<h4>조잘조잘</h4>
 					<a href="/school/create/view?schoolId=${user.elementaryId }">글쓰기</a>					
 				</div>
-				<div class="post-detail">
-					<div class="name-tag-div d-flex align-items-center">
-						<img class="rounded-circle" width="50" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg">
-						<div class="ml-2">두부 (안두부)</div>
+				<c:if test="${empty schoolPostList }">
+					<div class="display-2 text-center mt-5">
+						텅~
 					</div>
-					<img class="my-2" width="550" src="https://cdn.pixabay.com/photo/2017/07/27/16/48/toppokki-2545943_960_720.jpg">
-					<div class="mt-1">
-						: 학교앞에 떡볶이 맛있었는뎅
+					<div class="text-center">
+						글을 작성해주세요 :)
 					</div>
-				</div>
-				<div class="post-detail mt-3">
-					<div class="name-tag-div">
-						<img src="">
-						미종 (안미정)
+				</c:if>
+				<c:forEach var="schoolPost" items="${schoolPostList }">
+					<div class="post-detail mb-3">
+						<div class="name-tag-div d-flex align-items-center justify-content-between">
+							<div class="d-flex align-items-center">
+								<img class="rounded-circle" width="40" height="40" src="${schoolPost.userProfilePath }">
+								<div class="ml-2">${schoolPost.userNickname } (${schoolPost.userName })</div>							
+							</div>
+							<div class="mr-3">
+								<i class="bi bi-three-dots more-btn"></i>							
+							</div>
+						</div>
+						<img height="400" class="my-2" src="${schoolPost.imagePath }">
+						<div class="mt-1">
+							: ${schoolPost.content }
+						</div>
 					</div>
-					<div>
-						: 애두라 모하니?
-					</div>
-				</div>
+				</c:forEach>
+
 			</div>
 		
 		</div>

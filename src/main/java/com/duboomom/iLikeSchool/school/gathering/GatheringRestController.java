@@ -68,7 +68,14 @@ public class GatheringRestController {
 		
 		int userId = (Integer)session.getAttribute("userId");
 		
-		Boolean isMember = gatheringBO.isGatheringMember(userId, gatheringId);
+		Boolean isMember = false;	
+
+		// 만든사람이면 멤버테이블에 없어도 true 리턴
+		if(userId == gatheringBO.getGatheringUserId(gatheringId)) {
+			isMember = true;
+		} else {
+			isMember = gatheringBO.isGatheringMember(userId, gatheringId);
+		}		
 		
 		Map<String, Boolean> result = new HashMap<>();
 		
@@ -101,7 +108,7 @@ public class GatheringRestController {
 	}
 	
 	// 방장만 소모임 공지사항 수정 기능
-	@GetMapping("/annonce")
+	@GetMapping("/edit/annonce")
 	public Map<String, String> editAnnounce(
 			@RequestParam("gatheringId") int gatheringId
 			, @RequestParam("announce") String announce
@@ -121,6 +128,29 @@ public class GatheringRestController {
 		
 		return result;
 	}
+	
+	// 소모임 탈퇴
+	@GetMapping("/leave")
+	public Map<String, String> leaveGathering(
+			@RequestParam("gatheringId") int gatheringId
+			, HttpSession session) {
+		
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = gatheringBO.leaveGathering(gatheringId, userId);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+		
+	}
+	
 	
 	
 	

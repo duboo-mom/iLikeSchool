@@ -11,9 +11,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.duboomom.iLikeSchool.school.bo.SchoolBO;
 import com.duboomom.iLikeSchool.school.bo.SchoolNewsBO;
@@ -89,5 +91,51 @@ public class SchoolRestController {
 		
 	}
 	
+	// 동창회 게시글 작성
+	@PostMapping("/create")
+	public Map<String, String> createPost(
+			@RequestParam("schoolId") int schoolId
+			, @RequestParam("content") String content
+			, @RequestParam(value="file", required=false) MultipartFile file
+			, HttpSession session) {
+		
+		int userId = (Integer)session.getAttribute("userId");
+				
+		Map<String, String> result = new HashMap<>();
+		
+		int count = schoolBO.addPost(userId, schoolId, content, file);
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+		
+	}
+	
+	// 동창회 게시글 삭제
+	@GetMapping("/delete")
+	public Map<String, String> deletePost(
+			@RequestParam("postId") int postId
+			, HttpSession session) {
+
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = schoolBO.deletePost(postId, userId);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+		
+		
+	}
 	
 }

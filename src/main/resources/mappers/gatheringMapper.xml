@@ -97,4 +97,44 @@
 			AND `userId` = #{userId}
 	
 	</update>
+	
+	<select id="selectGatheringById" parameterType="int" resultType="com.duboomom.iLikeSchool.school.gathering.model.Gathering">
+		SELECT
+			`id`
+			, `userId`
+			, `schoolId`
+			, `title`
+			, `detail`
+			, `announcement`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`gathering`
+		WHERE
+			`id` = #{gatheringId}
+	</select>
+	<select id="selectCommentByGatheringId" parameterType="int" resultType="com.duboomom.iLikeSchool.school.gathering.model.GatheringComment">
+		SELECT
+			`id`
+			, `gatheringId`
+			, `userId`
+			, `comment`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`gatheringComment`
+		WHERE
+			`gatheringId` = #{gatheringId}
+		ORDER BY
+			`createdAt`
+	</select>
+	
+	<delete id="deleteGatheringMember" parameterType="map">
+		DELETE FROM
+			`gatheringMember`
+		WHERE
+			`gatheringId` = #{gatheringId}
+			AND `userId` = #{userId}
+	</delete>
+
 </mapper>

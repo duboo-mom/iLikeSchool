@@ -1,13 +1,20 @@
 package com.duboomom.iLikeSchool.school.bo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.duboomom.iLikeSchool.common.FileManagerService;
 import com.duboomom.iLikeSchool.school.dao.SchoolDAO;
+import com.duboomom.iLikeSchool.school.model.PostDetail;
 import com.duboomom.iLikeSchool.school.model.School;
+import com.duboomom.iLikeSchool.school.model.SchoolPost;
+import com.duboomom.iLikeSchool.user.bo.UserBO;
+import com.duboomom.iLikeSchool.user.model.User;
 
 @Service
 public class SchoolBO {
@@ -15,6 +22,9 @@ public class SchoolBO {
 	@Autowired
 	private SchoolDAO schoolDAO;
 
+	@Autowired
+	private UserBO userBO;	
+	
 	public int addSchool(
 			String elementary
 			, String middleschool
@@ -88,5 +98,61 @@ public class SchoolBO {
 		return schoolDAO.insertSchool(university, "대");
 	}
 	
+	public int addPost(int userId, int schoolId, String content, MultipartFile file) {
+		
+		String imagePath = null;
+		
+		if(file != null) {
+			imagePath = FileManagerService.saveFile(userId, file);		
+		}
+
+		return schoolDAO.insertPost(userId, schoolId, content, imagePath);
+		
+	}
 	
+	public int deletePost(int postId, int userId) {
+		
+		SchoolPost schoolPost = schoolDAO.selectSchoolPost(postId);
+				
+		if(schoolPost.getImagePath() != null) {
+			FileManagerService.removeFile(schoolPost.getImagePath());			
+		}
+		
+		return schoolDAO.deleteSchoolPost(postId, userId);
+	}
+	
+	public List<SchoolPost> getSchoolPostList(int schoolId) {
+		return schoolDAO.selectSchoolPostbySchoolId(schoolId);
+	}
+	
+	public List<PostDetail> getPostDetailList(int schoolId) {
+		
+		List<SchoolPost> schoolPostList = schoolDAO.selectSchoolPostbySchoolId(schoolId);
+		
+		List<PostDetail> postDetailList = new ArrayList<>();
+		
+		for(SchoolPost schoolPost:schoolPostList) {
+			
+			PostDetail postDetail = new PostDetail();
+			
+			int userId = schoolPost.getUserId();
+			
+			postDetail.setId(schoolPost.getId());
+			postDetail.setUserId(userId);
+			
+			User user = userBO.getUserById(userId);
+			
+			postDetail.setUserName(user.getName());
+			postDetail.setUserNickname(user.getNickname());
+			postDetail.setUserProfilePath(user.getProfilePath());
+			postDetail.setSchoolId(schoolId);
+			postDetail.setContent(schoolPost.getContent());
+			postDetail.setImagePath(schoolPost.getImagePath());
+			
+			postDetailList.add(postDetail);
+			
+		}
+		
+		return postDetailList;
+	}
 }

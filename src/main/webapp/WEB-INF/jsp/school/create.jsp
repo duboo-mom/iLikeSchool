@@ -35,9 +35,9 @@
 					</svg>
 				</div>
 				
-				<textarea type="text" class="form-control mt-3" rows="5" placeholder="내용을 입력해주세요"></textarea>
+				<textarea type="text" class="form-control mt-3" rows="5" placeholder="내용을 입력해주세요" id="contentInput"></textarea>
 				
-				<button type="button" class="mt-4 btn btn-block input-btn">작성하기</button>
+				<button type="button" class="mt-4 btn btn-block input-btn" id="uploadBtn" data-school-id="${param.schoolId }">작성하기</button>
 			</div>
 		</section>
 		
@@ -51,6 +51,46 @@
 			$("#imgInputBtn").on("click", function() {
 				// 파일 인풋을 클릭한 효과
 				$("#fileInput").click();				
+			});
+
+			
+			$("#uploadBtn").on("click", function() {
+				
+				let content = $("#contentInput").val();
+				let schoolId = $(this).data("school-id");
+				
+				if(content == "") {
+					alert("내용을 입력하세요");
+					return;
+				}
+				
+				// 사진은 필수항목 아님
+				
+				var formData = new FormData();
+				formData.append("schoolId", schoolId);
+				formData.append("content", content);
+				formData.append("file", $("#fileInput")[0].files[0]);
+				
+				$.ajax({
+					type:"post"
+					, url:"/school/create"
+					, data:formData
+					, enctype:"multipart/form-data"
+					, processData:false
+					, contentType:false
+					, success:function(data) {
+						if(data.result == "success") {
+							location.href="/get/reunion/view?schoolId="+schoolId;							
+						} else {
+							alert("게시글 업로드 실패");
+						}
+					}
+					, error:function() {
+						alert("게시글 업로드 에러");
+					}
+					
+				});
+			
 			});
 			
 		});

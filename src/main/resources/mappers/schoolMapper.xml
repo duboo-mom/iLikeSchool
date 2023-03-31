@@ -87,4 +87,67 @@
 		)
 	</insert>
 	
+	<insert id="insertPost" parameterType="map">
+		INSERT INTO
+			`schoolPost`
+		(
+			`userId`
+			, `schoolId`
+			, `content`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUE
+		(
+			#{userId}
+			, #{schoolId}
+			, #{content}
+			, #{imagePath}
+			, now()
+			, now()
+		)
+	</insert>
+	
+	<select id="selectSchoolPost" parameterType="int" resultType="com.duboomom.iLikeSchool.school.model.SchoolPost">
+		SELECT
+			`id`
+			, `userId`
+			, `schoolId`
+			, `content`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`schoolPost`
+		WHERE
+			`id` = #{id}
+		ORDER BY
+			`id` DESC;
+	</select>
+	
+	<select id="selectSchoolPostbySchoolId" parameterType="int" resultType="com.duboomom.iLikeSchool.school.model.SchoolPost">
+		SELECT
+			`id`
+			, `userId`
+			, `schoolId`
+			, `content`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`schoolPost`
+		WHERE
+			`schoolId` = #{schoolId}
+		ORDER BY
+			`id` DESC;
+	</select>
+	
+	<delete id="deleteSchoolPost" parameterType="int">
+		DELETE FROM
+			`schoolPost`
+		WHERE
+			`id` = #{id}
+			AND `userId` = #{userId}
+	</delete>
 </mapper>
