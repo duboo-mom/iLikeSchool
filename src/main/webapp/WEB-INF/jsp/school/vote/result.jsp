@@ -30,7 +30,7 @@
 			<tr>
 				<td>${status.count }</td>
 				<td>${itemResult.item }</td>
-				<td>${itemResult.itemCount }</td>
+				<td>${itemResult.count }</td>
 			</tr>
 			</c:forEach>		
 		</table>

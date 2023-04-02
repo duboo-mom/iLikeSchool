@@ -24,7 +24,7 @@ public class SchoolNewsBO {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	public List<SchoolNews> requestNews(String schoolName) throws JsonMappingException, JsonProcessingException {
+	public List<SchoolNews> requestNews(String schoolName, int display) throws JsonMappingException, JsonProcessingException {
 		
 		String CLIENT_ID = "dP0CiUTD_Sn8Xcpon07Y";
 		String CLIENT_SECRET = "zXT3swjwZA";
@@ -33,7 +33,7 @@ public class SchoolNewsBO {
 				.fromUriString("https://openapi.naver.com")
 				.path("/v1/search/news.json")
 				.queryParam("query", schoolName)
-				.queryParam("display", 5)
+				.queryParam("display", display)
 				.encode(Charset.forName("UTF-8"))
 				.build()
 				.toUri();

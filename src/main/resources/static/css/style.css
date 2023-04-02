@@ -64,10 +64,6 @@ header > .main-menu-link {
 	width:800px;
 }
 
-.main-content {
-	height:600px;
-}
-
 .main-content > .school-rank-table {
 	height:250px;
 }
@@ -82,7 +78,6 @@ header > .main-menu-link {
 
 .school-post {
 	width:700px;
-	height:900px;
 	background-color:#fffff0;
 	padding:50px;
 }

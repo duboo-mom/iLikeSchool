@@ -1,7 +1,7 @@
 package com.duboomom.iLikeSchool.school;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.duboomom.iLikeSchool.school.bo.SchoolBO;
 import com.duboomom.iLikeSchool.school.bo.SchoolNewsBO;
+import com.duboomom.iLikeSchool.school.model.CalendarSchedule;
+import com.duboomom.iLikeSchool.school.model.Schedule;
 import com.duboomom.iLikeSchool.school.model.SchoolNews;
+import com.duboomom.iLikeSchool.user.bo.UserBO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
@@ -32,6 +35,9 @@ public class SchoolRestController {
 	
 	@Autowired
 	private SchoolNewsBO schoolNewsBO;
+	
+	@Autowired
+	private UserBO userBO;
 		
 	// 학교 정보 추가 api
 	@GetMapping("/add")
@@ -63,7 +69,7 @@ public class SchoolRestController {
 //		} else {
 //		}
 //		
-		return schoolNewsBO.requestNews(schoolName);			
+		return schoolNewsBO.requestNews(schoolName, 5);			
 	}
 	
 	@GetMapping("/schedule/create")
@@ -135,7 +141,55 @@ public class SchoolRestController {
 		
 		return result;
 		
+	}
+	
+//	// 친구 찾기 api
+//	@GetMapping("/findfriend")
+//	public Map<String, Object> findFriend(
+//			@RequestParam("friendName") String friendName
+//			, @RequestParam("friendSchool") String friendSchool) {
+//		
+//		List<Friend> friendList = schoolBO.getFriendList(friendName, friendSchool);
+//		
+//		Map<String, Object> result = new HashMap<>();
+//		
+//		if(friendList != null) {
+//			result.put("result", "success");
+//			result.put("friendList", friendList);
+//		} else {
+//			result.put("result", "fail");
+//		}
+//		
+//		return result;
+//		
+//			
+//	}
+//	
+	
+	// 학교 일정 조회
+	@GetMapping("/getschedule")
+	public List<CalendarSchedule> getScheduleBySchool(@RequestParam("schoolId") int schoolId) {
+		
+		List<Schedule> scheduleList = schoolBO.getSchedulebySchool(schoolId);
+		
+		List<CalendarSchedule> calendarList = new ArrayList<>();
+		
+		for(Schedule schedule:scheduleList) {
+			
+			String title = schedule.getTitle();
+			Date start = schedule.getDateInfo();
+			
+			CalendarSchedule calendar = new CalendarSchedule();
+			
+			calendar.setTitle(title);
+			calendar.setStart(start);
+			
+			calendarList.add(calendar);
+		}
+				
+		return calendarList;
 		
 	}
+	
 	
 }

@@ -59,10 +59,7 @@
 				<div>
 					<div class="d-flex justify-content-between">
 						<h5>모임사진</h5>
-						<%-- 로그인한 userId와 해당 모임의 주인 userId가 일치하는 경우에만 아래 태그 보여주기 --%>
-						<c:if test="${gatheringDetail.userId eq userId }">
-							<button class="btn btn-outline-info btn-sm" id="editPhotoBtn">등록하기</button>											
-						</c:if>					
+						<button class="btn btn-outline-info btn-sm" id="editPhotoBtn">등록하기</button>													
 					</div>
 					<div class="text-secondary">
 						사진이 없습니다. <br>

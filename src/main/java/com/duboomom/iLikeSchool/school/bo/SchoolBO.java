@@ -10,8 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.duboomom.iLikeSchool.common.FileManagerService;
 import com.duboomom.iLikeSchool.school.dao.SchoolDAO;
+import com.duboomom.iLikeSchool.school.model.Friend;
 import com.duboomom.iLikeSchool.school.model.PostDetail;
+import com.duboomom.iLikeSchool.school.model.Schedule;
 import com.duboomom.iLikeSchool.school.model.School;
+import com.duboomom.iLikeSchool.school.model.SchoolMember;
 import com.duboomom.iLikeSchool.school.model.SchoolPost;
 import com.duboomom.iLikeSchool.user.bo.UserBO;
 import com.duboomom.iLikeSchool.user.model.User;
@@ -155,4 +158,75 @@ public class SchoolBO {
 		
 		return postDetailList;
 	}
+
+	
+	public List<Friend> getFriendList(String friendName, String friendSchoolName) {
+		
+		List<Integer> userIdList = userBO.getUserIdByName(friendName);
+		
+		int schoolId = schoolDAO.selectSchoolIdbyName(friendSchoolName);
+		
+		List<Friend> friendList = new ArrayList<>();
+		
+		if(userIdList != null) {
+			Friend friend = new Friend();
+			
+			for(Integer friendId:userIdList) {
+				
+				Integer friendSchoolId = userBO.getUserSchoolId(friendId, schoolId);
+				
+				if(friendSchoolId != null) {
+					friend.setFriendId(friendId);
+					friend.setFriendName(friendName);
+					friendList.add(friend);					
+				}			
+			}
+			
+			return friendList;
+			
+		} else {
+			return null;
+		}
+	}
+	
+	public List<Schedule> getSchedulebySchool(int schoolId) {
+		return schoolDAO.selectSchedulebySchool(schoolId);
+	}
+	
+	public List<SchoolMember> getSchoolMemberList() {
+		return schoolDAO.selectSchoolMemberCount();
+	}
+	
+	public List<PostDetail> getRecentSchoolPostDetail() {
+
+		List<SchoolPost> schoolPostList = schoolDAO.selectSchoolPostLimit2();
+		
+		List<PostDetail> postDetailList = new ArrayList<>();
+		
+		for(SchoolPost schoolPost:schoolPostList) {
+			
+			PostDetail postDetail = new PostDetail();
+			
+			int userId = schoolPost.getUserId();
+			
+			postDetail.setId(schoolPost.getId());
+			postDetail.setUserId(userId);
+			
+			User user = userBO.getUserById(userId);
+			
+			postDetail.setUserName(user.getName());
+			postDetail.setUserNickname(user.getNickname());
+			postDetail.setUserProfilePath(user.getProfilePath());
+			postDetail.setSchoolId(schoolPost.getSchoolId());
+			postDetail.setContent(schoolPost.getContent());
+			postDetail.setImagePath(schoolPost.getImagePath());
+			
+			postDetailList.add(postDetail);
+			
+		}
+		
+		return postDetailList;
+		
+	}
+	
 }

@@ -64,4 +64,6 @@ public interface UserDAO {
 			@Param("userId") int userId
 			, @Param("schoolId") int schoolId);
 	
+	public List<Integer> selectIdbyName(@Param("name") String name);
+		
 }

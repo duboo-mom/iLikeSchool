@@ -64,8 +64,6 @@
 	</style>	
 </head>
 <body>
-	<div id="wrap">
-		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
 		
 		<section class="schedule-input-div d-flex justify-content-center">
 			<div id="schedule-main-box">
@@ -88,9 +86,6 @@
 			</div>
 		</section>
 		
-		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
-	
-	</div>
 
 	<script>
 		$(document).ready(function() {
@@ -127,7 +122,8 @@
 					, data:{"schoolId":schoolId, "title":title, "locationInfo":locationInfo, "dateInfo":dateInfo, "detail":detail}
 					, success:function(data) {
 						if(data.result == "success") {
-							location.href="/school/reunion/view"
+							alert("일정이 등록되었습니다");
+							window.close();
 						} else {
 							alert("등록 실패");
 						}

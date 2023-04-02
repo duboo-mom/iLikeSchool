@@ -31,10 +31,10 @@
 		<div class="school-menu d-flex align-items-center">
 			<h4 class="ml-5" id="schoolTitle">${user.elementary }</h4>
 			<form>
-				<label><input type="radio" class="ml-4 mr-1 school-type-input" name="schoolType" value="${user.elementary }" checked="checked">초등학교</label>
-				<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.middleSchool }">중학교</label>				
-				<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.highSchool }">고등학교</label>				
-				<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.university }">대학교</label>				
+				<label><input type="radio" class="ml-4 mr-1 school-type-input" name="schoolType" value="${user.elementary }" checked="checked" data-school-id="${user.elementaryId }">초등학교</label>
+				<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.middleSchool }" data-school-id="${user.middleschoolId }">중학교</label>				
+				<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.highSchool }" data-school-id="${user.highschoolId }">고등학교</label>				
+				<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.university }" data-school-id="${user.universityId }">대학교</label>				
 			</form>				
 		</div>
 		<hr>
@@ -49,7 +49,7 @@
 				<div class="ml-5 mr-5 mt-3 d-flex justify-content-between">
 					<h5>우리학교 일정</h5>	
 					
-					<button type="button" class="btn btn-outline-warning btn-sm" onclick="window.open('/school/schedule/calendar/view','우리학교 일정','_blank')">일정 보기 및 등록하기</button>	        	
+					<button type="button" class="btn btn-outline-warning btn-sm" onclick="window.open('/school/schedule/calendar/view?schoolId=${user.elementaryId}','우리학교 일정','_blank')">일정 보기 및 등록하기</button>	        	
 					
 					<%--
 					<div><a href="/school/schedule/view?schoolId=${user.elementaryId }" class="small">일정 등록하기</a></div>														
@@ -123,7 +123,17 @@
 					<div class="post-detail mb-3">
 						<div class="name-tag-div d-flex align-items-center justify-content-between">
 							<div class="d-flex align-items-center">
-								<img class="rounded-circle" width="40" height="40" src="${schoolPost.userProfilePath }">
+								<c:choose> 
+									<c:when test="${empty schoolPost.userProfilePath}">
+										<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+										  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+										  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+										</svg>									
+									</c:when>
+									<c:otherwise>
+										<img class="rounded-circle" width="40" height="40" src="${schoolPost.userProfilePath }">									
+									</c:otherwise>
+								</c:choose>
 								<div class="ml-2">${schoolPost.userNickname } (${schoolPost.userName })</div>							
 							</div>
 							<div class="mr-3">
@@ -169,9 +179,35 @@
 			
 			// 학교 선택에 따라 타이틀 변경 및 section reload
 			$("input[name=schoolType]").on("click", function() {
-				
+				var schoolId = $(this).data("school-id");
+								
 				var schoolName = $('input[name="schoolType"]:checked').val();
 				$("#schoolTitle").text(schoolName);
+				
+				if(schoolName == "") {
+					
+					$("#existDiv").addClass("d-none");
+					$("#notExistDiv").removeClass("d-none");
+					
+				} else {
+					
+					$("#existDiv").removeClass("d-none");
+					$("#notExistDiv").addClass("d-none");
+					
+					$.ajax({
+						type:"get"
+						, url:"/school/reunion/select/div"
+						, data:{"schoolId":schoolId}
+						, success:function(data) {
+							
+							$("#existDiv").html(data);
+							
+						}
+						, error:function() {
+							alert("페이지 새로고침 에러");
+						}
+					});										
+				}
 								
 			});
 			

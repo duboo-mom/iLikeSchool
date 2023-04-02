@@ -31,15 +31,15 @@
 				<!-- 내 방명록이 아닐 경우에만 guest-input-div 보이도록 -->
 				<c:if test="${param.bookUserId ne userId }">
 					<div class="guest-input-div d-flex p-3">
-						<div class="profile-div mt-5 ml-2 mr-2">
+						<div class="profile-div mt-3 ml-2 mr-2">
 							<img class="rounded-circle" width="50" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg">
 							<div class="text-center">${userNickname }</div>
 						</div>
 						<div class="ml-2 mr-2">
-							<label><input type="checkbox">비밀글</label>						
+							<!-- <label><input type="checkbox">비밀글</label> -->						
 							<textarea rows="4" cols="40" class="form-control" placeholder="글쓰기"></textarea>
 						</div>
-						<div class="mt-5 ml-2">
+						<div class="mt-3 ml-2">
 							<button class="btn input-btn p-4">올리기</button>					
 						</div>
 					</div>		
@@ -50,8 +50,8 @@
 							<img class="rounded-circle" width="50" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg">
 							<div class="text-center">미종</div>
 						</div>
-						<div class="ml-2 mr-2">					
-							<textarea rows="4" cols="40" class="form-control">내용 주절주절</textarea>
+						<div class="ml-2 mr-2 bg-white p-2" style="width:400px;height:100px;border:1px solid #bebebe;">
+							내용 주절주절..
 						</div>					
 					</div>
 					<div class="guestbook-post d-flex p-3">
@@ -59,9 +59,9 @@
 							<img class="rounded-circle" width="50" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg">
 							<div class="text-center">미종</div>
 						</div>
-						<div class="ml-2 mr-2">
-							<h6><i class="bi bi-lock-fill"></i>비밀글 입니다.</h6>				
-							<textarea rows="4" cols="40" class="form-control">내용 주절주절</textarea>
+						<!-- <h6><i class="bi bi-lock-fill"></i>비밀글 입니다.</h6> -->				
+						<div class="ml-2 mr-2 bg-white p-2" style="width:400px;height:100px;border:1px solid #bebebe;">
+							내용 주절주절..
 						</div>					
 					</div>
 				</div>

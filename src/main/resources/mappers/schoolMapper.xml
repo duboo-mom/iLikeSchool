@@ -150,4 +150,62 @@
 			`id` = #{id}
 			AND `userId` = #{userId}
 	</delete>
+	
+	<select id="selectSchoolIdbyName" parameterType="String" resultType="int">
+		SELECT
+			`id`
+		FROM
+			`school`
+		WHERE
+			`name` = #{name}	
+	</select>
+	
+	<select id="selectSchedulebySchool" parameterType="int" resultType="com.duboomom.iLikeSchool.school.model.Schedule">
+		SELECT
+			`id`
+			, `userId`
+			, `schoolId`
+			, `title`
+			, `locationInfo`
+			, `dateInfo`
+			, `detail`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`schoolschedule`
+		WHERE
+			`schoolId` = #{schoolId}
+	</select>
+	
+	<select id="selectSchoolMemberCount" resultType="com.duboomom.iLikeSchool.school.model.SchoolMember">
+		SELECT
+			s.id as `schoolId`, s.name as `schoolName`, count(1) as `memberCount`
+		FROM
+			`school` s
+		INNER JOIN
+			`userSchool` u
+		ON
+			s.id = u.schoolId
+		GROUP BY
+			s.id
+		ORDER BY
+			`memberCount` DESC
+		LIMIT 3;
+	</select>
+	
+	<select id="selectSchoolPostLimit2" resultType="com.duboomom.iLikeSchool.school.model.SchoolPost">
+		SELECT
+			`id`
+			, `userId`
+			, `schoolId`
+			, `content`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`schoolPost`
+		ORDER BY
+			`id` DESC 
+		LIMIT 2;
+	</select>
 </mapper>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.duboomom.iLikeSchool.school.vote.model.Vote;
 import com.duboomom.iLikeSchool.school.vote.model.VoteItem;
 import com.duboomom.iLikeSchool.school.vote.model.VoteItemResult;
+import com.duboomom.iLikeSchool.school.vote.model.VoteResultCount;
 
 @Repository
 public interface VoteDAO {
@@ -42,6 +43,6 @@ public interface VoteDAO {
 	
 	public int insertVoteResult(@Param("userId") int userId, @Param("itemId") int itemId);
 	
-	public List<VoteItemResult> selectItemResultByVote(@Param("voteId") int voteId);
+	public int selectResultCount(@Param("itemId") int itemId);
 	
 }

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>친구 찾기</title>
+<title>i Like School - 친구 찾기</title>
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	
@@ -32,14 +32,9 @@
 					<button class="btn btn-block mt-3 mb-3 search-btn" id="searchBtn">검색</button>
 						
 					<hr>
-						
+					
 					<div class="mt-3" id="friendResultDiv">
-						<h5>검색 결과</h5>
-						<!-- 검색한 결과가 여러개라면 어떻게 불러와야할지 -->
-						<ul>
-							<li>결과1</li>
-							<li>결과2</li>
-						</ul>
+					
 					</div>
 						
 				</div>	
@@ -70,15 +65,10 @@
 				
 				$.ajax({
 					type:"get"
-					, url:"/school/find_friend"
-					, data:{"name":name, "school":school}
+					, url:"/school/findfriend/result/div"
+					, data:{"friendName":name, "friendSchool":school}
 					, success:function(data) {
-						if(data.result == "success") {
-							$("#friendResultDiv").removeClass("d-none");
-							$("#friendResultDiv").text(data.loginId);
-						} else {
-							alert("일치하는 사용자가 없습니다");
-						}	
+						$("#friendResultDiv").html(data);
 					}
 					, error:function() {
 						alert("친구 찾기 에러");

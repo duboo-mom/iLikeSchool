@@ -242,5 +242,8 @@ public class UserBO {
 		return userDAO.insertUserSchool(userId, schoolId);
 	}
 	
+	public List<Integer> getUserIdByName(String userName) {
+		return userDAO.selectIdbyName(userName);
+	}
 
 }

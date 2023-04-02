@@ -1,5 +1,6 @@
 package com.duboomom.iLikeSchool.school.vote.bo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -89,8 +90,32 @@ public class VoteBO {
 		return voteDAO.insertVoteResult(userId, itemId);
 	}
 	
+	// 결과 리스트 만들기
 	public List<VoteItemResult> getVoteResult(int voteId) {
-		return voteDAO.selectItemResultByVote(voteId);
+		
+		List<VoteItem> itemList = voteDAO.selectVoteItems(voteId);
+		
+		List<VoteItemResult> resultList = new ArrayList<>();
+		
+		for(VoteItem item:itemList) {
+			
+			VoteItemResult voteResult = new VoteItemResult();
+			
+			int itemId = item.getId();
+			String itemName = item.getItem();
+			
+			int count = voteDAO.selectResultCount(itemId);
+			
+			voteResult.setVoteId(voteId);
+			voteResult.setItem(itemName);
+			voteResult.setCount(count);
+			
+			resultList.add(voteResult);
+			
+		}
+		
+		return resultList;
+		
 	}
 	
 	

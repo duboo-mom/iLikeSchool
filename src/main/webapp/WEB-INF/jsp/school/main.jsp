@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>i Like School - 동창회</title>
+<title>i Like School</title>
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	
@@ -31,36 +31,64 @@
 					<div class="empty-box"></div>
 					<div class="empty-box"></div>
 					<div class="empty-box"></div>
-					<h5>학교 랭킹</h5>
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+					<h5>아이라잌스쿨 학교 랭킹</h5>
 					<table class="table">
 						<tr>
 							<th>학교 이름</th>
-							<th>게시글 수</th>
+							<th>가입자 수</th>
 						</tr>
+						<c:forEach var="schoolMember" items="${mainDetail.schoolMemberList }">
 						<tr>
-							<td>ㅇㅇ초등학교</td>
-							<td>21</td>							
+							<td>${schoolMember.schoolName }</td>
+							<td>${schoolMember.memberCount }</td>							
 						</tr>
-						<tr>
-							<td>ㅁㅁ초등학교</td>
-							<td>13</td>							
-						</tr>
-						<tr>
-							<td>ㅂㅂ고등학교</td>
-							<td>5</td>							
-						</tr>						
+						</c:forEach>						
 					</table>
 				</div>
 				
 				<div class="col-6">
-					<div class="main-content-item">
-						<h4>최신 게시글</h4>
-						<div class="text-secondary">어쩌구저쩌구...</div>
-					</div>
+					<h4 style="background-color:#E8F5FF">최신 게시글</h4>
+					<c:forEach var="schoolPost" items="${mainDetail.postDetailList }">
+						<div class="post-detail mb-3">
+							<div class="name-tag-div d-flex align-items-center justify-content-between">
+								<div class="d-flex align-items-center">
+									<c:choose> 
+										<c:when test="${empty schoolPost.userProfilePath}">
+											<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+											  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+											  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+											</svg>									
+										</c:when>
+										<c:otherwise>
+											<img class="rounded-circle" width="40" height="40" src="${schoolPost.userProfilePath }">									
+										</c:otherwise>
+									</c:choose>
+									<div class="ml-2">${schoolPost.userNickname } (${schoolPost.userName })</div>							
+								</div>
+								<div class="mr-3">
+									<i class="bi bi-three-dots more-btn"></i>							
+								</div>
+							</div>
+							<img height="400" class="my-2" src="${schoolPost.imagePath }">
+							<div class="mt-1">
+								: ${schoolPost.content }
+							</div>
+						</div>
+					</c:forEach>
 					<hr>
+					<h4 style="background-color:#E8F5FF">최신 학교 뉴스</h4>
 					<div class="main-content-item">
-						<h4>학교 소식</h4>
-						<div class="text-secondary">어디어디학교의 입학식</div>
+						<c:forEach var="news" items="${mainDetail.schoolNewsList }">
+						<div class="news-content mt-3">
+							<h5>${news.title}</h5>
+							<div class="text-dark">${news.description }</div>
+							<div class="small text-secondary">${news.pubDate }</div>
+						</div>
+						</c:forEach>
 					</div>
 				</div>
 				<div class="col-2">
@@ -71,8 +99,13 @@
 					<div class="empty-box"></div>
 					<div class="empty-box"></div>
 					<div class="empty-box"></div>
-
-					<img width="200" alt="친구찾기" src="https://cdn.pixabay.com/photo/2014/03/25/16/34/reading-297450_960_720.png">
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+					<div class="empty-box"></div>
+					
+					<a href="/school/find-friend/view">
+						<img width="200" alt="친구찾기" src="https://cdn.pixabay.com/photo/2014/03/25/16/34/reading-297450_960_720.png">					
+					</a>
 					
 					<h6 class="mt-4">우리학교 소식 확인하기</h6>
 					<div class="input-group mt-1">

@@ -138,7 +138,7 @@ public class UserRestController {
 			, HttpServletRequest request) {
 		
 		User user = userBO.getUser(loginId, password);
-		
+				
 		Map<String, String> result = new HashMap<>();
 		
 		if(user != null) {

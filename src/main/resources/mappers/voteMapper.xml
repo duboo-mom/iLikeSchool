@@ -130,18 +130,14 @@
 		)
 	</insert>
 	
-	<select id="selectItemResultByVote" parameterType="int" resultType="com.duboomom.iLikeSchool.school.vote.model.VoteItemResult">
+	<select id="selectResultCount" parameterType="int" resultType="int">
 		SELECT
-			`voteItem.item`, count(1) AS `itemCount`
+			count(1)
 		FROM
-			`voteItem` 
-		JOIN
-			`voteResult` ON `voteItem.id` = `voteresult.itemId` 
+			`voteResult`
 		WHERE
-			`voteId` = #{voteId}
-		GROUP BY 
-			`voteItem.id`;
-	
+			`itemId` = #{itemId}
 	</select>
+	
 	
 </mapper>

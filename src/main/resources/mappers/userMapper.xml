@@ -215,6 +215,14 @@
 			`userId` = #{userId}
 			AND `schoolId` = #{schoolId}
 	</select>
+	<select id="selectIdbyName" parameterType="map" resultType="int">
+		SELECT
+			`id`
+		FROM
+			`user`
+		WHERE
+			`name` = #{name}
+	</select>
 	
 </mapper>
  
