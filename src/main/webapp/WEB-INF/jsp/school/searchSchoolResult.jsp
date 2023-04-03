@@ -10,6 +10,13 @@
 		<tr>
 			<td>${school.schoolName }</td>
 			<td>${school.adres }</td>			
+			<td><button type="button" class="btn btn-primary btn-sm">선택</button></td>			
 		</tr>
 		</c:forEach>
 	</table>
+
+	
+	<script>
+	
+	
+	</script>
