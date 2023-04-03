@@ -27,13 +27,16 @@
 				<h4 class="mt-3">글 쓰기</h4>
 				
 				<hr>
-				<input id="fileInput" type="file" class="d-none">				
-				<div id="imgInputBtn">
-					<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-camera-fill" viewBox="0 0 16 16">
-					  <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-					  <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
-					</svg>
-				</div>
+				<input id="fileInput" type="file" class="d-none">		
+				<div class="d-flex">
+					<div id="imgInputBtn">
+						<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-camera-fill" viewBox="0 0 16 16">
+						  <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+						  <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+						</svg>
+					</div>
+					<img id="preview" width="80" class="d-none ml-4">				
+				</div>		
 				
 				<textarea type="text" class="form-control mt-3" rows="5" placeholder="내용을 입력해주세요" id="contentInput"></textarea>
 				
@@ -53,6 +56,21 @@
 				$("#fileInput").click();				
 			});
 
+			$("#fileInput").on("change", function() {
+				
+			    var file = event.target.files[0];
+
+			    var reader = new FileReader(); 
+			    reader.onload = function(e) {
+			    	
+					$("#preview").removeClass("d-none");
+			        $("#preview").attr("src", e.target.result);
+			    }
+
+			    reader.readAsDataURL(file);
+				
+			});
+			
 			
 			$("#uploadBtn").on("click", function() {
 				

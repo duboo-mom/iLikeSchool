@@ -34,7 +34,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 			
 		} else { // 로그인 안된 경우
 			// /school 로 시작하는 페이지로 접근 안되고 로그인페이지 보여주기
-			if(uri.startsWith("/school")) {
+			if(uri.startsWith("/school") || uri.startsWith("/user/mypage")) {
 				response.sendRedirect("/user/signin/view");
 				return false;
 			}

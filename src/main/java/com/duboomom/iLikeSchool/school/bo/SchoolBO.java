@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.duboomom.iLikeSchool.common.FileManagerService;
 import com.duboomom.iLikeSchool.school.dao.SchoolDAO;
 import com.duboomom.iLikeSchool.school.model.Friend;
+import com.duboomom.iLikeSchool.school.model.GuestBook;
+import com.duboomom.iLikeSchool.school.model.GuestBookDetail;
 import com.duboomom.iLikeSchool.school.model.PostDetail;
 import com.duboomom.iLikeSchool.school.model.Schedule;
 import com.duboomom.iLikeSchool.school.model.School;
@@ -226,6 +228,34 @@ public class SchoolBO {
 		}
 		
 		return postDetailList;
+		
+	}
+	
+	public int addGuestBook(int userId, int writerId, String comment) {
+		return schoolDAO.insertGuestBook(userId, writerId, comment);
+	}
+	
+	public List<GuestBookDetail> getGuestBookDetail(int bookUserId) {
+		
+		List<GuestBook> guestBookList = schoolDAO.selectGuestBookByUserId(bookUserId);
+		
+		List<GuestBookDetail> bookDetailList = new ArrayList<>();
+		
+		for(GuestBook guestBook:guestBookList) {
+			
+			GuestBookDetail bookDetail = new GuestBookDetail();
+			int writerId = guestBook.getWriterId();
+			
+			User writer = userBO.getUserById(writerId);
+			
+			bookDetail.setUserName(writer.getName());
+			bookDetail.setUserNickname(writer.getNickname());
+			bookDetail.setComment(guestBook.getComment());
+			
+			bookDetailList.add(bookDetail);
+		}
+		
+		return bookDetailList;
 		
 	}
 	

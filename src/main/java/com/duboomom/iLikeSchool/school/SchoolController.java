@@ -14,16 +14,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.duboomom.iLikeSchool.school.bo.SchoolBO;
 import com.duboomom.iLikeSchool.school.bo.SchoolNewsBO;
+import com.duboomom.iLikeSchool.school.bo.SearchSchoolBO;
 import com.duboomom.iLikeSchool.school.gathering.bo.GatheringBO;
 import com.duboomom.iLikeSchool.school.gathering.model.Gathering;
 import com.duboomom.iLikeSchool.school.gathering.model.GatheringDetail;
 import com.duboomom.iLikeSchool.school.model.Friend;
 import com.duboomom.iLikeSchool.school.model.MainDetail;
+import com.duboomom.iLikeSchool.school.model.SearchSchool;
 import com.duboomom.iLikeSchool.school.vote.bo.VoteBO;
 import com.duboomom.iLikeSchool.school.vote.model.Vote;
 import com.duboomom.iLikeSchool.school.vote.model.VoteItem;
 import com.duboomom.iLikeSchool.school.vote.model.VoteItemResult;
 import com.duboomom.iLikeSchool.user.bo.UserBO;
+import com.duboomom.iLikeSchool.user.model.User;
 import com.duboomom.iLikeSchool.user.model.UserDetail;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -46,6 +49,9 @@ public class SchoolController {
 	
 	@Autowired
 	private SchoolBO schoolBO;
+	
+	@Autowired
+	private SearchSchoolBO searchSchoolBO;
 	
 	@GetMapping("/main")
 	public String main(Model model) throws JsonMappingException, JsonProcessingException {
@@ -231,33 +237,19 @@ public class SchoolController {
 	}
 	
 	@GetMapping("/guestbook/view")
-	public String guestbookView(@RequestParam("bookUserId") int userId) {
-				
+	public String guestbookView(
+			@RequestParam("bookUserId") int userId
+			, Model model) {
+		
+		User bookUser = userBO.getUserById(userId);
+		
+		model.addAttribute("bookMaster", bookUser.getNickname()); 
+		
+		model.addAttribute("bookDetailList", schoolBO.getGuestBookDetail(userId));
+		
 		return "school/guestbook";
 	}
 	
-	// news 본문에 해당하는 html div 만 보여주는
-	@GetMapping("/news/content/div")
-	public String newsContent(
-			Model model
-			, HttpSession session
-			, @RequestParam("schoolName") String schoolName) throws JsonMappingException, JsonProcessingException {
-		
-		int id = (Integer)session.getAttribute("userId");
-		
-		UserDetail userDetail = userBO.getUserDetail(id);
-		
-		model.addAttribute("user", userDetail);
-		model.addAttribute("schoolName", schoolName);
-
-		if(schoolName != null) {
-			model.addAttribute("newsList", schoolNewsBO.requestNews(schoolName, 5));
-		} else {
-			model.addAttribute("newsList", null);
-		}
-		
-		return "school/newsContent";
-	}
 	
 	// 친구찾기 결과 html
 	@GetMapping("/findfriend/result/div")
@@ -284,6 +276,50 @@ public class SchoolController {
 	@GetMapping("/schedule/calendar/view")
 	public String scheduleDetailView(@RequestParam("schoolId") int schoolId) {
 		return "school/schedule/calendar";
+	}
+	
+	// news 본문에 해당하는 html div 만 보여주는
+	@GetMapping("/news/content/div")
+	public String newsContent(
+			Model model
+			, HttpSession session
+			, @RequestParam("schoolName") String schoolName) throws JsonMappingException, JsonProcessingException {
+		
+		int id = (Integer)session.getAttribute("userId");
+		
+		UserDetail userDetail = userBO.getUserDetail(id);
+		
+		model.addAttribute("user", userDetail);
+		model.addAttribute("schoolName", schoolName);
+		
+		if(schoolName != null) {
+			model.addAttribute("newsList", schoolNewsBO.requestNews(schoolName, 5));
+		} else {
+			model.addAttribute("newsList", null);
+		}
+		
+		return "school/newsContent";
+	}
+	
+	// 학교 검색 창
+	@GetMapping("/search/schoolname/view")
+	public String searchSchoolView() {
+		return "school/searchSchool";
+	}
+	
+	// 학교 검색 결과 html div
+	@GetMapping("/search/school/result/view")
+	public String searchSchoolResultView(
+			Model model
+			, @RequestParam("gubun") String gubun
+			, @RequestParam("word") String word) throws JsonMappingException, JsonProcessingException {
+	
+		List<SearchSchool> searchSchool = searchSchoolBO.requestSchoolName(gubun, word);
+		
+		model.addAttribute("result", searchSchool);
+		
+		return "school/searchSchoolResult";
+		
 	}
 	
 }

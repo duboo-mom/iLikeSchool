@@ -25,7 +25,7 @@
 		<section class="d-flex justify-content-center">
 			<div style="width:600px;">
 				<div class="my-3">
-					<h4>${userNickname } 의 방명록</h4>				
+					<h4>${bookMaster } 의 방명록</h4>				
 				</div>
 				
 				<!-- 내 방명록이 아닐 경우에만 guest-input-div 보이도록 -->
@@ -37,33 +37,26 @@
 						</div>
 						<div class="ml-2 mr-2">
 							<!-- <label><input type="checkbox">비밀글</label> -->						
-							<textarea rows="4" cols="40" class="form-control" placeholder="글쓰기"></textarea>
+							<textarea rows="4" cols="40" class="form-control" placeholder="글쓰기" id="commentInput"></textarea>
 						</div>
 						<div class="mt-3 ml-2">
-							<button class="btn input-btn p-4">올리기</button>					
+							<button class="btn input-btn p-4" id="guestBookInputBtn" data-book-id="${param.bookUserId }">올리기</button>					
 						</div>
 					</div>		
 				</c:if>
 				<div class="my-guestbook-div">
-					<div class="guestbook-post d-flex p-3">
-						<div class="profile-div mt-3 ml-2 mr-2">
-							<img class="rounded-circle" width="50" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg">
-							<div class="text-center">미종</div>
+					<c:forEach var="bookDetail" items="${bookDetailList }">
+						<div class="guestbook-post d-flex p-3">
+							<div class="profile-div mt-4 ml-2 mr-2">
+								<div class="text-center">${bookDetail.userNickname }</div>
+								<div class="text-center">(${bookDetail.userName })</div>
+							</div>
+							<div class="ml-2 mr-2 bg-white p-2" style="width:400px;height:100px;border:1px solid #bebebe;">
+								${bookDetail.comment }
+							</div>					
 						</div>
-						<div class="ml-2 mr-2 bg-white p-2" style="width:400px;height:100px;border:1px solid #bebebe;">
-							내용 주절주절..
-						</div>					
-					</div>
-					<div class="guestbook-post d-flex p-3">
-						<div class="profile-div mt-3 ml-2 mr-2">
-							<img class="rounded-circle" width="50" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg">
-							<div class="text-center">미종</div>
-						</div>
+					</c:forEach>
 						<!-- <h6><i class="bi bi-lock-fill"></i>비밀글 입니다.</h6> -->				
-						<div class="ml-2 mr-2 bg-white p-2" style="width:400px;height:100px;border:1px solid #bebebe;">
-							내용 주절주절..
-						</div>					
-					</div>
 				</div>
 			</div>
 								
@@ -72,6 +65,40 @@
 		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
 	</div>
 
+	<script>
+		$(document).ready(function() {
+			
+			$("#guestBookInputBtn").on("click", function() {
+				
+				let comment = $("#commentInput").val();
+				let bookId = $(this).data("book-id");
+				
+				if(comment == "") {
+					alert("내용을 입력해주세요");
+					return;
+				}
+				
+				$.ajax({
+					type:"post"
+					, url:"/school/guestbook/create"
+					, data:{"bookUserId":bookId, "comment":comment}
+					, success: function(data) {
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("방명록 작성 실패");
+						}
+					}
+					, error: function() {
+						alert("방명록 등록 에러");
+					}
+						
+				});
+				
+			});
+		});
+	
+	</script>
 
 </body>
 </html>

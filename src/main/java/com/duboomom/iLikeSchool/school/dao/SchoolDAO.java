@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.duboomom.iLikeSchool.school.model.GuestBook;
 import com.duboomom.iLikeSchool.school.model.Schedule;
 import com.duboomom.iLikeSchool.school.model.School;
 import com.duboomom.iLikeSchool.school.model.SchoolMember;
@@ -51,4 +52,11 @@ public interface SchoolDAO {
 	public List<SchoolMember> selectSchoolMemberCount();
 	
 	public List<SchoolPost> selectSchoolPostLimit2();
+	
+	public int insertGuestBook(
+			@Param("userId") int userId
+			, @Param("writerId") int writerId
+			, @Param("comment") String comment);
+	
+	public List<GuestBook> selectGuestBookByUserId(@Param("userId") int userId);
 }

@@ -36,6 +36,7 @@
 				<!-- 개인 정보 수정 -->
 				<div class="d-flex align-items-center mt-4">
 					<h1 id="profileImageIcon"><i class="bi bi-person-square"></i></h1>
+					<img id="preview" width="40" class="d-none">
 					<input id="fileInput" type="file" class="d-none">
 					<div class="ml-3" id="imageUploadBtn"><i class="bi bi-plus-circle text-primary"></i>프로필 이미지 설정</div>
 				</div>
@@ -70,7 +71,7 @@
 				<div class="small mt-2">초등학교</div>
 				<div class="input-group">
 					<input type="text" class="form-control" id="elementaryInput" value="${user.elementary }">
-					<button class="btn btn-light btn-outline-secondary" type="button">찾기</button>			
+					<button class="btn btn-light btn-outline-secondary" type="button" id="elemSearchBtn">찾기</button>			
 					<button class="btn btn-info" type="button" id="elementaryBtn">저장</button>			
 				</div>
 				
@@ -93,8 +94,8 @@
 					<input type="text" class="form-control" id="universityInput" value="${user.university }">
 					<button class="btn btn-light btn-outline-secondary" type="button">찾기</button>			
 					<button class="btn btn-info" type="button" id="universityBtn">저장</button>				
-				</div>			
-					
+				</div>
+				
 			</div>
 		</div>	
 	
@@ -104,6 +105,28 @@
 	
 	<script>
 		$(document).ready(function() {
+			
+			$("#elemSearchBtn").on("click", function() {
+				
+				window.open('/school/search/schoolname/view','학교검색','width=430,height=500,location=no,status=no,scrollbars=yes')
+
+			});
+			
+			$("#fileInput").on("change", function() {
+				
+			    var file = event.target.files[0];
+
+			    var reader = new FileReader(); 
+			    reader.onload = function(e) {
+			    	
+			    	$("#profileImageIcon").addClass("d-none");
+					$("#preview").removeClass("d-none");
+			        $("#preview").attr("src", e.target.result);
+			    }
+
+			    reader.readAsDataURL(file);
+				
+			});
 			
 			$("#elementaryBtn").on("click", function() {
 				

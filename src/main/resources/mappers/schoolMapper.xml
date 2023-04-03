@@ -208,4 +208,37 @@
 			`id` DESC 
 		LIMIT 2;
 	</select>
+	
+	<insert id="insertGuestBook" parameterType="map">
+		INSERT INTO
+			`guestBook`
+		(
+			`userId`
+			, `writerId`
+			, `comment`
+			, `createdAt`
+		)
+		VALUE
+		(
+			#{userId}
+			, #{writerId}
+			, #{comment}
+			, now()
+		)
+	</insert>
+	
+	<select id="selectGuestBookByUserId" parameterType="int" resultType="com.duboomom.iLikeSchool.school.model.GuestBook">
+		SELECT
+			`id`
+			, `userId`
+			, `writerId`
+			, `comment`
+			, `createdAt`
+		FROM
+			`guestBook`
+		WHERE
+			`userId` = #{userId}
+		ORDER BY
+			`id` DESC
+	</select>
 </mapper>

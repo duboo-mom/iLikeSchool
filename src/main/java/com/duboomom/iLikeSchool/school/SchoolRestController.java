@@ -19,9 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.duboomom.iLikeSchool.school.bo.SchoolBO;
 import com.duboomom.iLikeSchool.school.bo.SchoolNewsBO;
+import com.duboomom.iLikeSchool.school.bo.SearchSchoolBO;
 import com.duboomom.iLikeSchool.school.model.CalendarSchedule;
 import com.duboomom.iLikeSchool.school.model.Schedule;
 import com.duboomom.iLikeSchool.school.model.SchoolNews;
+import com.duboomom.iLikeSchool.school.model.SearchSchool;
 import com.duboomom.iLikeSchool.user.bo.UserBO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -29,7 +31,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 @RestController
 @RequestMapping("/school")
 public class SchoolRestController {
-
+	
 	@Autowired
 	private SchoolBO schoolBO;
 	
@@ -39,6 +41,9 @@ public class SchoolRestController {
 	@Autowired
 	private UserBO userBO;
 		
+	@Autowired
+	private SearchSchoolBO searchSchoolBO;
+	
 	// 학교 정보 추가 api
 	@GetMapping("/add")
 	public Map<String, String> signupSchoolInfo(
@@ -191,5 +196,36 @@ public class SchoolRestController {
 		
 	}
 	
+	// 학교 검색 커리어넷 open api
+	@GetMapping("/search/schoolname")
+	public List<SearchSchool> findSchool(
+			@RequestParam("gubun") String gubun
+			, @RequestParam("searchSchulNm") String searchSchulNm) throws JsonMappingException, JsonProcessingException {
+		
+		return searchSchoolBO.requestSchoolName(gubun, searchSchulNm);
+			 
+	}
+	
+	// 방명록 글 작성
+	@PostMapping("/guestbook/create")
+	public Map<String, String> addGuestBook(
+			@RequestParam("bookUserId") int bookUserId
+			, @RequestParam("comment") String comment
+			, HttpSession session) {
+		
+		int writerId = (Integer)session.getAttribute("userId");
+		
+		Map<String, String> result = new HashMap<>();
+		
+		int count = schoolBO.addGuestBook(bookUserId, writerId, comment);
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+	}
 	
 }
