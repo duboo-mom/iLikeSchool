@@ -73,7 +73,7 @@
 									<i class="bi bi-three-dots more-btn"></i>							
 								</div>
 							</div>
-							<img height="400" class="my-2" src="${schoolPost.imagePath }">
+							<img height="350" class="my-2" src="${schoolPost.imagePath }">
 							<div class="mt-1">
 								: ${schoolPost.content }
 							</div>

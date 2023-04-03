@@ -1,17 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>i Like School - 동창회</title>
 
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	
+	<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
+	<link rel="stylesheet" href="/static/css/style.css" type="text/css">
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js" integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	
+	<script type="text/javascript" src="/static/js/calendar.js"></script>
+	
+	<link rel="stylesheet" href="/static/css/calendar.css" type="text/css">
+		
+</head>
 
-
-<div id="existDiv" class="school-main-content d-flex justify-content-between align-itmes-end">
+<body>
+	<div id="wrap">
+		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
+		<div class="school-menu d-flex align-items-center">
+			<h4 class="ml-5" id="schoolTitle"></h4>
+			<form>
+				<label><input type="radio" class="ml-4 mr-1 school-type-input" name="schoolType" value="${user.elementary }" data-school-id="${user.elementaryId }">초등학교</label>
+				<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.middleSchool }" data-school-id="${user.middleschoolId }">중학교</label>				
+				<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.highSchool }" data-school-id="${user.highschoolId }">고등학교</label>				
+				<label class="ml-3"><input type="radio" class="mr-1 school-type-input" name="schoolType" value="${user.university }" data-school-id="${user.universityId }">대학교</label>				
+			</form>				
+		</div>
+		<hr>
+		
+		<div id="notExistDiv" class="mt-5 ml-5 display-4 text-secondary d-none">
+			학교 정보를 입력해주세요 :)
+		</div>			
+		
+		<div id="existDiv" class="school-main-content d-flex justify-content-between align-itmes-end">
 			<!-- 좌측 정보들 -->
 			<div class="school-plan">
 				<div class="ml-5 mr-5 mt-3 d-flex justify-content-between">
 					<h5>우리학교 일정</h5>	
 					
-					<button type="button" class="btn btn-outline-warning btn-sm" onclick="window.open('/school/schedule/calendar/view?schoolId=${param.schoolId}','우리학교 일정','_blank')">일정 보기 및 등록하기</button>	        	
-
+					<button type="button" class="btn btn-outline-warning btn-sm" onclick="window.open('/school/schedule/calendar/view?schoolId=${user.elementaryId}','우리학교 일정','_blank')">일정 보기 및 등록하기</button>	        	
+					
+					<%--
+					<div><a href="/school/schedule/view?schoolId=${user.elementaryId }" class="small">일정 등록하기</a></div>														
+					 --%>
 				</div>
                 <div class="school-calendar mt-3">
 			        <table class="Calendar">
@@ -67,7 +109,7 @@
 			<div class="school-post">
 				<div class="d-flex justify-content-between">
 					<h4>조잘조잘</h4>
-					<a href="/school/create/view?schoolId=${param.schoolId }">글쓰기</a>					
+					<a href="/school/create/view?schoolId=${param.schoolId}">글쓰기</a>					
 				</div>
 				<c:if test="${empty schoolPostList }">
 					<div class="display-2 text-center mt-5">
@@ -98,7 +140,7 @@
 								<i class="bi bi-three-dots more-btn"></i>							
 							</div>
 						</div>
-						<img height="400" class="my-2" src="${schoolPost.imagePath }">
+						<img height="350" class="my-2" src="${schoolPost.imagePath }">						
 						<div class="mt-1">
 							: ${schoolPost.content }
 						</div>
@@ -109,7 +151,7 @@
 		
 		</div>
 			
-		
+		<c:import url="/WEB-INF/jsp/include/footer.jsp"/>
 	
 	</div>
 
@@ -131,3 +173,65 @@
 	    </div>
 	  </div>
 	</div>
+
+	<script>
+		$(document).ready(function() {
+			
+			$.fn.radioSelect = function(val) {
+				  this.each(function() {
+				    var $this = $(this);
+				    if($this.data("school-id") == val)
+				      $this.attr('checked', true);
+				  });
+				  return this;
+			};
+						
+			var url_href = window.location.href;
+			
+			var url = new URL(url_href);			
+			var paramId = url.searchParams.get("schoolId");
+			
+			$("input[name=schoolType]").radioSelect(paramId);
+						
+			var schoolName = $('input[name="schoolType"]:checked').val();
+			$("#schoolTitle").text(schoolName);
+			
+			// 학교 선택에 따라 타이틀 변경 및 section reload
+			$("input[name=schoolType]").on("click", function() {
+				var schoolId = $(this).data("school-id");
+
+				$("#schoolTitle").text(schoolName);
+				
+				if(schoolName == "") {
+					
+					$("#existDiv").addClass("d-none");
+					$("#notExistDiv").removeClass("d-none");
+					
+				} else {
+					
+					$("#existDiv").removeClass("d-none");
+					$("#notExistDiv").addClass("d-none");
+					
+					$.ajax({
+						type:"get"
+						, url:"/school/reunion/select"
+						, data:{"schoolId":schoolId}
+						, success:function(data) {
+							
+							location.href="/school/reunion/select?schoolId="+schoolId;
+							
+						}
+						, error:function() {
+							alert("페이지 새로고침 에러");
+						}
+					});										
+				}
+								
+			});
+			
+		});
+	
+	</script>
+	
+</body>
+</html>

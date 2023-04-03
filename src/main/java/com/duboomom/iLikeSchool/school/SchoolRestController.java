@@ -200,9 +200,10 @@ public class SchoolRestController {
 	@GetMapping("/search/schoolname")
 	public List<SearchSchool> findSchool(
 			@RequestParam("gubun") String gubun
-			, @RequestParam("searchSchulNm") String searchSchulNm) throws JsonMappingException, JsonProcessingException {
+			, @RequestParam(value="region", required=false) String region
+			, @RequestParam("word") String word) throws JsonMappingException, JsonProcessingException {
 		
-		return searchSchoolBO.requestSchoolName(gubun, searchSchulNm);
+		return searchSchoolBO.requestSchoolName(gubun, region, word);
 			 
 	}
 	

@@ -10,13 +10,21 @@
 		<tr>
 			<td>${school.schoolName }</td>
 			<td>${school.adres }</td>			
-			<td><button type="button" class="btn btn-primary btn-sm">선택</button></td>			
+			<td><button type="button" class="btn btn-primary btn-sm select-school-btn" data-school-name=${school.schoolName }>선택</button></td>			
 		</tr>
 		</c:forEach>
 	</table>
 
 	
 	<script>
-	
-	
+		$(document).ready(function() {
+			
+			$(".select-school-btn").on("click", function() {
+				
+				let schoolName = $(".select-school-btn").data("school-name");
+				
+				alert(schoolName);
+				
+			})
+		});
 	</script>

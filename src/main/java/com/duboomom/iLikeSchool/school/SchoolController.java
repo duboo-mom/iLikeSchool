@@ -108,7 +108,7 @@ public class SchoolController {
 	}
 	
 	// 동창회 페이지 선택시 새로고침해서 보여줄 div
-	@GetMapping("/reunion/select/div")
+	@GetMapping("/reunion/select")
 	public String refreshReunionView(Model model, HttpSession session, @RequestParam("schoolId") int schoolId) {
 		
 		int id = (Integer)session.getAttribute("userId");
@@ -312,9 +312,10 @@ public class SchoolController {
 	public String searchSchoolResultView(
 			Model model
 			, @RequestParam("gubun") String gubun
+			, @RequestParam("region") String region
 			, @RequestParam("word") String word) throws JsonMappingException, JsonProcessingException {
 	
-		List<SearchSchool> searchSchool = searchSchoolBO.requestSchoolName(gubun, word);
+		List<SearchSchool> searchSchool = searchSchoolBO.requestSchoolName(gubun, region, word);
 		
 		model.addAttribute("result", searchSchool);
 		

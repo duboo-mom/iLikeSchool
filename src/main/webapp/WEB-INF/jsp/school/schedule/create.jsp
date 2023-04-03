@@ -124,6 +124,7 @@
 						if(data.result == "success") {
 							alert("일정이 등록되었습니다");
 							window.close();
+							opener.parent.location.reload();
 						} else {
 							alert("등록 실패");
 						}

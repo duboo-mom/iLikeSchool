@@ -71,28 +71,28 @@
 				<div class="small mt-2">초등학교</div>
 				<div class="input-group">
 					<input type="text" class="form-control" id="elementaryInput" value="${user.elementary }">
-					<button class="btn btn-light btn-outline-secondary" type="button" id="elemSearchBtn">찾기</button>			
+					<button class="btn btn-light btn-outline-secondary school-search-btn" type="button">찾기</button>			
 					<button class="btn btn-info" type="button" id="elementaryBtn">저장</button>			
 				</div>
 				
 				<div class="small mt-2">중학교</div>
 				<div class="input-group">
 					<input type="text" class="form-control" id="middleschoolInput" value="${user.middleSchool }">
-					<button class="btn btn-light btn-outline-secondary" type="button">찾기</button>			
+					<button class="btn btn-light btn-outline-secondary school-search-btn" type="button">찾기</button>			
 					<button class="btn btn-info" type="button" id="middleSchoolBtn">저장</button>					
 				</div>
 				
 				<div class="small mt-2">고등학교</div>
 				<div class="input-group">
 					<input type="text" class="form-control" id="highschoolInput" value="${user.highSchool }">
-					<button class="btn btn-light btn-outline-secondary" type="button">찾기</button>			
+					<button class="btn btn-light btn-outline-secondary school-search-btn" type="button">찾기</button>			
 					<button class="btn btn-info" type="button" id="highschoolBtn">저장</button>				
 				</div>
 				
 				<div class="small mt-2">대학교</div>
 				<div class="input-group">
 					<input type="text" class="form-control" id="universityInput" value="${user.university }">
-					<button class="btn btn-light btn-outline-secondary" type="button">찾기</button>			
+					<button class="btn btn-light btn-outline-secondary school-search-btn" type="button">찾기</button>			
 					<button class="btn btn-info" type="button" id="universityBtn">저장</button>				
 				</div>
 				
@@ -106,9 +106,9 @@
 	<script>
 		$(document).ready(function() {
 			
-			$("#elemSearchBtn").on("click", function() {
+			$(".school-search-btn").on("click", function() {
 				
-				window.open('/school/search/schoolname/view','학교검색','width=430,height=500,location=no,status=no,scrollbars=yes')
+				window.open('/school/search/schoolname/view','학교검색','width=550,height=600,location=no,status=no,scrollbars=yes')
 
 			});
 			

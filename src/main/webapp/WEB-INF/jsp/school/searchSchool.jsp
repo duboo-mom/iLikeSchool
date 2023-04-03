@@ -17,10 +17,11 @@
 </head>
 <body>
 
-	<div id="searchBlock" style="width:'400px'">
+	<div id="searchBlock" style="width:'500px'">
 		<h4>학교 검색</h4>
+		
 		<div class="my-3">
-		    <select class="form-control form-group-margin" data-bind="value: gubun" name="gubun" placeholder="구분">
+		    <select class="form-control form-group-margin" name="gubun" placeholder="구분">
 		        <option value="elem_list">초등학교</option>
 		        <option value="midd_list">중학교</option>
 		        <option value="high_list">고등학교</option>
@@ -29,7 +30,7 @@
 	    </div>
 	
 		<div>
-			<select class="form-control form-group-margin" data-bind="value: region" name="region" placeholder="지역">
+			<select class="form-control form-group-margin" name="region" placeholder="지역">
 		        <option value="">전체</option>
 		        <option value="100260">서울특별시</option>
 		        <option value="100267">부산광역시</option>
@@ -51,7 +52,7 @@
 	     </div>
 	 
 		<div class="my-3">
-			<input class="form-control" placeholder="학교이름" type="text">
+			<input class="form-control" placeholder="학교이름" type="text" id="wordInput">
 	    </div>
 		<div class="mb-5">
 			<button class="btn btn-light btn-block" type="button" id="searchBtn">검색</button>
@@ -65,8 +66,34 @@
 	<script>
 		$(document).ready(function() {
 			
-			// 검색어 입력 받아서
-			// 검색 버튼 눌렀을대 ajax 호출하고 결과 school
+			$("#searchBtn").on("click", function() {
+				// 기본 파라미터
+				// gubun, region
+				let gubun = $("select[name=gubun]").val();
+				let region = $("select[name=region]").val();
+				
+				// 검색어 입력 받아서
+				let word = $("#wordInput").val();
+				
+				// 검색 버튼 눌렀을대 ajax 호출하고 결과 school
+				$.ajax({
+					type:"get"
+					, url:"/school/search/school/result/view"
+					, data:{"gubun":gubun, "region":region, "word":word}
+					, success:function(data) {
+						$("#searchResultDiv").html(data);
+					}
+					, error:function() {
+						alert("학교 검색 에러");
+					}
+					
+				});
+				
+				
+				
+				
+			});
+			
 			
 			
 		});

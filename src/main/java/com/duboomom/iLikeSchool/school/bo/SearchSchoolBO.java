@@ -24,10 +24,10 @@ public class SearchSchoolBO {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	public List<SearchSchool> requestSchoolName(String gubun, String searchWord) throws JsonMappingException, JsonProcessingException {
+	public List<SearchSchool> requestSchoolName(String gubun, String region, String searchWord) throws JsonMappingException, JsonProcessingException {
 		
 		String API_KEY = "e7c93a5af156237e1c0929cba3a27347";
-						
+		
 		URI uri = UriComponentsBuilder
 				.fromUriString("http://www.career.go.kr/cnet/openapi")
 				.path("/getOpenApi.json")
@@ -35,6 +35,8 @@ public class SearchSchoolBO {
 				.queryParam("svcType", "api")
 				.queryParam("svcCode", "SCHOOL")
 				.queryParam("contentType", "json")
+				.queryParam("gubun", gubun)
+				.queryParam("region", region)
 				.queryParam("thisPage", 1)
 				.queryParam("perPage", 10)
 				.queryParam("searchSchulNm", searchWord)
@@ -58,7 +60,8 @@ public class SearchSchoolBO {
 		Map<String, Object> jsonMap = objectMapper.readValue(resultBody, new TypeReference<Map<String, Object>>() {});
 		
 		// 내가 만든 model 객체 newsListnewsList 
-		List<SearchSchool> searchSchoolList = (List<SearchSchool>) jsonMap.get("content");
+		Map<String, Object> contentMap = (Map<String, Object>) jsonMap.get("dataSearch");
+		List<SearchSchool> searchSchoolList = (List<SearchSchool>) contentMap.get("content");
 		
 		return searchSchoolList;
 		
