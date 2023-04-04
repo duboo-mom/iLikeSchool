@@ -27,7 +27,12 @@ public class WebMVCConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(interceptor)
 		.addPathPatterns("/**") // 모든 페이지에 대하여 인터셉터를 거치도록
-		.excludePathPatterns("/user/signout", "/static/**", "/images/**", "/user/mypage/*", "/user/signup/userschool/**", "/user/userschool/is_existence"); 
+		.excludePathPatterns(
+				"/user/signout", "/static/**"
+				, "/images/**", "/user/mypage/*"
+				, "/user/signup/userschool/**"
+				, "/user/userschool/is_existence"
+				, "/user/edit/*"); 
 		// 로그아웃, static, image 파일 경로는 인터셉터 거치지 않도록 따로 빼기
 	}
 	

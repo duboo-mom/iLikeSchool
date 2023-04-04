@@ -136,9 +136,12 @@
 								</c:choose>
 								<div class="ml-2">${schoolPost.userNickname } (${schoolPost.userName })</div>							
 							</div>
-							<div class="mr-3">
-								<i class="bi bi-three-dots more-btn"></i>							
-							</div>
+							<%-- 로그인한 userId와 해당 게시글의 작성자 userId가 일치하는 경우에만 more-btn 보여주기 --%>
+							<c:if test="${userId eq schoolPost.userId }">
+								<div class="mr-3">
+									<i data-toggle="modal" data-target="#deleteModal" class="bi bi-three-dots more-btn" data-post-id="${schoolPost.id }"></i>							
+								</div>					
+							</c:if>
 						</div>
 						<img height="350" class="my-2" src="${schoolPost.imagePath }">						
 						<div class="mt-1">
@@ -169,13 +172,58 @@
 		        <a href="/school/vote/list/view?schoolId=${param.schoolId }" id="voteListBtn">투표 리스트</a>	      	
 	      	</div>
 	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      
+	      <div class="modal-body text-center">
+	        <a href="#" id="deleteBtn">삭제하기</a>
+	      </div>
 	      
 	    </div>
 	  </div>
 	</div>
-
+	
+	
 	<script>
 		$(document).ready(function() {
+			
+			$(".more-btn").on("click", function() {
+				// 해당 more-btn 태그에 있는 post-id를 모달의 a태그에 넣는다.
+				let postId = $(this).data("post-id");
+								
+				// data-post-id=""
+				$("#deleteBtn").data("post-id", postId);
+				
+			});
+			
+			$("#deleteBtn").on("click", function() {
+				
+				// 해당하는 버튼에 대응되는 post id 를 얻어오기
+				let postId = $(this).data("post-id");
+								
+				$.ajax({
+					type:"get"
+					, url:"/school/delete"
+					, data:{"postId":postId}
+					, success:function(data) {
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("게시글 삭제 실패");
+						}
+					}
+					, error:function() {
+						alert("게시글 삭제 에러");
+					}
+				});
+				
+			});
+			
 			
 			$.fn.radioSelect = function(val) {
 				  this.each(function() {

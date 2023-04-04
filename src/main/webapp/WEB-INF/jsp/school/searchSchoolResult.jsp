@@ -10,7 +10,7 @@
 		<tr>
 			<td>${school.schoolName }</td>
 			<td>${school.adres }</td>			
-			<td><button type="button" class="btn btn-primary btn-sm select-school-btn" data-school-name=${school.schoolName }>선택</button></td>			
+			<td><button type="button" class="btn btn-primary btn-sm select-school-btn" data-gubun=${param.gubun } data-school-name=${school.schoolName }>선택</button></td>			
 		</tr>
 		</c:forEach>
 	</table>
@@ -20,10 +20,25 @@
 		$(document).ready(function() {
 			
 			$(".select-school-btn").on("click", function() {
+								
+				let schoolName = $(this).data("school-name");
 				
-				let schoolName = $(".select-school-btn").data("school-name");
+				let gubun = $(this).data("gubun");
 				
-				alert(schoolName);
+				if(gubun == "elem_list") {
+					$("#elementaryInput", opener.document).val(schoolName);
+					window.close();					
+				} else if(gubun == "midd_list") {
+					$("#middleschoolInput", opener.document).val(schoolName);
+					window.close();	
+				} else if(gubun == "high_list") {
+					$("#highschoolInput", opener.document).val(schoolName);
+					window.close();	
+				} else if(gubun == "univ_list") {
+					$("#universityInput", opener.document).val(schoolName);
+					window.close();	
+				} 
+				
 				
 			})
 		});

@@ -98,7 +98,7 @@
 					, contentType:false
 					, success:function(data) {
 						if(data.result == "success") {
-							location.href="/school/reunion/view"						
+							location.href="/school/reunion/select?schoolId="+schoolId;						
 						} else {
 							alert("게시글 업로드 실패");
 						}

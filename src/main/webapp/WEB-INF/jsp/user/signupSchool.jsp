@@ -37,19 +37,19 @@
 
 				<div class="input-group mt-2">
 					<input type="text" class="form-control" placeholder="초등학교" id="elementaryInput">
-					<button class="btn btn-success" type="button">찾기</button>			
+					<button class="btn btn-success school-search-btn" type="button">찾기</button>			
 				</div>
 				<div class="input-group mt-2">
 					<input type="text" class="form-control" placeholder="중학교" id="middleschoolInput">
-					<button class="btn btn-success" type="button">찾기</button>			
+					<button class="btn btn-success school-search-btn" type="button">찾기</button>			
 				</div>
 				<div class="input-group mt-2">
 					<input type="text" class="form-control" placeholder="고등학교" id="highschoolInput">
-					<button class="btn btn-success" type="button">찾기</button>			
+					<button class="btn btn-success school-search-btn" type="button">찾기</button>			
 				</div>
 				<div class="input-group mt-2">
 					<input type="text" class="form-control" placeholder="대학교" id="universityInput">
-					<button class="btn btn-success" type="button">찾기</button>			
+					<button class="btn btn-success school-search-btn" type="button">찾기</button>			
 				</div>			
 								
 				<button class="btn btn-warning btn-block mt-3" id="saveBtn" data-user-id="${userId }">저장하기</button>
@@ -60,6 +60,12 @@
 	
 	<script>
 		$(document).ready(function() {
+			
+			$(".school-search-btn").on("click", function() {
+				
+				window.open('/school/search/schoolname/view','학교검색','width=550,height=600,location=no,status=no,scrollbars=yes')
+
+			});
 			
 			$("#saveBtn").on("click", function() {
 								
