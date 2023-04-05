@@ -172,7 +172,7 @@
 			, `createdAt`
 			, `updatedAt`
 		FROM
-			`schoolschedule`
+			`schoolSchedule`
 		WHERE
 			`schoolId` = #{schoolId}
 	</select>
