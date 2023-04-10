@@ -55,9 +55,11 @@ public class SchoolRestController {
 		// 학교정보 받아서 
 		int count = schoolBO.addSchool(elementary, middleschool, highschool, university);
 		
+		int schoolCount = schoolBO.checkExistSchool(elementary, middleschool, highschool, university);
+		
 		Map<String, String> result = new HashMap<>();
 		
-		if(count != 0) {
+		if(count != 0 || schoolCount != 0) {
 			result.put("result", "success");
 		} else {
 			result.put("result", "fail");

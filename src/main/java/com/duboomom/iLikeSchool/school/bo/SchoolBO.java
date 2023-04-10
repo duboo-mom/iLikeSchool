@@ -30,6 +30,20 @@ public class SchoolBO {
 	@Autowired
 	private UserBO userBO;	
 	
+	public int checkExistSchool(String elementary
+			, String middleschool
+			, String highschool
+			, String university) {
+		
+		int count = schoolDAO.selectCountSchool(elementary);
+		count += schoolDAO.selectCountSchool(middleschool);
+		count += schoolDAO.selectCountSchool(highschool);
+		count += schoolDAO.selectCountSchool(university);
+		
+		return count;
+				
+	}
+	
 	public int addSchool(
 			String elementary
 			, String middleschool
